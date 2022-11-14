@@ -1,6 +1,5 @@
 import { NOTIFICATION_TYPES } from "../../consts";
-import { createTransactionHookSetter } from "../../recoilUtils";
-import atoms, { DEFAULTS } from "../store";
+import atoms, { DEFAULTS, createTransactionHookSetter } from "../store";
 import calculateCells from "../cellsCalculator";
 
 const {
@@ -13,7 +12,7 @@ const {
 	notifications,
 } = atoms;
 
-const useCollageReset = createTransactionHookSetter((
+const useCollageReset = createTransactionHookSetter({ setter: (
 	{ set, reset },
 ) => {
 	reset(gridSize);
@@ -31,6 +30,6 @@ const useCollageReset = createTransactionHookSetter((
 		severity: "info",
 		message: "Collage was reset",
 	}, ...prev]);
-});
+} });
 
 export default useCollageReset;

@@ -5,15 +5,7 @@ import {
 	useRecoilState,
 	useRecoilValue,
 	useSetRecoilState,
-	useRecoilTransaction_UNSTABLE as useRecoilTransaction,
 } from "recoil";
-
-export const createTransactionHookSetter = (setter) => {
-	return (deps = []) => useRecoilTransaction((actions) =>
-		(...args) => {
-			setter(actions, ...args);
-		}, deps);
-};
 
 export const createStateHookSetter = (key, setter) => {
 	const stateSelector = selector({

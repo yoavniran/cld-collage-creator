@@ -1,7 +1,6 @@
 import isNil from "lodash/isNil";
 import { isRecoilValue, selectorFamily, useRecoilCallback, useRecoilValue } from "recoil";
-import { findTrackerNameInStore } from "./familyTrackerAtom";
-import { getAtomFamilyParts } from "./utils";
+import getTrackerSetters from "./familTrackerSetters";
 
 // CANT SUPPORT ATOM KEYS WITH DOUBLE __ because recoil uses this as separator! (What does recoil do if you use it?)
 
@@ -9,65 +8,19 @@ import { getAtomFamilyParts } from "./utils";
 //TODO: in case setter is a selector, we cant make use of the tracker! need to warn about this
 //TODO: Need to support useResetRecoilState - https://recoiljs.org/docs/api-reference/core/useResetRecoilState
 
-const updateAtomTracker = (atomsData, atom, fn) => {
-	if (atomsData) {
-		//update tracker with new key to track
-		const familyKeyParts = getAtomFamilyParts(atom);
-
-		if (familyKeyParts.length > 1) {
-			const atomName = familyKeyParts[0];
-			const trackerName = findTrackerNameInStore(atomName, atomsData);
-
-			if (trackerName && familyKeyParts[1]) {
-				const param = JSON.parse(familyKeyParts[1]);
-				fn(trackerName, param);
-			}
-		}
-	}
-};
-
-const getCustomSelectorSetters = ({ set, reset, atomsData }) => {
-	const setWithTracker = (atom, val) => {
-		updateAtomTracker(atomsData, atom, (trackerName, param) => {
-			console.log("!!!!!! SETTING WITH TRACKER !!!! ", { atom, val, trackerName, param });
-			set(atomsData.atoms[trackerName], (prev) =>
-				prev.includes(param) ? prev : [param, ...prev]);
-		});
-
-		set(atom, val);
-	};
-
-	const resetWithTracker = (atom) => {
-		updateAtomTracker(atomsData, atom, (trackerName, param) => {
-			console.log("!!!!!! RESETTING WITH TRACKER !!!! ", { atom, trackerName, param });
-			set(atomsData.atoms[trackerName], (prev) => {
-				const indx = prev.indexOf(param);
-				return ~indx ? [...prev.slice(0, indx), ...prev.slice(indx + 1)] : prev;
-			});
-		});
-
-		reset(atom);
-	};
-
-	return {
-		set: setWithTracker,
-		reset: resetWithTracker,
-	};
-};
-
 const createSelector = ({ key, allowWrite, getter, setter, isGetterRecoilVal, atomsData }) => {
 	return selectorFamily({
 		key,
 		set: allowWrite ?
 			(param) => ({ get, set, reset }, newValue) => {
 
-				const trackerSetters = getCustomSelectorSetters({
+				const trackerSetters = getTrackerSetters({
 					set, reset, atomsData,
 				});
 
 				return setter ?
 					//use custom setter
-					setter(param, newValue, { get, set: trackerSetters.set, reset: trackerSetters.reset }) :
+					setter(param, newValue, { get, ...trackerSetters }) :
 					//set the new value for the family member
 					trackerSetters.set(getter(param), newValue);
 			} :

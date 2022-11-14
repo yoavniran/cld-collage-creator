@@ -1,7 +1,6 @@
 import { NOTIFICATION_TYPES } from "../../consts";
 import { getTrackerForAtom } from "../../recoilUtils/recoil-spring";
-import { createTransactionHookSetter } from "../../recoilUtils";
-import atoms from "../store";
+import atoms, { createTransactionHookSetter } from "../store";
 import createCollage from "../../createCollage";
 
 const {
@@ -69,7 +68,7 @@ const createAssetsList = (flatCells, photoIds, get) => {
 		});
 };
 
-const useCollageGenerator = createTransactionHookSetter(async (
+const useCollageGenerator = createTransactionHookSetter({ setter: async (
 	{ get, set }
 ) => {
 	set(isGenerating, true);
@@ -101,6 +100,6 @@ const useCollageGenerator = createTransactionHookSetter(async (
 	console.log("GOT GENERATE RESULT !!! ", result);
 
 	set(isGenerating, false);
-});
+} });
 
 export default useCollageGenerator;

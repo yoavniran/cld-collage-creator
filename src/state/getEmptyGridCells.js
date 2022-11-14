@@ -5,7 +5,7 @@ const {
 	gridPhotos,
 } = atoms;
 
-const fillEmptyGridCells = (photos, get, set) => {
+const getEmptyGridCells = (photos, get) => {
 	const cells = get(gridCells)
 		.flat()
 		.filter(({ override }) => override === null);
@@ -21,9 +21,7 @@ const fillEmptyGridCells = (photos, get, set) => {
 		}
 	}
 
-	emptyCells.forEach((id, index) => {
-		set(gridPhotos(id), photos[index]);
-	});
+	return emptyCells;
 };
 
-export default fillEmptyGridCells;
+export default getEmptyGridCells;

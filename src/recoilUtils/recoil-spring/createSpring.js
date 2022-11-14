@@ -3,6 +3,7 @@ import { createTrackerAtom } from "./familyTrackerAtom";
 import createSelectorFamilyHook from "./createSelectorFamilyHook";
 import createTrackerSelectorHook from "./createTrackerSelectorHook";
 import { useRecoilHistory } from "./history";
+import createTransactionHookSetter  from "./createTransactionHookSetter";
 
 const createSpring = (list) => {
 	const atomsData = Object.entries(list)
@@ -31,10 +32,12 @@ const createSpring = (list) => {
 			createTrackerSelectorHook({ ...options, atomsData }),
 		createRecoilHistoryHook: (options) => () =>
 			useRecoilHistory({...options, atomsData }),
+		createTransactionHookSetter: (options) =>
+			createTransactionHookSetter({ ...options, atomsData }),
 
 		//TODO useLocalStorageRecoilPersister
 
-	}
+	};
 };
 
 export default createSpring;

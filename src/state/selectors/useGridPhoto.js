@@ -1,6 +1,6 @@
 import atoms, { createSelectorFamilyHook } from "../store";
 import isNil from "lodash/isNil";
-import fillEmptyGridCells from "../fillEmptyGridCells";
+import getEmptyGridCells from "../getEmptyGridCells";
 
 const {
 	gridPhotos,
@@ -17,7 +17,11 @@ const useGridPhoto = createSelectorFamilyHook({
 		} else {
 			//set photo in first empty cell
 			//Would have been nice to do in a transaction but Recoil doesnt support selectors use :(
-			fillEmptyGridCells([photo], get, set);
+			const [cellId] = getEmptyGridCells([photo], get);
+
+			if (cellId) {
+				set(gridPhotos(cellId), photo);
+			}
 		}
 
 		if (options.orgCellId && !options.copy) {

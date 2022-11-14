@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 import isString from "lodash/isString";
-import { getAtomFamilyRootName } from "./utils";
+import { getAtomFamilyParts, getAtomFamilyRootName } from "./utils";
 
 const TRACKER_EXT = "$$tracker";
 
@@ -22,10 +22,28 @@ const findTrackerNameInStore = (name, { metadata }) => {
 	return atomMeta?.tracker;
 };
 
+const updateAtomTracker = (atomsData, atom, fn) => {
+	if (atomsData) {
+		//update tracker with new key to track
+		const familyKeyParts = getAtomFamilyParts(atom);
+
+		if (familyKeyParts.length > 1) {
+			const atomName = familyKeyParts[0];
+			const trackerName = findTrackerNameInStore(atomName, atomsData);
+
+			if (trackerName && familyKeyParts[1]) {
+				const param = JSON.parse(familyKeyParts[1]);
+				fn(trackerName, param);
+			}
+		}
+	}
+};
+
 export {
 	TRACKER_EXT,
 	createTrackerAtom,
 	getTrackerAtomName,
 	findTrackerNameInStore,
-	getTrackerForAtom
+	getTrackerForAtom,
+	updateAtomTracker,
 };

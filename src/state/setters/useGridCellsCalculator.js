@@ -1,5 +1,4 @@
-import { createTransactionHookSetter } from "../../recoilUtils";
-import atoms from "../store";
+import atoms, { createTransactionHookSetter } from "../store";
 import calculateCells, { getCellMapFromGrid } from "../cellsCalculator";
 
 const {
@@ -45,7 +44,7 @@ const calculateOverrideDetails = ({ selectedIds }, cells) => {
 	};
 };
 
-const useGridCellsCalculator = createTransactionHookSetter((
+const useGridCellsCalculator = createTransactionHookSetter({ setter: (
 	{ get, set },
 	{ size, override },
 ) => {
@@ -85,6 +84,6 @@ const useGridCellsCalculator = createTransactionHookSetter((
 			set(gridCells, newCells);
 		}
 	}
-});
+} });
 
 export default useGridCellsCalculator;

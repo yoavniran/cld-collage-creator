@@ -1,17 +1,17 @@
-import { createTransactionHookSetter } from "../../recoilUtils";
 import { NOTIFICATION_TYPES } from "../../consts";
 import { getTrackerForAtom } from "../../recoilUtils/recoil-spring";
-import atoms from "../store";
-import fillEmptyGridCells from "../fillEmptyGridCells";
+import atoms, { createTransactionHookSetter } from "../store";
+import getEmptyGridCells from "../getEmptyGridCells";
 
 const {
+	gridPhotos,
 	notifications,
 	photos: photosAtom,
 } = atoms;
 
 const gridPhotosTracker = getTrackerForAtom(photosAtom, atoms);
 
-const useFillGridPhotos = createTransactionHookSetter((
+const useFillGridPhotos = createTransactionHookSetter({ setter: (
 	{ get, set },
 ) => {
 	const photosIndex = get(gridPhotosTracker);
@@ -23,7 +23,13 @@ const useFillGridPhotos = createTransactionHookSetter((
 		message: "Filling empty grid cells",
 	}, ...prev]);
 
-	fillEmptyGridCells(photos, get, set);
-});
+	const emptyCells = getEmptyGridCells(photos, get);
+
+	if (emptyCells.length) {
+		emptyCells.forEach((id, index) => {
+			set(gridPhotos(id), photos[index]);
+		});
+	}
+} });
 
 export default useFillGridPhotos;
