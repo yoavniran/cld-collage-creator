@@ -9,13 +9,13 @@ const {
 	photos: photosAtom,
 } = atoms;
 
-const gridPhotosTracker = getTrackerForAtom(photosAtom, atoms);
+const photosTrackerAtom = getTrackerForAtom(photosAtom, atoms);
 
 const useFillGridPhotos = createTransactionHookSetter({ setter: (
 	{ get, set },
 ) => {
-	const photosIndex = get(gridPhotosTracker);
-	const photos = photosIndex.map((index) => get(photosAtom(index)));
+	const photosTracker = get(photosTrackerAtom);
+	const photos = photosTracker.map((index) => get(photosAtom(index)));
 
 	set(notifications, (prev) => [{
 		type: NOTIFICATION_TYPES.FILL_GRID,

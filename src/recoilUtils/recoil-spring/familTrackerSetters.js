@@ -1,6 +1,6 @@
-import { updateAtomTracker } from "./familyTrackerAtom";
+import { findTrackedAtom, updateAtomTracker } from "./familyTrackerAtom";
 
-const getTrackerSetters = ({ set, reset, atomsData }) => {
+const getTrackerSetters = ({ get, set, reset, atomsData }) => {
 	const setWithTracker = (atom, val) => {
 		updateAtomTracker(atomsData, atom, (trackerName, param) => {
 			console.log("!!!!!! SETTING WITH TRACKER !!!! ", { atom, val, trackerName, param });
@@ -23,9 +23,19 @@ const getTrackerSetters = ({ set, reset, atomsData }) => {
 		reset(atom);
 	};
 
+	const resetFamily = (familyTracker) => {
+		const tracker = get(familyTracker);
+		const rootAtom = findTrackedAtom(familyTracker, atomsData);
+
+		tracker.forEach((index) => reset(rootAtom(index)));
+
+		reset(familyTracker);
+	};
+
 	return {
 		set: setWithTracker,
 		reset: resetWithTracker,
+		resetFamily,
 	};
 };
 

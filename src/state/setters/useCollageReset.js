@@ -1,6 +1,7 @@
 import { NOTIFICATION_TYPES } from "../../consts";
 import atoms, { DEFAULTS, createTransactionHookSetter } from "../store";
 import calculateCells from "../cellsCalculator";
+import { getTrackerForAtom } from "../../recoilUtils/recoil-spring";
 
 const {
 	gridSize,
@@ -8,28 +9,31 @@ const {
 	borderWidth,
 	gridCells,
 	lastOverride,
-	photos,
 	notifications,
+	gridPhotos,
 } = atoms;
 
+const gridPhotosTracker = getTrackerForAtom(gridPhotos, atoms);
+
 const useCollageReset = createTransactionHookSetter({ setter: (
-	{ set, reset },
+	{ set, reset, resetFamily },
 ) => {
 	reset(gridSize);
 	reset(borderColor);
 	reset(borderWidth);
 	reset(gridCells);
 	reset(lastOverride);
-	reset(photos);
 
 	set(gridCells,
 		calculateCells(DEFAULTS.gridSize));
 
-	set(notifications, (prev) => [{
-		type: NOTIFICATION_TYPES.COLLAGE_RESET,
-		severity: "info",
-		message: "Collage was reset",
-	}, ...prev]);
+		resetFamily(gridPhotosTracker);
+
+		set(notifications, (prev) => [{
+			type: NOTIFICATION_TYPES.COLLAGE_RESET,
+			severity: "info",
+			message: "Collage was reset",
+		}, ...prev]);
 } });
 
 export default useCollageReset;

@@ -15,7 +15,7 @@ const createSelector = ({ key, allowWrite, getter, setter, isGetterRecoilVal, at
 			(param) => ({ get, set, reset }, newValue) => {
 
 				const trackerSetters = getTrackerSetters({
-					set, reset, atomsData,
+					get, set, reset, atomsData,
 				});
 
 				return setter ?

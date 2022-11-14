@@ -22,6 +22,11 @@ const findTrackerNameInStore = (name, { metadata }) => {
 	return atomMeta?.tracker;
 };
 
+const findTrackedAtom = (trackerAtom, { atoms, metadata }) => {
+	const atomMeta = metadata[trackerAtom.key];
+	return atoms[atomMeta.tracked];
+};
+
 const updateAtomTracker = (atomsData, atom, fn) => {
 	if (atomsData) {
 		//update tracker with new key to track
@@ -46,4 +51,5 @@ export {
 	findTrackerNameInStore,
 	getTrackerForAtom,
 	updateAtomTracker,
+	findTrackedAtom,
 };
