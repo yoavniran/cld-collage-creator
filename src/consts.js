@@ -7,4 +7,5 @@ export const DRAG_TYPES = {
 export const NOTIFICATION_TYPES = {
 	COLLAGE_RESET: "collage-reset",
 	COLLAGE_GENERATE: "collage-generate",
+	FILL_GRID: "fill-grid",
 };

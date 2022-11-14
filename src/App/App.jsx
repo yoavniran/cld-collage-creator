@@ -9,7 +9,7 @@ import AppThemeProvider from "../styles/AppThemeProvider";
 import CollageCreator from "../components/CollageCreator";
 import StateLogger from "../components/StateLogger";
 import StatePersister from "../components/StatePersister";
-import HtmlHead from "../components/HtmlHead/HtmlHead";
+import HtmlHead from "../components/HtmlHead";
 
 const App = () => {
 	const initializeRecoil = useRecoilLocalStorageInitializer({

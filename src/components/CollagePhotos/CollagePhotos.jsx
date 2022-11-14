@@ -1,10 +1,14 @@
 import styled from "styled-components";
 import { UploadPreview } from "@rpldy/upload-preview";
+import MenuItem from "@mui/material/MenuItem";
+import BurstModeIcon from "@mui/icons-material/BurstMode";
 import ResizableBottomContainer from "../ResizableBottomContainer";
 import EmptyCard from "./EmptyCard";
 import UploadingCard from "./UploadingCard";
 import PhotoCard from "./PhotoCard";
 import { usePhotos, usePhotosDrawerHeight } from "../../state/selectors";
+import { useFillGridPhotos } from "../../state/setters";
+import IconButtonMenu from "../IconButtonMenu";
 
 const MIN_CONTAINER_HEIGHT = 14;
 
@@ -19,12 +23,22 @@ const PhotosContainer = styled.div`
 
 //TODO: make photos list virtual?
 //tODO: make photos list sortable?
-//TODO: add fill grid button to fill all empty cells by order
 //TODO: support drag/paste of cloudinary res URL????
+
+const StyledIconButtonMenu = styled(IconButtonMenu)`
+	position: absolute;
+	right: 20px;
+	top: 20px;
+`;
 
 const CollagePhotos = () => {
 	const photos = usePhotos();
 	const [drawerHeight, setDrawerHeight] = usePhotosDrawerHeight();
+	const fillCells = useFillGridPhotos();
+
+	const onFillCells = () => {
+		fillCells();
+	};
 
 	return (
 		<ResizableBottomContainer
@@ -41,6 +55,11 @@ const CollagePhotos = () => {
 				{photos.map((photoId) =>
 					<PhotoCard id={photoId} key={photoId}/>)}
 			</PhotosContainer>
+			<StyledIconButtonMenu>
+				<MenuItem onClick={onFillCells} disabled={!photos.length}>
+					<BurstModeIcon /> Fill Cells
+				</MenuItem>
+			</StyledIconButtonMenu>
 		</ResizableBottomContainer>
 	);
 };

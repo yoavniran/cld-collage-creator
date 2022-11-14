@@ -22,7 +22,7 @@ const {
 	gravity,
 } = atoms;
 
-const gridPhotosTracker = getTrackerForAtom(atoms.gridPhotos, atoms);
+const gridPhotosTracker = getTrackerForAtom(gridPhotos, atoms);
 
 const getCollageData = (get) => {
 	const size = get(gridSize);

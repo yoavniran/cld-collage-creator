@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import styled from "styled-components";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
@@ -20,7 +21,7 @@ const StyledIconButton = styled(IconButton)`
   }
 `;
 
-const TooltipIconButton = (
+const TooltipIconButton = forwardRef((
 	{
 		onClick,
 		isDisabled = false,
@@ -31,16 +32,20 @@ const TooltipIconButton = (
 		tooltipDelay = 100,
 		icon,
 		...buttonProps
-	}) => {
+	}, ref) => {
+	const showTooltip = !!(tooltipText || tooltipTitle) &&
+		(!isDisabled && !tooltipOnDisabled || isDisabled && tooltipOnDisabled);
+
 	return (
 		<Tooltip
-			show={!isDisabled && !tooltipOnDisabled || isDisabled && tooltipOnDisabled}
+			show={showTooltip}
 			title={tooltipTitle}
 			text={tooltipText}
 			severity={tooltipSeverity}
 			delay={tooltipDelay}
 		>
 			<StyledIconButton
+				ref={ref}
 				onClick={isDisabled ? undefined : onClick}
 				disabled={isDisabled}
 				component={isDisabled ? "div" : undefined}
@@ -52,6 +57,6 @@ const TooltipIconButton = (
 			</StyledIconButton>
 		</Tooltip>
 	);
-};
+});
 
 export default TooltipIconButton;

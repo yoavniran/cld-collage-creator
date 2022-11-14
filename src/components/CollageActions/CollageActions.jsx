@@ -67,8 +67,6 @@ const GenerateButton = ({ }) => {
 	const isDarkMode = useIsDarkMode();
 	const theme = useAppTheme();
 
-	console.log("GENERATE STATUS ", { isGenerating, canGenerateReport });
-
 	return (
 		isGenerating ?
 			<Box sx={{ color: "action.active", margin: "0 15px" }}>

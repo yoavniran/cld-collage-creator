@@ -14,7 +14,7 @@ const useCanGenerate = createSelectorHook(
 		const checks = [
 			{ text: "Set cloud name (menu)" , status: !isEmpty(get(cloud)) },
 			{ text: "Set collage preset (menu)" , status: !isEmpty(get(collagePreset)) },
-			{ text: "Set a photo for every cells (grid)" , status: (get(useAllCellsSet.selector)) },
+			{ text: "Set a photo for every cell (grid)" , status: (get(useAllCellsSet.selector)) },
 		];
 
 		return {
