@@ -17,7 +17,7 @@ const useGridPhoto = createSelectorFamilyHook({
 		} else {
 			//set photo in first empty cell
 			//Would have been nice to do in a transaction but Recoil doesnt support selectors use :(
-			fillEmptyGridCells([photo]), get, set);
+			fillEmptyGridCells([photo], get, set);
 		}
 
 		if (options.orgCellId && !options.copy) {
