@@ -46,17 +46,26 @@ const IconButtonMenu = (
 		children,
 		icon,
 		iconSize = "large",
+		onOpenChange,
+		closeOnClick = true,
 	}) => {
 	const [isOpen, setOpen] = useState(false);
 	const anchorRef = useRef(null);
 
-	const onClick = () => {
-		setOpen((prev) => !prev);
+	const updateState = (val) => {
+		onOpenChange?.(val);
+		return val;
 	};
 
-	const onClose = () => {
-		setOpen(false);
-	}
+	const onClick = () => {
+		setOpen((prev) => updateState(!prev));
+	};
+
+	const onClose = (e, reason) => {
+		if (reason || closeOnClick) {
+			setOpen(updateState(false));
+		}
+	};
 
 	return (
 		<>

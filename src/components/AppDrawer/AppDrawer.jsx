@@ -7,7 +7,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { useAppDrawerStatus } from "../../state/selectors";
 import useFloatingMenuMediaQuery from "../hooks/useFloatingMenuMediaQuery";
 import CollageMenu from "../CollageMenu";
-import ThemeModeSwitcher from "../ThemeModeSwitcher";
+import AppSettings from "../AppSettings";
 
 const DRAWER_WIDTH = 350;
 
@@ -59,7 +59,7 @@ const AppDrawer = () => {
 					<IconButton onClick={onCloseClick} size="large">
 						<ChevronRightIcon/>
 					</IconButton>
-					<ThemeModeSwitcher />
+					<AppSettings />
 				</DrawerHeader>
 				<Divider/>
 				<CollageMenu/>

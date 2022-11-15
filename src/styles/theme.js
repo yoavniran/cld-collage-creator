@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme, experimental_sx as sx } from "@mui/material/styles";
 import merge from "lodash/merge";
 
 const THEME_MODES = {
@@ -62,8 +62,16 @@ const darkTheme = {
 		...getComponentOverride("MuiAppBar", {
 			backgroundColor: "#022e46",
 		}),
-		// ...getComponentOverride("MuiLinearProgress", {
-		// 	backgroundColor:
+		// ...getComponentOverride("MuiSwitch", {}, {
+		// 	track: ({ ownerState, theme }) => {
+		// 		console.log("SWITCH TRACK OVERRIDE @@@@@@@@@@@@ ", ownerState);
+		// 		return {
+		// 			opacity: 1,
+		// 			backgroundColor: ownerState.checked ?
+		// 				theme.palette.success.main :
+		// 				theme.palette.grey[500],
+		// 		};
+		// 	},
 		// }),
 	},
 

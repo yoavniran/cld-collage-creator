@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import { useAppDrawerStatus } from "../../state/selectors";
 import useFloatingMenuMediaQuery from "../hooks/useFloatingMenuMediaQuery";
 import Logo from "../Logo";
-import ThemeModeSwitcher from "../ThemeModeSwitcher";
+import AppSettings from "../AppSettings";
 
 const StyledAppBar = styled(AppBar)`
   padding: 0 12px;
@@ -63,7 +63,7 @@ const Topbar = () => {
 				</BarLeftSide>
 
 				<BarRightSize>
-					{!isAppDrawerOpen && <ThemeModeSwitcher />}
+					{!isAppDrawerOpen && <AppSettings />}
 
 					{!showFloating && !isAppDrawerOpen && <IconButton
 						aria-label="open side-menu"

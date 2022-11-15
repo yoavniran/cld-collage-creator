@@ -1,13 +1,14 @@
 import { useEffect } from "react";
-import {
+import Uploady, {
 	useRequestPreSend,
 	useUploady,
 } from "@rpldy/uploady";
 import { usePasteUpload } from "@rpldy/upload-paste";
 import { useUploadDetails } from "../../state/selectors";
 import useUploadyItemMonitor from "../hooks/useUploadyItemMonitor";
+import useUploadyEnhancers from "./useUploadyEnhancers";
 
-const UploadyConnector = () => {
+const UploadyConfig = () => {
 	const { cloud, preset } = useUploadDetails() || {};
 	const { setOptions } = useUploady();
 	const { getIsEnabled } = usePasteUpload();
@@ -36,6 +37,21 @@ const UploadyConnector = () => {
 	useUploadyItemMonitor();
 
 	return null;
+};
+
+const UploadyConnector = ({ children }) => {
+	const uploadyEnhancers = useUploadyEnhancers();
+
+	return (
+		<Uploady
+			debug
+			accept="image/*"
+			enhancer={uploadyEnhancers}
+		>
+			<UploadyConfig/>
+			{children}
+		</Uploady>
+	);
 };
 
 export default UploadyConnector;

@@ -30,6 +30,10 @@ const DEFAULTS = {
 	photoOverCell: null,
 	isGenerating: false,
 
+	//debug options
+	isDebug: false,
+	isMockUpload: false,
+
 	//collections of uploads that turn into photos for the collage
 	[springFamily("uploads")]: null,
 	[springFamily("photos")]: null,

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Container from "@mui/material/Container";
-import Uploady  from "@rpldy/uploady";
 import { DndProvider } from "react-dnd";
 import Topbar from "../Topbar";
 import AppDrawer from "../AppDrawer";
@@ -10,7 +9,7 @@ import Notifications from "../Notifications";
 import CollageActions from "../CollageActions";
 import CollageFloatingMenu from "../CollageFloatingMenu";
 import CollagePhotos from "../CollagePhotos";
-import UploadyConnector, { uploadyEnhancers } from "../UploadyConnector";
+import UploadyConnector from "../UploadyConnector";
 import CollageUploadDropZone from "../CollageUploadDropZone";
 
 const AppContainer = styled.div`
@@ -29,13 +28,8 @@ const AppContainer = styled.div`
 //TODO: add I button at the bottom with info about the creator of the tool + link to GH repo
 
 const CollageCreator = () => {
-	return (<Uploady
-		debug
-		accept="image/*"
-		enhancer={uploadyEnhancers}
-	>
+	return (<UploadyConnector>
 		<DndProvider backend={DragDropBackend}>
-			<UploadyConnector/>
 			<Notifications/>
 			<CollageUploadDropZone>
 				<Topbar/>
@@ -50,7 +44,7 @@ const CollageCreator = () => {
 				<AppDrawer/>
 			</CollageUploadDropZone>
 		</DndProvider>
-	</Uploady>);
+	</UploadyConnector>);
 };
 
 export default CollageCreator;
