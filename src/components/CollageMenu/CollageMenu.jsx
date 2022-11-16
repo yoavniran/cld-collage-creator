@@ -214,7 +214,7 @@ const GravityField = () => {
 	return (
 		<MenuField>
 			<MenuSelect
-				label="Crop"
+				label="Gravity"
 				value={gravity}
 				onChange={setGravity}
 			>
