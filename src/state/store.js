@@ -1,5 +1,6 @@
 import { createSpring, springFamily } from "../recoilUtils/recoil-spring";
 import { THEME_MODES } from "../styles/theme";
+import { CROP_TYPES, GRAVITY_TYPES } from "../consts";
 
 const DEFAULTS = {
 	//grid properties
@@ -19,8 +20,8 @@ const DEFAULTS = {
 	collagePreset: "",
 	uploadPreset: "",
 	isSamePreset: true,
-	crop: "scale",
-	gravity: "center",
+	crop: CROP_TYPES[0],
+	gravity: GRAVITY_TYPES[0],
 
 	//ui state
 	themeMode: THEME_MODES.DARK,
@@ -39,12 +40,6 @@ const DEFAULTS = {
 	[springFamily("photos")]: null,
 };
 
-const MIN_SIZE = 1,
-	MAX_SIZE = 10,
-	MIN_BORDER = 1,
-	MAX_BORDER = 6,
-	MIN_DIM = 100,
-	MAX_DIM = 2000;
 
 const spring = createSpring({ ...DEFAULTS });
 
@@ -62,12 +57,6 @@ export default atoms;
 
 export {
 	DEFAULTS,
-	MIN_SIZE,
-	MAX_SIZE,
-	MIN_BORDER,
-	MAX_BORDER,
-	MIN_DIM,
-	MAX_DIM,
 	spring,
 
 	createSelectorFamilyHook,

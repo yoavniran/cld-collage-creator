@@ -9,6 +9,8 @@ const {
 	gridPhotos,
 } = atoms;
 
+//TODO: need to ignore Notifications on forward/back
+
 const useCollageHistory = createRecoilHistoryHook({
 	atoms: [
 		gridSize,

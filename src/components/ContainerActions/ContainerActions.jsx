@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { alpha } from "@mui/system/colorManipulator";
+import { alpha } from "@mui/material";
 import { isMobile } from "react-device-detect";
 
 const CircleMotion = {

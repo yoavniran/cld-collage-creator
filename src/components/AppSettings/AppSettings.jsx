@@ -8,6 +8,10 @@ import IconButtonMenu from "../IconButtonMenu";
 import ThemeModeSwitcher from "../ThemeModeSwitcher";
 import SimpleSwitch from "../SimpleSwitch";
 
+//TODO: Add Switch to monochrome grid instead of colorful
+//TODO: Add button to reset all settings (clear LS) with confirmation dialog
+
+
 const AppSettings = () => {
 	const [isDebug, setDebug] = useDebug();
 	const [isMockUpload, setMockUpload] = useMockUpload();

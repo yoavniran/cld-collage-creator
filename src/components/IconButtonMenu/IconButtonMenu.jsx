@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import styled from "styled-components";
-import { alpha } from "@mui/system/colorManipulator";
+import { alpha } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TooltipIconButton from "../TooltipIconButton";

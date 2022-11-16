@@ -24,3 +24,5 @@ export useGenerating from "./useGenerating";
 export useDimensions from "./useDimensions";
 export useDebug from "./useDebug";
 export useMockUpload from "./useMockUpload";
+export useCropType from "./useCropType";
+export useGravityType from "./useGravityType";
