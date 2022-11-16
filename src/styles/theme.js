@@ -1,4 +1,8 @@
-import { createTheme, experimental_sx as sx } from "@mui/material/styles";
+import {
+	createTheme,
+	responsiveFontSizes,
+	experimental_sx as sx,
+} from "@mui/material/styles";
 import merge from "lodash/merge";
 
 const THEME_MODES = {
@@ -113,9 +117,12 @@ const lightTheme = merge({}, darkTheme, {
 	},
 });
 
+const getTheme = (custom) =>
+	responsiveFontSizes(createTheme(custom), { factor: 3 });
+
 const THEMES = {
-	[THEME_MODES.DARK]: createTheme(darkTheme),
-	[THEME_MODES.LIGHT]: createTheme(lightTheme),
+	[THEME_MODES.DARK]: getTheme(darkTheme),
+	[THEME_MODES.LIGHT]: getTheme(lightTheme),
 };
 
 export default THEMES;

@@ -64,7 +64,7 @@ const ToggleHandle = ({ onDoubleClick }) => {
 	);
 };
 
-const ResizableBottomContainer = ({ children, height, minHeight = 0, setHeight }) => {
+const ResizableBottomContainer = ({ children, height, minHeight = 0, setHeight, className }) => {
 	const [ownHeight, setOwnHeight] = useState(minHeight);
 	const [isResizing, setResizing] = useState(false);
 	const effectiveHeight = height || minHeight || (!setHeight && ownHeight);
@@ -91,6 +91,7 @@ const ResizableBottomContainer = ({ children, height, minHeight = 0, setHeight }
 
 	return (
 		<StyledResizable
+			className={className}
 			size={{
 				height: effectiveHeight,
 				width: "100%",

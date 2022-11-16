@@ -16,7 +16,21 @@ const StyledContainerActions = styled(ContainerActions)`
     }
 
     .action-circle {
-      min-width: 60px;
+	    ${({ theme }) => `	   
+	   	      
+	      ${theme.breakpoints.up("sm")} {
+	        width: 60px;
+	      }
+	      
+        ${theme.breakpoints.down("sm")} {
+	        width: 40px;
+	        
+	        svg {
+	          width: 18px;
+	          height: 18px;
+	        }
+	      }
+	    `}
     }
   }
 `;

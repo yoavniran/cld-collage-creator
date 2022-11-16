@@ -39,7 +39,7 @@ const Title = () => <Typography
 	noWrap
 	sx={{
 		ml: 10,
-		display: { xs: "none", md: "flex" },
+		display: { xs: "none", sm: "flex" },
 		fontFamily: "'Chicle', cursive",
 		fontWeight: 700,
 		letterSpacing: ".3rem",

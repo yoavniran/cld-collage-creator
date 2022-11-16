@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import SelectionArea from "@viselect/react";
+import { isMobile } from "react-device-detect";
 import {
 	useCollageCells,
 	useCollageSize,
@@ -23,8 +24,9 @@ const SELECTION_PROPS = {
 		startThreshold: 20,
 	},
 	features: {
+		touch: isMobile,
 		singleTap: {
-			allow: false,
+			allow: isMobile,
 		}
 	}
 };

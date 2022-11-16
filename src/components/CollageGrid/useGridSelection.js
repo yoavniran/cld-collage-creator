@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import { isMobile } from "react-device-detect";
 import { useGridCellsCalculator } from "../../state/setters";
 
 const convertElementsToIds = (elms) =>
@@ -10,7 +11,7 @@ const useGridSelection = () => {
 
 	const onBeforeStart = ({ event }) => {
 		//only allow selection with left mouse button and without ctrl/cmd
-		return event.buttons === 1 && !event.metaKey && !event.ctrlKey;
+		return isMobile || (event.buttons === 1 && !event.metaKey && !event.ctrlKey);
 	};
 
 	const onStart = useCallback(({ selection }) => {

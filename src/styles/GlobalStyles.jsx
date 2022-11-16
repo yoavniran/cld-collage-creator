@@ -1,10 +1,15 @@
-import { createGlobalStyle } from "styled-components";
+import { css, createGlobalStyle } from "styled-components";
 import { alpha } from "@mui/material";
+import { isMobile } from "react-device-detect";
 import "@fontsource/roboto-serif/300.css";
 import "@fontsource/roboto-serif/400.css";
 import "@fontsource/roboto-serif/500.css";
 import "@fontsource/roboto-serif/700.css";
 import "@fontsource/chicle/400.css";
+
+const opaquePaperCss = css`
+  background-color: ${({ theme }) => alpha(theme.palette.background.paper, 0.9)};
+`;
 
 const GlobalStyles = createGlobalStyle`
   body {
@@ -26,8 +31,10 @@ const GlobalStyles = createGlobalStyle`
 
   .MuiPaper-root.hover-opaque {
     &:hover {
-      background-color: ${({ theme }) => alpha(theme.palette.background.paper, 0.9)};
+      ${opaquePaperCss}
     }
+	  
+	  ${isMobile ? opaquePaperCss : ""}
   }
 `;
 

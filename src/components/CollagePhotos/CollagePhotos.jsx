@@ -12,8 +12,12 @@ import IconButtonMenu from "../IconButtonMenu";
 
 const MIN_CONTAINER_HEIGHT = 14;
 
+const StyledResizableBottomContainer = styled(ResizableBottomContainer)`
+	
+`;
+
 const PhotosContainer = styled.div`
-  padding: 12px 20px;
+  padding: 12px 30px;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -27,8 +31,10 @@ const PhotosContainer = styled.div`
 
 const StyledIconButtonMenu = styled(IconButtonMenu)`
 	position: absolute;
-	right: 20px;
-	top: 20px;
+	right: 2px;
+	top: 10px;
+	
+	
 `;
 
 const CollagePhotos = () => {
@@ -41,7 +47,7 @@ const CollagePhotos = () => {
 	};
 
 	return (
-		<ResizableBottomContainer
+		<StyledResizableBottomContainer
 			minHeight={MIN_CONTAINER_HEIGHT}
 			height={drawerHeight}
 			setHeight={setDrawerHeight}
@@ -60,7 +66,7 @@ const CollagePhotos = () => {
 					<BurstModeIcon /> Fill Cells
 				</MenuItem>
 			</StyledIconButtonMenu>
-		</ResizableBottomContainer>
+		</StyledResizableBottomContainer>
 	);
 };
 
