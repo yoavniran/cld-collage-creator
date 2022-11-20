@@ -1,6 +1,6 @@
 import { NOTIFICATION_TYPES } from "../../consts";
 import { getTrackerForAtom } from "../../recoilUtils/recoil-spring";
-import atoms, { createTransactionHookSetter } from "../store";
+import atoms, { createCallbackSetter } from "../store";
 import createCollage from "../../createCollage";
 
 const {
@@ -57,49 +57,67 @@ const createTemplate = (size, flatCells) => {
 			res[position[0]][position[1]] = override ? overrideMap[id] : templateId;
 			return res;
 		}, [...new Array(size).fill(null).map(() => [])]);
-}
+};
 
 const createAssetsList = (flatCells, photoIds, get) => {
 	return flatCells
 		.filter(({ override }) => override === null)
-		.map(({ id, }) => {
+		.map(({ id }) => {
 			const gridPhoto = get(gridPhotos(id));
 			return gridPhoto.cldId;
 		});
 };
 
-const useCollageGenerator = createTransactionHookSetter({ setter: async (
-	{ get, set }
-) => {
-	set(isGenerating, true);
+const useCollageGenerator = createCallbackSetter({
+	setter: async (
+		{ get, set },
+	) => {
+		set(isGenerating, true);
 
-	set(notifications, (prev) => [{
-		type: NOTIFICATION_TYPES.COLLAGE_GENERATE,
-		severity: "info",
-		message: "Creating your Cloudinary Collage",
-	}, ...prev]);
+		set(notifications, (prev) => [{
+			type: NOTIFICATION_TYPES.COLLAGE_GENERATE,
+			severity: "info",
+			message: "Creating your Cloudinary Collage",
+		}, ...prev]);
 
-	const data = getCollageData(get);
-	const { size, cells, photoIds } = data;
-	const flatCells = cells.flat();
-	const template = createTemplate(size, flatCells);
-	const assets = createAssetsList(flatCells, photoIds, get);
+		const data = getCollageData(get);
+		const { size, cells, photoIds } = data;
+		const flatCells = cells.flat();
+		const template = createTemplate(size, flatCells);
+		const assets = createAssetsList(flatCells, photoIds, get);
 
-	console.log("generating ..... ", { data, template, assets });
+		console.log("generating ..... ", { data, template, assets });
 
-	const result = await createCollage(
-		Date.now().toString(),
-		{
-			...data,
-			template,
-			assets,
-			columns: size,
-			rows: size,
-		});
+		const result = await createCollage(
+			Date.now().toString(),
+			{
+				...data,
+				template,
+				assets,
+				columns: size,
+				rows: size,
+			});
 
-	console.log("GOT GENERATE RESULT !!! ", result);
+		console.log("GOT GENERATE RESULT !!! ", result);
 
-	set(isGenerating, false);
-} });
+		set(isGenerating, false);
+
+		if (result.success) {
+			set(notifications, (prev) => [{
+				type: NOTIFICATION_TYPES.COLLAGE_GENERATE_SUCCESS,
+				severity: "success",
+				message: "Collage generated successfully!",
+			}, ...prev]);
+
+
+		} else {
+			set(notifications, (prev) => [{
+				type: NOTIFICATION_TYPES.COLLAGE_GENERATE_FAIL,
+				severity: "error",
+				message: "Unexpected error while generating collage!",
+			}, ...prev]);
+		}
+	},
+});
 
 export default useCollageGenerator;

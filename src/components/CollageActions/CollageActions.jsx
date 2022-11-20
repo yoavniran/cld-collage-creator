@@ -2,18 +2,21 @@ import styled from "styled-components";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import IconButton from "@mui/material/IconButton";
 import UndoIcon from "@mui/icons-material/Undo";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import RedoIcon from "@mui/icons-material/Redo";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import SaveIcon from "@mui/icons-material/Save";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import MenuItem from "@mui/material/MenuItem";
+import SaveAsIcon from "@mui/icons-material/SaveAs";
 import { useCollageHistory, useCollageReset, useCollageGenerator } from "../../state/setters";
 import { useCanGenerate, useGenerating, useIsDarkMode } from "../../state/selectors";
-import TooltipIconButton from "../TooltipIconButton/";
 import GutterCircleProgress from "../GutterCircleProgress";
 import useAppTheme from "../../styles/useAppTheme";
+import SplitIconButton from "../SplitIconButton";
 
 const ActionsWrapper = styled(Paper)`
   padding: 20px;
@@ -26,15 +29,15 @@ const ActionsWrapper = styled(Paper)`
 `;
 
 const CheckList = styled.div`
-	margin-top: 20px;
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
-	
-	span {
-		display: flex;
-		gap: 8px;
-	}
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  span {
+    display: flex;
+    gap: 8px;
+  }
 `;
 
 const CantGenerateTooltipText = ({ report }) => {
@@ -51,21 +54,27 @@ const CantGenerateTooltipText = ({ report }) => {
 					{text}
 				</Typography>)}
 		</CheckList>
-	)
+	);
 };
 
 const GeneratingProgress = styled(GutterCircleProgress)`
   svg {
-		margin: 3px;
-	}
+    margin: 3px;
+  }
 `;
 
-const GenerateButton = ({ }) => {
-	const generate = useCollageGenerator()
+const GenerateButton = () => {
+	const generate = useCollageGenerator();
 	const isGenerating = useGenerating();
 	const canGenerateReport = useCanGenerate();
 	const isDarkMode = useIsDarkMode();
 	const theme = useAppTheme();
+
+	console.log("Rendering Generate Button - ", {
+		isGenerating,
+		canGenerateReport,
+	});
+
 
 	return (
 		isGenerating ?
@@ -77,7 +86,7 @@ const GenerateButton = ({ }) => {
 					thickness={4}
 				/>
 			</Box> :
-			<TooltipIconButton
+			<SplitIconButton
 				onClick={generate}
 				isDisabled={!canGenerateReport.result}
 				tooltipOnDisabled
@@ -86,7 +95,27 @@ const GenerateButton = ({ }) => {
 				tooltipSeverity="warning"
 				aria-label="generate collage"
 				icon={<SaveIcon fontSize="large"/>}
-			/>
+			>
+				<MenuItem>
+					<Button
+						onClick={generate}
+						startIcon={<SaveIcon/>}
+						variant="text"
+						sx={{ color: theme.palette.action.active }}
+					>
+						<Typography variant="button" color="text.primary">Save</Typography>
+					</Button>
+				</MenuItem>
+				<MenuItem>
+					<Button
+						startIcon={<SaveAsIcon/>}
+						variant="text"
+						sx={{ color: theme.palette.action.active }}
+					>
+						<Typography variant="button" color="text.primary">Save As</Typography>
+					</Button>
+				</MenuItem>
+			</SplitIconButton>
 	);
 };
 
@@ -107,7 +136,7 @@ const UndoRedoButtons = () => {
 				<RedoIcon fontSize="large"/>
 			</IconButton>
 		</>
-	)
+	);
 };
 
 const CollageActions = () => {

@@ -53,7 +53,8 @@ export const createSelectorHook = (key, getter, setter = null) => {
 	const { allowWrite, hookSelector } = createHookSelector(key, getter, setter);
 
 	const useHook = () => allowWrite ?
-		[useRecoilValue(hookSelector), useSetRecoilState(hookSelector)] :
+		useRecoilState(hookSelector) :
+		// [useRecoilValue(hookSelector), useSetRecoilState(hookSelector)] :
 		useRecoilValue(hookSelector);
 	useHook.selector = hookSelector;
 
@@ -69,12 +70,12 @@ export const createGetSetHooks = (key, getter, setter) => {
 	return { useSetHook, useGetHook };
 };
 
-export const createSimpleSetterHook = (atom, customSetter = undefined) =>
-	() => {
-		const recoilSetter = useSetRecoilState(atom);
-
-		return useCallback((value) => {
-			recoilSetter(customSetter ?
-				(current) => customSetter(current, value) : value);
-		}, [recoilSetter]);
-	};
+// export const createSimpleSetterHook = (atom, customSetter = undefined) =>
+// 	() => {
+// 		const recoilSetter = useSetRecoilState(atom);
+//
+// 		return useCallback((value) => {
+// 			recoilSetter(customSetter ?
+// 				(current) => customSetter(current, value) : value);
+// 		}, [recoilSetter]);
+// 	};

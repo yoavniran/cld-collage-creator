@@ -83,7 +83,6 @@ const IconButtonMenu = (
 			<StyledMenu
 				className={menuClassName}
 				anchorEl={() => anchorRef.current}
-				id="account-menu"
 				open={isOpen}
 				onClose={onClose}
 				onClick={onClose}

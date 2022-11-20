@@ -51,6 +51,7 @@ const {
 	createTrackerSelectorHook,
 	createRecoilHistoryHook,
 	createTransactionHookSetter,
+	createCallbackSetter,
 } = spring;
 
 export default atoms;
@@ -63,4 +64,5 @@ export {
 	createTrackerSelectorHook,
 	createRecoilHistoryHook,
 	createTransactionHookSetter,
+	createCallbackSetter,
 };

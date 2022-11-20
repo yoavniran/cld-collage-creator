@@ -4,6 +4,7 @@ import createSelectorFamilyHook from "./createSelectorFamilyHook";
 import createTrackerSelectorHook from "./createTrackerSelectorHook";
 import { useRecoilHistory } from "./history";
 import createTransactionHookSetter  from "./createTransactionHookSetter";
+import createCallbackSetter from "./createCallbackSetter";
 
 const createSpring = (list) => {
 	const atomsData = Object.entries(list)
@@ -34,6 +35,8 @@ const createSpring = (list) => {
 			useRecoilHistory({...options, atomsData }),
 		createTransactionHookSetter: (options) =>
 			createTransactionHookSetter({ ...options, atomsData }),
+		createCallbackSetter: (options) =>
+			createCallbackSetter({...options, atomsData }),
 
 		//TODO useLocalStorageRecoilPersister
 

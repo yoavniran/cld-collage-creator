@@ -18,6 +18,7 @@ const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+	overflow-y: auto;
 
   ${({ theme }) => theme.breakpoints.down("lg")} {
     padding: 0 10px;
@@ -35,7 +36,7 @@ const CollageCreator = () => {
 				<Topbar/>
 				<AppContainer>
 					<CollageActions/>
-					<Container maxWidth="xl" sx={{ display: "flex" }}>
+					<Container maxWidth="xl" sx={{ display: "flex", pb: 50 }}>
 						<CollageGrid/>
 						<CollageFloatingMenu/>
 					</Container>

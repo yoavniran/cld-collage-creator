@@ -42,28 +42,14 @@ const createCollage = async (id,
 		fd.append("public_id", id);
 		fd.append("manifest_json", JSON.stringify(manifest));
 
-
 		const response = await request(
 			`https://api.cloudinary.com/v1_1/${cloud}/image/create_collage`,
 			fd,
 		);
 
-
-		// 	await request(
-		// 	"http://localhost:4000/collage",
-		// 	JSON.stringify({
-		// 		cloud,
-		// 		preset,
-		// 		collage: {
-		// 			id,
-		// 			manifest,
-		// 		}
-		// 	})
-		// );
-
 		console.log("!!!!!!!!!!!!!! RESPONSE !!!!!!!!!! ", response);
 
-		result = { result: "success", id };
+		result = { success: response.success, id };
 	} catch (ex) {
 		console.error(ex);
 		result = { result: "error", message: ex.message };
