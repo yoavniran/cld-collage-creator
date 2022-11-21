@@ -1,9 +1,10 @@
+import merge from "lodash/merge";
 import {
 	createTheme,
 	responsiveFontSizes,
 	experimental_sx as sx,
 } from "@mui/material/styles";
-import merge from "lodash/merge";
+import { alpha } from "@mui/material";
 
 const THEME_MODES = {
 	DARK: "dark",
@@ -66,6 +67,14 @@ const darkTheme = {
 		...getComponentOverride("MuiAppBar", {
 			backgroundColor: "#022e46",
 		}),
+		...getComponentOverride("MuiDialog", {}, {
+				paper: ({ theme }) => ({
+					minWidth: 320,
+					minHeight: 280,
+					backgroundColor: alpha(theme.palette.background.paper, 0.95),
+				})
+			}
+		)
 		// ...getComponentOverride("MuiSwitch", {}, {
 		// 	track: ({ ownerState, theme }) => {
 		// 		console.log("SWITCH TRACK OVERRIDE @@@@@@@@@@@@ ", ownerState);

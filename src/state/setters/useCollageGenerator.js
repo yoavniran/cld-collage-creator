@@ -71,6 +71,7 @@ const createAssetsList = (flatCells, photoIds, get) => {
 const useCollageGenerator = createCallbackSetter({
 	setter: async (
 		{ get, set },
+		params = {}
 	) => {
 		set(isGenerating, true);
 
@@ -86,10 +87,10 @@ const useCollageGenerator = createCallbackSetter({
 		const template = createTemplate(size, flatCells);
 		const assets = createAssetsList(flatCells, photoIds, get);
 
-		console.log("generating ..... ", { data, template, assets });
+		console.log("generating ..... ", { data, template, assets, params });
 
 		const result = await createCollage(
-			Date.now().toString(),
+			params.id || Date.now().toString(),
 			{
 				...data,
 				template,
