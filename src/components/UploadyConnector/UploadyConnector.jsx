@@ -4,7 +4,8 @@ import Uploady, {
 	useUploady,
 } from "@rpldy/uploady";
 import { usePasteUpload } from "@rpldy/upload-paste";
-import { useUploadDetails } from "../../state/selectors";
+import { logger } from "../../utils";
+import { useDebug, useUploadDetails } from "../../state/selectors";
 import useUploadyItemMonitor from "../hooks/useUploadyItemMonitor";
 import useUploadyEnhancers from "./useUploadyEnhancers";
 
@@ -15,7 +16,7 @@ const UploadyConfig = () => {
 	const { setOptions } = useUploady();
 	const { getIsEnabled } = usePasteUpload();
 
-	console.log("Paste to Upload status = ", getIsEnabled());
+	logger.log("Paste to Upload status = ", getIsEnabled());
 
 	useEffect(() => {
 		setOptions({
@@ -43,10 +44,11 @@ const UploadyConfig = () => {
 
 const UploadyConnector = ({ children }) => {
 	const uploadyEnhancers = useUploadyEnhancers();
+	const [isDebug] = useDebug()
 
 	return (
 		<Uploady
-			debug
+			debug={isDebug}
 			accept="image/*"
 			enhancer={uploadyEnhancers}
 

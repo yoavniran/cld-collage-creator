@@ -46,8 +46,6 @@ const CollageGrid = () => {
 		}
 	}, [isGenerating]);
 
-	console.log("RENDERING COLLAGE GRID", { color, width, cells, isGenerating, isShowingXerox });
-
 	const onXeroxDone = () => setShowXerox(false);
 
 	return (<StyledSelectionArea

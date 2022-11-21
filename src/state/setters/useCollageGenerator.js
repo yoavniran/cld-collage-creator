@@ -1,3 +1,4 @@
+import { logger } from "../../utils";
 import { NOTIFICATION_TYPES } from "../../consts";
 import { getTrackerForAtom } from "../../recoilUtils/recoil-spring";
 import atoms, { createCallbackSetter } from "../store";
@@ -87,7 +88,7 @@ const useCollageGenerator = createCallbackSetter({
 		const template = createTemplate(size, flatCells);
 		const assets = createAssetsList(flatCells, photoIds, get);
 
-		console.log("generating ..... ", { data, template, assets, params });
+		logger.log("generating ..... ", { data, template, assets, params });
 
 		const result = await createCollage(
 			params.id || Date.now().toString(),
@@ -99,7 +100,7 @@ const useCollageGenerator = createCallbackSetter({
 				rows: size,
 			});
 
-		console.log("GOT GENERATE RESULT !!! ", result);
+		logger.log("GOT GENERATE RESULT !!! ", result);
 
 		set(isGenerating, false);
 

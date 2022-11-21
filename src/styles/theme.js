@@ -77,7 +77,6 @@ const darkTheme = {
 		)
 		// ...getComponentOverride("MuiSwitch", {}, {
 		// 	track: ({ ownerState, theme }) => {
-		// 		console.log("SWITCH TRACK OVERRIDE @@@@@@@@@@@@ ", ownerState);
 		// 		return {
 		// 			opacity: 1,
 		// 			backgroundColor: ownerState.checked ?

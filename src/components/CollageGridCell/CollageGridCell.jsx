@@ -55,8 +55,6 @@ const CollageGridCell = memo((
 	const { dropRef } = useCellDropTarget({ id });
 	const ref = (node) => dragRef(dropRef(node));
 
-	// console.log("RENDERING GRID CELL !!!!!!!!!! ", {cellIndex,id,columns,rows,position,color,className,isDragOver,overrideTargets,size,photo,	borderCss,dragRef,dropRef,});
-
 	return (<CellContainer
 		data-id={id}
 		height={`${height}%`}

@@ -1,4 +1,4 @@
-import { request } from "./utils";
+import { logger, request } from "./utils";
 
 const createCollage = async (id,
 	{
@@ -29,7 +29,7 @@ const createCollage = async (id,
 		assets: Object.values(assets).map((id) => ({ media: id })),
 	};
 
-	console.log("SENDING COLLAGE REQUEST !!!!!!!!", { id, manifest, assets });
+	logger.log("SENDING COLLAGE REQUEST !!!!!!!!", { id, manifest, assets });
 
 	let result;
 
@@ -47,7 +47,7 @@ const createCollage = async (id,
 			fd,
 		);
 
-		console.log("!!!!!!!!!!!!!! RESPONSE !!!!!!!!!! ", response);
+		logger.log("!!!!!!!!!!!!!! CREATE RESPONSE !!!!!!!!!! ", response);
 
 		result = { success: response.success, id };
 	} catch (ex) {

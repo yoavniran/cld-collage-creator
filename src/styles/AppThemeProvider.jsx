@@ -1,10 +1,11 @@
 import { ThemeProvider } from "@mui/material/styles";
+import { logger } from "../utils"
 import useAppTheme from "./useAppTheme";
 
 const AppThemeProvider = ({ children }) => {
 	const theme = useAppTheme();
 
-	console.log("THEME PROVIDER USING THEME ------ ", theme);
+	logger.log("THEME PROVIDER USING THEME ------ ", theme);
 
 	return (
 		<ThemeProvider theme={theme}>

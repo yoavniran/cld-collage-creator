@@ -1,3 +1,4 @@
+import { logger } from "../../utils";
 import atoms, { createTransactionHookSetter } from "../store";
 import calculateCells, { getCellMapFromGrid } from "../cellsCalculator";
 
@@ -49,11 +50,11 @@ const useGridCellsCalculator = createTransactionHookSetter({ setter: (
 	{ size, override },
 ) => {
 	if (size || override) {
-		console.log("RUNNING GRID CELL CALCULATOR TRANSACTION");
 		let canCalculate = true;
-
 		const prevSize = get(gridSize),
 			prevCells = get(gridCells);
+
+		logger.log("RUNNING GRID CELL CALCULATOR TRANSACTION", { prevSize, prevCells, size, override });
 
 		if (size && size !== prevSize) {
 			set(gridSize, size);

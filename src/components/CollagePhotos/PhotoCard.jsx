@@ -47,9 +47,7 @@ const PhotoCard = memo(({ id }) => {
 	const { url, name, cldId, } = photo;
 	const [isPhotoError, setPhotoError] = useState(false);
 	const photoUrl = addUrlTransformation(url, "$&/h_160,dpr_2,g_auto,c_fill/");
-
 	const { dragRef, isDragging } = useAsPhotoDragSource({ photo });
-	// console.log("RENDERING PHOTO CARD ----- ", { name, cldId, url, isDragging });
 
 	const onRemovePhoto = () => {
 		setPhoto(cldId, null);

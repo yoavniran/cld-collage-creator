@@ -1,9 +1,10 @@
+import { logger } from "../../utils";
 import { findTrackedAtom, updateAtomTracker } from "./familyTrackerAtom";
 
 const getTrackerSetters = ({ get, set, reset, atomsData }) => {
 	const setWithTracker = (atom, val) => {
 		updateAtomTracker(atomsData, atom, (trackerName, param) => {
-			console.log("!!!!!! SETTING WITH TRACKER !!!! ", { atom, val, trackerName, param });
+			logger.log("!!!!!! SETTING WITH TRACKER !!!! ", { atom, val, trackerName, param });
 			set(atomsData.atoms[trackerName], (prev) =>
 				prev.includes(param) ? prev : [param, ...prev]);
 		});
@@ -13,7 +14,7 @@ const getTrackerSetters = ({ get, set, reset, atomsData }) => {
 
 	const resetWithTracker = (atom) => {
 		updateAtomTracker(atomsData, atom, (trackerName, param) => {
-			console.log("!!!!!! RESETTING WITH TRACKER !!!! ", { atom, trackerName, param });
+			logger.log("!!!!!! RESETTING WITH TRACKER !!!! ", { atom, trackerName, param });
 			set(atomsData.atoms[trackerName], (prev) => {
 				const indx = prev.indexOf(param);
 				return ~indx ? [...prev.slice(0, indx), ...prev.slice(indx + 1)] : prev;

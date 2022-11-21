@@ -1,5 +1,6 @@
 import { useDrop } from "react-dnd";
 import { DRAG_TYPES } from "../../consts";
+import { logger } from "../../utils";
 import { useGridPhoto } from "../../state/selectors";
 import { useSetPhotoOverCell } from "../../state/setters";
 import useDndKeyboardSupport from "../hooks/useDndKeyboardSupport";
@@ -17,7 +18,7 @@ const useCellDropTarget = ({ id }) => {
 			drop: ({ photo, orgCellId }, monitor) => {
 				const copy = dndKeyboardSupport.isDropShiftPressed();
 
-				console.log("CELL BEING DROPPED ON  ", { photo, orgCellId, copy }, monitor.getItemType());
+				logger.log("CELL BEING DROPPED ON  ", { photo, orgCellId, copy }, monitor.getItemType());
 
 				if (monitor.getItemType() === DRAG_TYPES.PHOTO) {
 					setGridPhoto(id, { photo, options: { orgCellId, copy } });

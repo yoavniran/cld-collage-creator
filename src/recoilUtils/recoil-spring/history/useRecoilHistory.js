@@ -4,6 +4,7 @@ import {
 	useRecoilTransactionObserver_UNSTABLE as useRecoilTransactionObserver,
 } from "recoil";
 import { findTrackerNameInStore } from "../familyTrackerAtom";
+import { logger } from "../../../utils";
 import { getAtomFamilyRootName } from "../utils";
 import useRecoilTimeTravel from "./useRecoilTimeTravel";
 
@@ -21,13 +22,18 @@ const getHasDiffs = (snapshot, prevSnapshot, atoms) => {
 		!!atoms.find((a) => {
 			const res = snapshot.getLoadable(a).contents !== prevSnapshot.getLoadable(a).contents;
 			if (res) {
-				console.log("FOUND SNAPSHOT DIFF FOR HISTORY ", a);
+				logger.log("FOUND SNAPSHOT DIFF FOR HISTORY ", a);
 			}
 			return res;
 		});
 };
 
-const useRecoilHistory = ({ atoms, maxItems = DEFAULT_MAX_ITEMS, navMutator = null, atomsData = null }) => {
+const useRecoilHistory = ({
+	                          atoms,
+	                          maxItems = DEFAULT_MAX_ITEMS,
+	                          navMutator = null,
+	                          atomsData = null,
+                          }) => {
 	const diffAtoms = getAtomsForDiff(atoms, atomsData);
 
 	const {

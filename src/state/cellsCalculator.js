@@ -1,4 +1,5 @@
 import { getColor } from "../styles/colors";
+import { logger } from "../utils";
 
 /**
  * calculates cell's ID based on the cell position
@@ -113,7 +114,7 @@ const unmergeOversizedOverrides = (cellMap, size) => {
 
 const calculateCells = (size, override = null, prevCells = null) => {
 	const newCells = [], cellMap = {};
-	console.log("** CALCULATING GRID CELLS ** ", { size, prevCells, override });
+	logger.log("** CALCULATING GRID CELLS ** ", { size, prevCells, override });
 
 	for (let i = 0; i < size; i++) {
 		for (let j = 0; j < size; j++) {

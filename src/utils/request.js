@@ -1,12 +1,14 @@
+import logger  from "./logger";
+
 const request = (url, data, cors = true) => {
 	return fetch(url, {
 		method: "POST",
 		body: data,
 		mode: cors ? "cors" : undefined,
 	}).then(({ json, status, statusText }) => {
-		console.log("REQUEST RESPONSE", { status, statusText });
+		logger.log("REQUEST RESPONSE", { status, statusText });
 		return json.then((jsonRes) => {
-			console.log("JSON RESPONSE !!!!! ", jsonRes);
+			logger.log("JSON RESPONSE !!!!! ", jsonRes);
 			return {
 				success: true,
 				response: jsonRes,

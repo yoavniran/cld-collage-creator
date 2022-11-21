@@ -57,11 +57,6 @@ const GenerateButton = () => {
 	const isDarkMode = useIsDarkMode();
 	const theme = useAppTheme();
 
-	console.log("Rendering Generate Button - ", {
-		isGenerating,
-		canGenerateReport,
-	});
-
 	const onGenerateWithId = () => {
 		setShowingSaveAs(true);
 	};
