@@ -9,8 +9,6 @@ import { useDebug, useUploadDetails } from "../../state/selectors";
 import useUploadyItemMonitor from "../hooks/useUploadyItemMonitor";
 import useUploadyEnhancers from "./useUploadyEnhancers";
 
-//TODO: add simulataneous uploads
-
 const UploadyConfig = () => {
 	const { cloud, preset } = useUploadDetails() || {};
 	const { setOptions } = useUploady();
@@ -49,9 +47,10 @@ const UploadyConnector = ({ children }) => {
 	return (
 		<Uploady
 			debug={isDebug}
+			concurrent
+			maxConcurrent={5}
 			accept="image/*"
 			enhancer={uploadyEnhancers}
-
 		>
 			<UploadyConfig/>
 			{children}

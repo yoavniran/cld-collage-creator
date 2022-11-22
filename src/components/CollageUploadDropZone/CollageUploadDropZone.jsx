@@ -3,8 +3,8 @@ import styled from "styled-components";
 import UploadDropZone from "@rpldy/upload-drop-zone";
 import Typography from "@mui/material/Typography";
 import AdjustIcon from "@mui/icons-material/Adjust";
-
-//tODO: use theme colors for accent + dark/light overlay bg color !!!
+import { GENERATE_REPORT_TYPES } from "../../consts";
+import { useCanGenerate } from "../../state/selectors";
 
 const DragOverlay = styled.div`
   position: absolute;
@@ -55,17 +55,28 @@ const StyledUploadDropZone = styled(UploadDropZone)`
   }
 `;
 
+const IS_READY_DROP_CHECKS = [GENERATE_REPORT_TYPES.CLOUD, GENERATE_REPORT_TYPES.PRESET];
+
+const getIsReadyForDrop = (report) =>
+	IS_READY_DROP_CHECKS.every((ct) =>
+		!!report.checks.find(({ type, status }) => ct === type && status ));
+
+const getIsDropAllImages = (event) =>
+	Array.prototype.slice.call(event.dataTransfer.items)
+		.every((item) => item.kind === "file" && item.type.startsWith("image/"));
+
 const CollageUploadDropZone = ({ children }) => {
 	const overlayRef = useRef(null);
+	const canGenReport = useCanGenerate();
 
 	return (
 		<StyledUploadDropZone
 			onDragOverClassName="file-over"
-			shouldHandleDrag={(e) =>  {
+			shouldHandleDrag={(e) => {
 				//only show drop zone for files being dragged onto the page
 				return e.dataTransfer?.items?.length &&
-					Array.prototype.slice.call(e.dataTransfer.items)
-					.every((item) => item.kind === "file" && item.type.startsWith("image/"));
+					getIsReadyForDrop(canGenReport) &&
+					getIsDropAllImages(e);
 			}}
 			shouldRemoveDragOver={({ target }) => target === overlayRef.current}
 		>

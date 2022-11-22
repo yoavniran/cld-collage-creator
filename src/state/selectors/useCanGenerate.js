@@ -1,6 +1,7 @@
 import isEmpty from "lodash/isEmpty";
-import atoms from "../store";
+import { GENERATE_REPORT_TYPES } from "../../consts";
 import { createSelectorHook } from "../../recoilUtils";
+import atoms from "../store";
 import useAllCellsSet from "./useAllCellsSet";
 
 const {
@@ -12,9 +13,9 @@ const useCanGenerate = createSelectorHook(
 	"CanGenerateSelector",
 	(get) => {
 		const checks = [
-			{ text: "Set cloud name (menu)" , status: !isEmpty(get(cloud)) },
-			{ text: "Set collage preset (menu)" , status: !isEmpty(get(collagePreset)) },
-			{ text: "Set a photo for every cell (grid)" , status: (get(useAllCellsSet.selector)) },
+			{ type: GENERATE_REPORT_TYPES.CLOUD, text: "Set cloud name (menu)" , status: !isEmpty(get(cloud)) },
+			{ type: GENERATE_REPORT_TYPES.PRESET, text: "Set collage preset (menu)" , status: !isEmpty(get(collagePreset)) },
+			{ type: GENERATE_REPORT_TYPES.CELLS, text: "Set a photo for every cell (grid)" , status: (get(useAllCellsSet.selector)) },
 		];
 
 		return {
