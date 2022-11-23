@@ -14,6 +14,8 @@ import useAppTheme from "../../styles/useAppTheme";
 import SplitIconButton from "../SplitIconButton";
 import SaveAsModal from "./SaveAsModal";
 
+//TODO: Add manifest preview button -> show readonly manifest JSON in modal
+
 const CheckList = styled.div`
   margin-top: 20px;
   display: flex;

@@ -1,4 +1,4 @@
-import { Suspense  } from "react";
+import { Suspense } from "react";
 import styled from "styled-components";
 import Container from "@mui/material/Container";
 import { DndProvider } from "react-dnd";
@@ -20,7 +20,7 @@ const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-	overflow-y: auto;
+  overflow-y: auto;
 
   ${({ theme }) => theme.breakpoints.down("lg")} {
     padding: 0 10px;
@@ -32,9 +32,9 @@ const AppContainer = styled.div`
 
 const CollageCreator = () => {
 	return (
-		<Suspense fallback={<PageSpinner/>}>
-			<UploadyConnector>
-				<DndProvider backend={DragDropBackend}>
+		<UploadyConnector>
+			<DndProvider backend={DragDropBackend}>
+				<Suspense fallback={<PageSpinner/>}>
 					<Notifications/>
 					<CollageUploadDropZone>
 						<Topbar/>
@@ -48,9 +48,9 @@ const CollageCreator = () => {
 						</AppContainer>
 						<AppDrawer/>
 					</CollageUploadDropZone>
-				</DndProvider>
-			</UploadyConnector>
-		</Suspense>
+				</Suspense>
+			</DndProvider>
+		</UploadyConnector>
 	);
 };
 

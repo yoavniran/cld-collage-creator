@@ -1,26 +1,26 @@
-import { memo, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import BrokenImageIcon from "@mui/icons-material/BrokenImage";
-import SwipeUpAltIcon from "@mui/icons-material/SwipeUpAlt";
+import BaseCard from "./BaseCard";
 import DeleteIcon from "@mui/icons-material/Delete";
+import SwipeUpAltIcon from "@mui/icons-material/SwipeUpAlt";
+import BrokenImageIcon from "@mui/icons-material/BrokenImage";
 import { addUrlTransformation } from "../../utils";
-import { useGridPhoto, usePhoto } from "../../state/selectors";
 import useAsPhotoDragSource from "../hooks/useAsPhotoDragSource";
 import TooltipIconButton from "../TooltipIconButton";
 import Tooltip from "../Tooltip";
-import BaseCard from "./BaseCard";
 import PhotoMedia from "./PhotoMedia";
+import { useGridPhoto } from "../../state/selectors";
 
-const PhotoBaseCard = styled(BaseCard)`
-	.MuiCardContent-root {
+const StyledBaseCard = styled(BaseCard)`
+  .MuiCardContent-root {
     overflow: hidden;
   }
 
   .MuiCardMedia-root {
-	  height: 100%;
+    height: 100%;
   }
-	
-	&:hover {
+
+  &:hover {
     img {
       cursor: grab;
       transition: all 0.5s ease;
@@ -34,24 +34,26 @@ const PhotoBaseCard = styled(BaseCard)`
 `;
 
 const ErrorContainer = styled.div`
-	width: 100%;
-	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
-const PhotoCard = memo(({ id }) => {
-	const setGridPhoto = useGridPhoto()[1];
-	const [photo, setPhoto] = usePhoto(id);
-	const { url, name, cldId, } = photo;
+const PhotoCardBase = ({
+	                       className,
+	                       url,
+	                       name,
+	                       cldId,
+	                       allowDelete = false,
+	                       onDelete,
+                       }) => {
 	const [isPhotoError, setPhotoError] = useState(false);
-	const photoUrl = addUrlTransformation(url, "$&/h_160,dpr_2,g_auto,c_fill/");
+	const photo = { url, name, cldId };
+	const setGridPhoto = useGridPhoto()[1];
 	const { dragRef, isDragging } = useAsPhotoDragSource({ photo });
-
-	const onRemovePhoto = () => {
-		setPhoto(cldId, null);
-	};
+	const photoUrl = addUrlTransformation(url, "$&/h_160,dpr_2,g_auto,c_fill/");
 
 	const onAddPhotoToCollage = () => {
 		setGridPhoto(null, { photo });
@@ -62,7 +64,8 @@ const PhotoCard = memo(({ id }) => {
 	};
 
 	return (
-		<PhotoBaseCard
+		<StyledBaseCard
+			className={className}
 			actions={[
 				!isPhotoError && {
 					key: "add-to-first",
@@ -75,10 +78,10 @@ const PhotoCard = memo(({ id }) => {
 						color="secondary"
 					/>,
 				},
-				{
+				allowDelete && {
 					key: "delete",
 					component: <TooltipIconButton
-						onClick={onRemovePhoto}
+						onClick={onDelete}
 						tooltipText="Delete photo"
 						tooltipDelay={1000}
 						icon={<DeleteIcon/>}
@@ -111,8 +114,8 @@ const PhotoCard = memo(({ id }) => {
 						onDoubleClick={onAddPhotoToCollage}
 					/>}
 			</Tooltip>
-		</PhotoBaseCard>
+		</StyledBaseCard>
 	);
-});
+};
 
-export default PhotoCard;
+export default PhotoCardBase;

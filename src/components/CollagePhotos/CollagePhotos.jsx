@@ -5,10 +5,11 @@ import BurstModeIcon from "@mui/icons-material/BurstMode";
 import ResizableBottomContainer from "../ResizableBottomContainer";
 import EmptyCard from "./EmptyCard";
 import UploadingCard from "./UploadingCard";
-import PhotoCard from "./PhotoCard";
+import UploadPhotoCard from "./UploadPhotoCard";
 import { useDamConfig, usePhotos, usePhotosDrawerHeight } from "../../state/selectors";
 import { useFillGridPhotos } from "../../state/setters";
 import IconButtonMenu from "../IconButtonMenu";
+import AssetPhotoCard from "./AssetPhotoCard";
 
 const MIN_CONTAINER_HEIGHT = 14;
 
@@ -42,7 +43,6 @@ const CollagePhotos = () => {
 	const [drawerHeight, setDrawerHeight] = usePhotosDrawerHeight();
 	const fillCells = useFillGridPhotos();
 	const damConfig = useDamConfig();
-	console.log("DAM CONFIG !!!!!!!!!!! ", damConfig);
 
 	const onFillCells = () => {
 		fillCells();
@@ -60,8 +60,10 @@ const CollagePhotos = () => {
 					rememberPreviousBatches
 					PreviewComponent={UploadingCard}
 				/>
+				{damConfig?.assets?.map((asset) =>
+					<AssetPhotoCard key={asset.id} asset={asset}/>)}
 				{photos.map((photoId) =>
-					<PhotoCard id={photoId} key={photoId}/>)}
+					<UploadPhotoCard key={photoId} id={photoId}/>)}
 			</PhotosContainer>
 			<StyledIconButtonMenu>
 				<MenuItem onClick={onFillCells} disabled={!photos.length}>
