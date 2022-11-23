@@ -26,3 +26,4 @@ export useDebug from "./useDebug";
 export useMockUpload from "./useMockUpload";
 export useCropType from "./useCropType";
 export useGravityType from "./useGravityType";
+export useIsDam from "./useIsDam";

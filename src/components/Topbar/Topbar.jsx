@@ -4,7 +4,7 @@ import Toolbar from "@mui/material/Toolbar";
 import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { useAppDrawerStatus } from "../../state/selectors";
+import { useAppDrawerStatus, useIsDam } from "../../state/selectors";
 import useFloatingMenuMediaQuery from "../hooks/useFloatingMenuMediaQuery";
 import Logo from "../Logo";
 import AppSettings from "../AppSettings";
@@ -52,14 +52,20 @@ const Title = () => <Typography
 
 const Topbar = () => {
 	const [isAppDrawerOpen, setAppDrawerOpen] = useAppDrawerStatus(false);
+	const isDam = useIsDam();
 	const showFloating = useFloatingMenuMediaQuery();
 
 	return (
 		<StyledAppBar position="static">
 			<StyledToolbar>
 				<BarLeftSide>
-					<Logo/>
-					<Title/>
+					{
+						isDam &&
+						<>
+							<Logo/>
+							<Title/>
+						</>
+					}
 				</BarLeftSide>
 
 				<BarRightSize>

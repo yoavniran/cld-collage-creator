@@ -38,6 +38,9 @@ const DEFAULTS = {
 	//collections of uploads that turn into photos for the collage
 	[springFamily("uploads")]: null,
 	[springFamily("photos")]: null,
+
+	damConfig: null,
+	isDam: document.location.search.includes("dam=true"),
 };
 
 

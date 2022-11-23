@@ -25,6 +25,14 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
       <title>Cloudinary Collage Creator</title>
+      <script>
+          if (document.location.search?.includes("dam=true")) {
+			const s = document.createElement("script");
+			s.src = "https://custom-action.cloudinary.com/all.js"
+            s.async = true;
+			document.head.appendChild(s);
+          }
+      </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
