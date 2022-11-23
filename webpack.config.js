@@ -69,10 +69,21 @@ module.exports = {
 		...[
 			isDev && new webpack.HotModuleReplacementPlugin(),
 			isDev && new ReactRefreshWebpackPlugin(),
+			!isDev && new MiniCssExtractPlugin()
 		].filter(Boolean),
 		new HtmlWebpackPlugin({
 			template: "public/index.html"
 		}),
 	],
-
+	optimization: {
+		splitChunks: {
+			cacheGroups: {
+				commons: {
+					test: /[\\/]node_modules[\\/]/,
+					name: 'vendors',
+					chunks: 'all',
+				},
+			},
+		},
+	},
 };

@@ -5,7 +5,7 @@
   "scripts": {
     "start": "webpack serve",
     "watch": "webpack --watch",
-    "build": "webpack"
+    "build": "rm -rf dist/ && NODE_ENV=production webpack"
   },
   "devDependencies": {
     "@babel/plugin-proposal-export-default-from": "^7.18.10",
