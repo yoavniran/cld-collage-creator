@@ -45,7 +45,7 @@ const CollagePhotos = () => {
 	const damConfig = useDamConfig();
 
 	const onFillCells = () => {
-		fillCells();
+		fillCells(damConfig);
 	};
 
 	return (
