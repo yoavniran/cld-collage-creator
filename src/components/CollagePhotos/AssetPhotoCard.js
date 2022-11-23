@@ -3,7 +3,7 @@ import styled from "styled-components";
 import PhotoCardBase from "./PhotoCardBase";
 
 const StyledPhotoCardBase = styled(PhotoCardBase)`
-	box-shadow: 0 0 6px 2px ${(theme) => theme.palette.action.active};
+	box-shadow: 0 0 6px 2px ${({ theme }) => theme.palette.action.active};
 `;
 
 const AssetPhotoCard = memo(({ asset }) => {
