@@ -60,7 +60,7 @@ const Topbar = () => {
 			<StyledToolbar>
 				<BarLeftSide>
 					{
-						isDam &&
+						!isDam &&
 						<>
 							<Logo/>
 							<Title/>

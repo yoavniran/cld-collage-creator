@@ -1,3 +1,4 @@
+import { Suspense  } from "react";
 import styled from "styled-components";
 import Container from "@mui/material/Container";
 import { DndProvider } from "react-dnd";
@@ -11,6 +12,7 @@ import CollageFloatingMenu from "../CollageFloatingMenu";
 import CollagePhotos from "../CollagePhotos";
 import UploadyConnector from "../UploadyConnector";
 import CollageUploadDropZone from "../CollageUploadDropZone";
+import PageSpinner from "../PageSpinner";
 
 const AppContainer = styled.div`
   width: 100%;
@@ -29,23 +31,27 @@ const AppContainer = styled.div`
 //TODO: add I button at the bottom with info about the creator of the tool + link to GH repo
 
 const CollageCreator = () => {
-	return (<UploadyConnector>
-		<DndProvider backend={DragDropBackend}>
-			<Notifications/>
-			<CollageUploadDropZone>
-				<Topbar/>
-				<AppContainer>
-					<CollageActions/>
-					<Container maxWidth="xl" sx={{ display: "flex", pb: 50 }}>
-						<CollageGrid/>
-						<CollageFloatingMenu/>
-					</Container>
-					<CollagePhotos/>
-				</AppContainer>
-				<AppDrawer/>
-			</CollageUploadDropZone>
-		</DndProvider>
-	</UploadyConnector>);
+	return (
+		<Suspense fallback={<PageSpinner/>}>
+			<UploadyConnector>
+				<DndProvider backend={DragDropBackend}>
+					<Notifications/>
+					<CollageUploadDropZone>
+						<Topbar/>
+						<AppContainer>
+							<CollageActions/>
+							<Container maxWidth="xl" sx={{ display: "flex", pb: 50 }}>
+								<CollageGrid/>
+								<CollageFloatingMenu/>
+							</Container>
+							<CollagePhotos/>
+						</AppContainer>
+						<AppDrawer/>
+					</CollageUploadDropZone>
+				</DndProvider>
+			</UploadyConnector>
+		</Suspense>
+	);
 };
 
 export default CollageCreator;

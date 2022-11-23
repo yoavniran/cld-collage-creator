@@ -1,3 +1,5 @@
+import useDamConfig from "./useDamConfig";
+
 export useCollageBorder from "./useCollageBorder";
 export useCollageBorderColor from "./useCollageBorderColor";
 export useCollageBorderWidth from "./useCollageBorderWidth";
@@ -27,3 +29,4 @@ export useMockUpload from "./useMockUpload";
 export useCropType from "./useCropType";
 export useGravityType from "./useGravityType";
 export useIsDam from "./useIsDam";
+export useDamConfig from "./useDamConfig";

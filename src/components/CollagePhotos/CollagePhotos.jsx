@@ -6,7 +6,7 @@ import ResizableBottomContainer from "../ResizableBottomContainer";
 import EmptyCard from "./EmptyCard";
 import UploadingCard from "./UploadingCard";
 import PhotoCard from "./PhotoCard";
-import { usePhotos, usePhotosDrawerHeight } from "../../state/selectors";
+import { useDamConfig, usePhotos, usePhotosDrawerHeight } from "../../state/selectors";
 import { useFillGridPhotos } from "../../state/setters";
 import IconButtonMenu from "../IconButtonMenu";
 
@@ -41,6 +41,8 @@ const CollagePhotos = () => {
 	const photos = usePhotos();
 	const [drawerHeight, setDrawerHeight] = usePhotosDrawerHeight();
 	const fillCells = useFillGridPhotos();
+	const damConfig = useDamConfig();
+	console.log("DAM CONFIG !!!!!!!!!!! ", damConfig);
 
 	const onFillCells = () => {
 		fillCells();

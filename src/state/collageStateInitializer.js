@@ -11,11 +11,17 @@ const collageStateInitializer = (data, set) => {
 	set(gridCells, calculateCells(size));
 
 	if ("cloudinary" in window) {
-		const cldConfig = window.cloudinary?.customAction?.getConfig();
+		const configPromise = window.cloudinary?.customAction?.getConfig();
 
-		// console.log("CLD CONFIG !!! ", cldConfig);
-		set(damConfig, cldConfig);
+		if (configPromise) {
+			set(damConfig, configPromise);
+		}
 	}
+	// else {
+	// 	set(damConfig, new Promise((resolve) =>{
+	// 		setTimeout(() => resolve({ test: true }), 2000);
+	// 	}));
+	// }
 };
 
 export default collageStateInitializer;
