@@ -4,7 +4,7 @@ import Container from "@mui/material/Container";
 import { DndProvider } from "react-dnd";
 import Topbar from "../Topbar";
 import AppDrawer from "../AppDrawer";
-import DragDropBackend from "../DragDropBackend";
+import getDndBackend from "../DragDropBackend";
 import CollageGrid from "../CollageGrid";
 import Notifications from "../Notifications";
 import CollageActions from "../CollageActions";
@@ -33,7 +33,7 @@ const AppContainer = styled.div`
 const CollageCreator = () => {
 	return (
 		<UploadyConnector>
-			<DndProvider backend={DragDropBackend}>
+			<DndProvider backend={getDndBackend()}>
 				<Suspense fallback={<PageSpinner/>}>
 					<Notifications/>
 					<CollageUploadDropZone>

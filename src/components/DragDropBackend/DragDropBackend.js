@@ -1,4 +1,6 @@
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { TouchBackend } from "react-dnd-touch-backend";
+import { isMobile } from "react-device-detect";
 
 //TODO: this is horrible but react-dnd doesnt provide access to the DOM event or to the keyboard keys pressed during the drag event :(
 const createDragDropBackend = (manager, context, options) => {
@@ -22,5 +24,6 @@ const createDragDropBackend = (manager, context, options) => {
 	return customBE;
 };
 
+const getDndBackend = () => isMobile ? TouchBackend : createDragDropBackend;
 
-export default createDragDropBackend;
+export default getDndBackend;
