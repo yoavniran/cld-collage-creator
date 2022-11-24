@@ -30,6 +30,7 @@ const DEFAULTS = {
 	photosDrawerHeight: 0,
 	photoOverCell: null,
 	isGenerating: false,
+	isMonochromeGrid: false,
 
 	//debug options
 	isDebug: false,

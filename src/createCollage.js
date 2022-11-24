@@ -16,7 +16,6 @@ const createCollage = async (id,
 		gravity,
 	}) => {
 
-
 	const manifest = {
 		template,
 		width,
@@ -36,9 +35,6 @@ const createCollage = async (id,
 	try {
 		const fd = new FormData();
 		fd.append("upload_preset", preset);
-
-		//TODO: Allow setting public id (save-as)
-
 		fd.append("public_id", id);
 		fd.append("manifest_json", JSON.stringify(manifest));
 

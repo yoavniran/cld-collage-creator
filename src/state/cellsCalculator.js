@@ -1,4 +1,4 @@
-import { getColor } from "../styles/colors";
+import { getColor, getMonochromeColor } from "../styles/colors";
 import { logger } from "../utils";
 
 /**
@@ -22,14 +22,17 @@ const calculateCellId = (i, j) => {
 	return Math.pow(size, 2) + size - j + i + 1;
 };
 
-const createNewCell = (i, j) => {
+const getColorForCell = (pos, isMono) =>
+	isMono ? getMonochromeColor(pos) : getColor(pos);
+
+const createNewCell = (i, j, isMonochrome) => {
 	const position = [i, j];
 	return {
 		position,
 		//unique id that doesnt change when grid is resized
 		id: calculateCellId(i, j),
 		//unique color
-		color: getColor(position),
+		color: getColorForCell(position, isMonochrome),
 		//how many columns this cell should occupy (when its overriding other cells)
 		columns: 1,
 		//how many rows this cell should occupy (when its overriding other cells)
@@ -38,10 +41,12 @@ const createNewCell = (i, j) => {
 		override: null,
 		//ids of the cells being overridden by this one
 		overrideTargets: [],
+		//store flag if monochrome colors or not
+		isMonochrome,
 	};
 };
 
-const getMergedGradient = (cell, cellMap) => {
+const getMergedGradient = (cell, cellMap, isMonochrome) => {
 	const step = 100 / (cell.overrideTargets.length + 1);
 
 	const gradients = cell.overrideTargets.map((targetId, index) => {
@@ -49,13 +54,13 @@ const getMergedGradient = (cell, cellMap) => {
 		return `${target.color} ${(index + 1) * step}%`;
 	}).join(", ");
 
-	const sourceColor = getColor(cell.position);
+	const sourceColor = getColorForCell(cell.position, isMonochrome);
 
 	return `linear-gradient(140deg, ${sourceColor} 0%, ${gradients})`;
 };
 
-const resetCellFromOverride = (cell) => {
-	cell.color = getColor(cell.position);
+const resetCellFromOverride = (cell, isMonochrome) => {
+	cell.color = getColorForCell(cell.position, isMonochrome);
 	cell.overrideTargets = [];
 	cell.columns = 1;
 	cell.rows = 1;
@@ -67,16 +72,15 @@ const resetCellOverriddenTargets = (cell, cellMap) => {
 			cellMap[targetId].override = null;
 		}
 	});
-}
+};
 
-const updateCellsOverrides = (override, cellMap) => {
+const updateCellsOverrides = (override, cellMap, isMonochrome) => {
 	const source = cellMap[override.source];
 
 	if (override.unmerge) {
 		//clear overridden cells from the override
 		resetCellOverriddenTargets(source, cellMap);
-
-		resetCellFromOverride(source);
+		resetCellFromOverride(source, isMonochrome);
 	} else {
 		source.overrideTargets = override.selectedIds;
 		source.rows = override.rows;
@@ -85,12 +89,12 @@ const updateCellsOverrides = (override, cellMap) => {
 		//clean up any existing overrides swallowed by this new override
 		source.overrideTargets.forEach((targetId) => {
 			const target = cellMap[targetId];
-			resetCellFromOverride(target);
+			resetCellFromOverride(target, isMonochrome);
 			target.override = source.id;
 		});
 
 		//create gradient from the colors of the combined cells
-		source.color = getMergedGradient(source, cellMap);
+		source.color = getMergedGradient(source, cellMap, isMonochrome);
 	}
 };
 
@@ -100,21 +104,39 @@ const getCellMapFromGrid = (cells, copy = false) => cells.flat()
 		return res;
 	}, {});
 
-const unmergeOversizedOverrides = (cellMap, size) => {
+const unmergeOversizedOverrides = (cellMap, size, isMonochrome) => {
 	Object.values(cellMap)
 		.filter(({ overrideTargets }) => !!overrideTargets.length)
 		.forEach((cell) => {
 			if (cell.position[0] + cell.rows > size ||
 				cell.position[1] + cell.columns > size) {
 				resetCellOverriddenTargets(cell, cellMap);
-				resetCellFromOverride(cell);
+				resetCellFromOverride(cell, isMonochrome);
 			}
 		});
 };
 
-const calculateCells = (size, override = null, prevCells = null) => {
+const updateCellsColor = (cellMap, isMonochrome) => {
+	//need to update the individual cells first
+	Object.values(cellMap)
+		.filter(({ overrideTargets }) => !overrideTargets.length)
+		.forEach((cell) => {
+			cell.color = getColorForCell(cell.position, isMonochrome);
+			cell.isMonochrome = isMonochrome;
+		});
+
+	//after updating individual cells, its possible to update merged ones
+	Object.values(cellMap)
+		.filter(({ overrideTargets }) => !!overrideTargets.length)
+		.forEach((cell) => {
+			cell.color = getMergedGradient(cell, cellMap, isMonochrome);
+			cell.isMonochrome = isMonochrome;
+		});
+};
+
+const calculateCells = ({ size, isMonochrome, override = null, prevCells = null }) => {
 	const newCells = [], cellMap = {};
-	logger.log("** CALCULATING GRID CELLS ** ", { size, prevCells, override });
+	logger.log("** CALCULATING GRID CELLS ** ", { size, prevCells, override, isMonochrome });
 
 	for (let i = 0; i < size; i++) {
 		for (let j = 0; j < size; j++) {
@@ -125,18 +147,26 @@ const calculateCells = (size, override = null, prevCells = null) => {
 				//copy readonly cell from recoil store if already exists
 				{ ...prevCell } :
 				//create a new one cell (on first-time or resize)
-				createNewCell(i, j);
+				createNewCell(i, j, isMonochrome);
 
 			cellMap[cell.id] = cell;
 			newCells[i][j] = cell;
 		}
 	}
 
-	if (override) {
-		updateCellsOverrides(override, cellMap);
-	} else if (prevCells && size < prevCells[0].length) {
+	if (prevCells && size < prevCells[0].length) {
 		//grid was resized down
-		unmergeOversizedOverrides(cellMap, size);
+		unmergeOversizedOverrides(cellMap, size, isMonochrome);
+	}
+
+	if (newCells[0][0].isMonochrome !== isMonochrome) {
+		//color scheme changed
+		updateCellsColor(cellMap, isMonochrome);
+	}
+
+	if (override) {
+		//override (cells merged) was set
+		updateCellsOverrides(override, cellMap, isMonochrome);
 	}
 
 	return newCells;

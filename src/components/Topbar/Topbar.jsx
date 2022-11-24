@@ -1,9 +1,10 @@
 import styled, { css } from "styled-components";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
+import MenuIcon from "@mui/icons-material/Menu";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import { useAppDrawerStatus, useIsDam } from "../../state/selectors";
 import useFloatingMenuMediaQuery from "../hooks/useFloatingMenuMediaQuery";
 import Logo from "../Logo";
@@ -69,6 +70,14 @@ const Topbar = () => {
 				</BarLeftSide>
 
 				<BarRightSize>
+					<IconButton
+						href="https://cloudinary.com/documentation/image_collage_generation"
+						target="_blank"
+						rel="noopener"
+					>
+						<HelpOutlineIcon fontSize="large"/>
+					</IconButton>
+
 					{!isAppDrawerOpen && <AppSettings />}
 
 					{!showFloating && !isAppDrawerOpen && <IconButton

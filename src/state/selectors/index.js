@@ -1,5 +1,3 @@
-import useDamConfig from "./useDamConfig";
-
 export useCollageBorder from "./useCollageBorder";
 export useCollageBorderColor from "./useCollageBorderColor";
 export useCollageBorderWidth from "./useCollageBorderWidth";
@@ -30,3 +28,4 @@ export useCropType from "./useCropType";
 export useGravityType from "./useGravityType";
 export useIsDam from "./useIsDam";
 export useDamConfig from "./useDamConfig";
+export useIsMonochromeGrid from "./useIsMonochromeGrid";

@@ -11,12 +11,13 @@ const {
 	lastOverride,
 	notifications,
 	gridPhotos,
+	isMonochromeGrid,
 } = atoms;
 
 const gridPhotosTracker = getTrackerForAtom(gridPhotos, atoms);
 
 const useCollageReset = createTransactionHookSetter({ setter: (
-	{ set, reset, resetFamily },
+	{ get, set, reset, resetFamily },
 ) => {
 	reset(gridSize);
 	reset(borderColor);
@@ -25,7 +26,7 @@ const useCollageReset = createTransactionHookSetter({ setter: (
 	reset(lastOverride);
 
 	set(gridCells,
-		calculateCells(DEFAULTS.gridSize));
+		calculateCells({ size: DEFAULTS.gridSize, isMonochrome: get(isMonochromeGrid) }));
 
 		resetFamily(gridPhotosTracker);
 

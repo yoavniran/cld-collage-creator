@@ -27,7 +27,6 @@ const AppContainer = styled.div`
   }
 `;
 
-//TODO: add link to docs in the top bar
 //TODO: add I button at the bottom with info about the creator of the tool + link to GH repo
 
 const CollageCreator = () => {

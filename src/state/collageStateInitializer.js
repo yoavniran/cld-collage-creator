@@ -8,7 +8,11 @@ const {
 
 const collageStateInitializer = (data, set) => {
 	const size = data?.gridSize || DEFAULTS.gridSize;
-	set(gridCells, calculateCells(size));
+
+	set(gridCells, calculateCells({
+		size,
+		isMonochrome: data?.isMonochromeGrid || DEFAULTS.isMonochromeGrid,
+	}));
 
 	if ("cloudinary" in window) {
 		const configPromise = window.cloudinary?.customAction?.getConfig();
@@ -17,11 +21,6 @@ const collageStateInitializer = (data, set) => {
 			set(damConfig, configPromise);
 		}
 	}
-	// else {
-	// 	set(damConfig, new Promise((resolve) =>{
-	// 		setTimeout(() => resolve({ test: true }), 2000);
-	// 	}));
-	// }
 };
 
 export default collageStateInitializer;
