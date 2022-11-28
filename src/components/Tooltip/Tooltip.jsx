@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import Zoom from "@mui/material/Zoom";
 
 const TooltipContent = ({ title, text, severity }) => {
-	return <Alert  severity={severity} sx={{ color: "primary.contrastText" }}>
+	return <Alert severity={severity} sx={{ color: "primary.contrastText", backgroundColor: "background.paper" }}>
 		{title && <AlertTitle>{title}</AlertTitle>}
 		{isString(text) ?
 			<Typography variant="subtitle1">{text}</Typography> :

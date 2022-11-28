@@ -29,3 +29,4 @@ export useGravityType from "./useGravityType";
 export useIsDam from "./useIsDam";
 export useDamConfig from "./useDamConfig";
 export useIsMonochromeGrid from "./useIsMonochromeGrid";
+export useCollageManifest from "./useCollageManifest";

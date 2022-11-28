@@ -2,19 +2,19 @@ import { useState } from "react";
 import styled from "styled-components";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import SaveIcon from "@mui/icons-material/Save";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import SaveIcon from "@mui/icons-material/Save";
 import SaveAsIcon from "@mui/icons-material/SaveAs";
+import DataObjectIcon from "@mui/icons-material/DataObject";
 import { useCollageGenerator } from "../../state/setters";
 import { useCanGenerate, useGenerating, useIsDarkMode } from "../../state/selectors";
 import GutterCircleProgress from "../GutterCircleProgress";
 import useAppTheme from "../../styles/useAppTheme";
 import SplitIconButton from "../SplitIconButton";
 import SaveAsModal from "./SaveAsModal";
-
-//TODO: Add manifest preview button -> show readonly manifest JSON in modal
+import ManifestModal from "./ManifestModal";
 
 const CheckList = styled.div`
   margin-top: 20px;
@@ -53,6 +53,7 @@ const GeneratingProgress = styled(GutterCircleProgress)`
 
 const GenerateButton = () => {
 	const [isShowingSaveAs, setShowingSaveAs] = useState(false);
+	const [isShowingManifest, setShowingManifest] = useState(false);
 	const generate = useCollageGenerator();
 	const isGenerating = useGenerating();
 	const canGenerateReport = useCanGenerate();
@@ -71,6 +72,18 @@ const GenerateButton = () => {
 		}
 	};
 
+	const onShowManifest = () => {
+		setShowingManifest(true);
+	};
+
+	const onManifestClose = (generate) => {
+		setShowingManifest(false);
+
+		if (generate) {
+			onGenerateWithId();
+		}
+	};
+
 	return (
 		isGenerating ?
 			<Box sx={{ color: "action.active", margin: "0 15px" }}>
@@ -82,38 +95,50 @@ const GenerateButton = () => {
 				/>
 			</Box> :
 			<>
-			<SplitIconButton
-				onClick={generate}
-				isDisabled={!canGenerateReport.result}
-				tooltipOnDisabled
-				tooltipTitle="To Generate: "
-				tooltipText={<CantGenerateTooltipText report={canGenerateReport}/>}
-				tooltipSeverity="warning"
-				aria-label="generate collage"
-				icon={<SaveIcon fontSize="large"/>}
-			>
-				<MenuItem>
-					<Button
-						onClick={generate}
-						startIcon={<SaveIcon/>}
-						variant="text"
-						sx={{ color: theme.palette.action.active }}
-					>
-						<Typography variant="button" color="text.primary">Save</Typography>
-					</Button>
-				</MenuItem>
-				<MenuItem>
-					<Button
-						onClick={onGenerateWithId}
-						startIcon={<SaveAsIcon/>}
-						variant="text"
-						sx={{ color: theme.palette.action.active }}
-					>
-						<Typography variant="button" color="text.primary">Save As</Typography>
-					</Button>
-				</MenuItem>
-			</SplitIconButton>
-				{isShowingSaveAs && <SaveAsModal onClose={onSaveAsClose} />}
+				<SplitIconButton
+					onClick={generate}
+					isDisabled={!canGenerateReport.result}
+					tooltipOnDisabled
+					tooltipTitle="To Generate: "
+					tooltipText={<CantGenerateTooltipText report={canGenerateReport}/>}
+					tooltipSeverity="warning"
+					aria-label="generate collage"
+					icon={<SaveIcon fontSize="large"/>}
+				>
+					<MenuItem>
+						<Button
+							onClick={generate}
+							startIcon={<SaveIcon/>}
+							variant="text"
+							sx={{ color: theme.palette.action.active }}
+						>
+							<Typography variant="button" color="text.primary">Save</Typography>
+						</Button>
+					</MenuItem>
+					<MenuItem>
+						<Button
+							onClick={onGenerateWithId}
+							startIcon={<SaveAsIcon/>}
+							variant="text"
+							sx={{ color: theme.palette.action.active }}
+						>
+							<Typography variant="button" color="text.primary">Save As</Typography>
+						</Button>
+					</MenuItem>
+					<MenuItem>
+						<Button
+							onClick={onShowManifest}
+							startIcon={<DataObjectIcon/>}
+							variant="text"
+							sx={{ color: theme.palette.action.active }}
+						>
+							<Typography variant="button" color="text.primary">Manifest</Typography>
+						</Button>
+					</MenuItem>
+				</SplitIconButton>
+
+				{isShowingSaveAs && <SaveAsModal onClose={onSaveAsClose}/>}
+				{isShowingManifest && <ManifestModal onClose={onManifestClose}/> }
 			</>
 	);
 };

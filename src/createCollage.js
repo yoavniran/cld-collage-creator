@@ -1,42 +1,16 @@
 import { logger, request } from "./utils";
 
-const createCollage = async (id,
-	{
-		cloud,
-		preset,
-		template,
-		assets,
-		width,
-		height,
-		columns,
-		rows,
-		spacing,
-		color,
-		crop,
-		gravity,
-	}) => {
-
-	const manifest = {
-		template,
-		width,
-		height,
-		columns,
-		rows,
-		spacing,
-		color,
-		assetDefaults: { kind: "upload", crop, gravity },
-		assets: Object.values(assets).map((id) => ({ media: id })),
-	};
-
-	logger.log("SENDING COLLAGE REQUEST !!!!!!!!", { id, manifest, assets });
-
+const createCollage = async (id, manifest, cloud, preset) => {
 	let result;
 
 	try {
 		const fd = new FormData();
+
 		fd.append("upload_preset", preset);
 		fd.append("public_id", id);
 		fd.append("manifest_json", JSON.stringify(manifest));
+
+		logger.log("SENDING COLLAGE REQUEST !!!!!!!!", { id, manifest, cloud, preset });
 
 		const response = await request(
 			`https://api.cloudinary.com/v1_1/${cloud}/image/create_collage`,

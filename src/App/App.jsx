@@ -20,12 +20,12 @@ const App = () => {
 
 	return (
 		<RecoilRoot initializeState={initializeRecoil}>
+			<StateLogger/>
+			<StatePersister/>
 			<HtmlHead>
 				<AppThemeProvider>
 					<CssBaseline/>
 					<GlobalStyles/>
-					<StatePersister/>
-					<StateLogger/>
 					<CollageCreator/>
 				</AppThemeProvider>
 			</HtmlHead>
