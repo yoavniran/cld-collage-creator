@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { alpha } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -7,6 +7,21 @@ import TooltipIconButton from "../TooltipIconButton";
 
 const getMenuBackground = ({ theme }) =>
 	alpha(theme.palette.background.paper, 0.95);
+
+const menuArrowCss = css`
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    right: 14px;
+    width: 14px;
+    height: 14px;
+    transform: translateY(-50%) rotate(45deg);
+    z-index: 0;
+    background: ${getMenuBackground};
+    ${({ $isPopupAbove }) => $isPopupAbove ? "bottom: -14px" : "top: 0" };
+  }
+`;
 
 const StyledMenu = styled(Menu)`
 	.MuiPaper-root {
@@ -16,18 +31,7 @@ const StyledMenu = styled(Menu)`
     padding: 8px 0;
     filter: drop-shadow(0px 2px 8px rgba(0,0,0,0.32));
     
-		&:before {
-      content: "";
-      display: block;
-      position: absolute;
-      top: 0;
-      right: 14px;
-      width: 14px;
-      height: 14px;
-      background: ${getMenuBackground};
-      transform: translateY(-50%) rotate(45deg);
-      z-index: 0;
-		}
+		${({ $isPopupAbove }) => $isPopupAbove !== null && menuArrowCss}
 	}
 
   .MuiMenuItem-root {
@@ -51,6 +55,7 @@ const IconButtonMenu = (
 	}) => {
 	const [isOpen, setOpen] = useState(false);
 	const anchorRef = useRef(null);
+	const [isPopupAbove, setPopupAbove] = useState(null);
 
 	const updateState = (val) => {
 		onOpenChange?.(val);
@@ -81,6 +86,7 @@ const IconButtonMenu = (
 				}
 			/>
 			<StyledMenu
+				$isPopupAbove={isPopupAbove}
 				className={menuClassName}
 				anchorEl={() => anchorRef.current}
 				open={isOpen}
@@ -88,6 +94,20 @@ const IconButtonMenu = (
 				onClick={onClose}
 				transformOrigin={{ horizontal: "right", vertical: "top" }}
 				anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+				// onTransitionEnter={() => {
+				// 	console.log("MENU TRANSITION ENTER !!!!!!!!!!!");
+				// }}
+				TransitionProps={{
+					onEntered: (popupElm) => {
+						const popupElmRect = popupElm.getBoundingClientRect(),
+							anchorRect = anchorRef.current.getBoundingClientRect();
+
+						setPopupAbove(anchorRect.y > popupElmRect.y);
+					},
+					onExit: () => {
+						setPopupAbove(null);
+					}
+				}}
 			>
 				{children}
 			</StyledMenu>
