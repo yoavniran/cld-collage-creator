@@ -13,8 +13,10 @@ import CollagePhotos from "../CollagePhotos";
 import UploadyConnector from "../UploadyConnector";
 import CollageUploadDropZone from "../CollageUploadDropZone";
 import PageSpinner from "../PageSpinner";
+import InfoPopup from "../InfoPopup";
 
 const AppContainer = styled.div`
+	position: relative;
   width: 100%;
   height: calc(100% - 64px);
   display: flex;
@@ -27,7 +29,11 @@ const AppContainer = styled.div`
   }
 `;
 
-//TODO: add I button at the bottom with info about the creator of the tool + link to GH repo
+const StyledInfoPopup = styled(InfoPopup)`
+	position: absolute;
+	bottom: 0;
+	right: 4px;
+`;
 
 const CollageCreator = () => {
 	return (
@@ -39,9 +45,10 @@ const CollageCreator = () => {
 						<Topbar/>
 						<AppContainer>
 							<CollageActions/>
-							<Container maxWidth="xl" sx={{ display: "flex", pb: 50 }}>
+							<Container maxWidth="xl" sx={{ display: "flex", pb: 50, position: "relative" }}>
 								<CollageGrid/>
 								<CollageFloatingMenu/>
+								<StyledInfoPopup/>
 							</Container>
 							<CollagePhotos/>
 						</AppContainer>

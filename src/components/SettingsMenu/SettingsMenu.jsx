@@ -28,6 +28,7 @@ const SettingsMenu = () => {
 				fontSize="large"
 				color={isMenuOpen ? "disabled" : undefined}
 			/>}
+			tooltipTitle="Settings"
 		>
 			<MenuItem>
 				<FormControlLabel

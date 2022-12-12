@@ -9,6 +9,7 @@ import { useAppDrawerStatus, useIsDam } from "../../state/selectors";
 import useFloatingMenuMediaQuery from "../hooks/useFloatingMenuMediaQuery";
 import Logo from "../Logo";
 import AppSettings from "../AppSettings";
+import TooltipIconButton from "../TooltipIconButton";
 
 const StyledAppBar = styled(AppBar)`
   padding: 0 12px;
@@ -70,13 +71,19 @@ const Topbar = () => {
 				</BarLeftSide>
 
 				<BarRightSize>
-					<IconButton
+					<TooltipIconButton
 						href="https://cloudinary.com/documentation/image_collage_generation"
 						target="_blank"
 						rel="noopener"
-					>
-						<HelpOutlineIcon fontSize="large"/>
-					</IconButton>
+						icon={<HelpOutlineIcon fontSize="large"/>}
+						tooltipTitle="Documentation Page"
+						tooltipSimple
+					/>
+
+					<TooltipIconButton
+						tooltipTitle=""
+						tooltipSimple
+						/>
 
 					{!isAppDrawerOpen && <AppSettings />}
 

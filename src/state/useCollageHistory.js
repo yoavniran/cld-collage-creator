@@ -1,10 +1,12 @@
-import atoms, { createRecoilHistoryHook } from "../store";
+import atoms, { createRecoilHistoryHook } from "./store";
 
 const {
 	gridSize,
+	width,
 	borderColor,
 	borderWidth,
 	crop,
+	gravity,
 	gridCells,
 	gridPhotos,
 } = atoms;
@@ -19,6 +21,8 @@ const useCollageHistory = createRecoilHistoryHook({
 		crop,
 		gridCells,
 		gridPhotos,
+		width,
+		gravity,
 	],
 });
 

@@ -23,13 +23,14 @@ const Tooltip = (
 		className,
 		delay = 100,
 		nextDelay,
+		simple = false,
 		...contentProps
 	}) => {
 	return (
 		<MuiTooltip
 			arrow
 			TransitionComponent={Zoom}
-			title={show ? <TooltipContent {...contentProps} /> : ""}
+			title={show ? (simple ? contentProps.title : <TooltipContent {...contentProps} />) : ""}
 			placement={placement}
 			classes={{ popper: className }}
 			enterDelay={delay}

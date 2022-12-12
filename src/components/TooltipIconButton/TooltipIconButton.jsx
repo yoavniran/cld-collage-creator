@@ -30,6 +30,7 @@ const TooltipIconButton = forwardRef((
 		tooltipText,
 		tooltipSeverity = "info",
 		tooltipDelay = 100,
+		tooltipSimple = false,
 		icon,
 		...buttonProps
 	}, ref) => {
@@ -43,6 +44,7 @@ const TooltipIconButton = forwardRef((
 			text={tooltipText}
 			severity={tooltipSeverity}
 			delay={tooltipDelay}
+			simple={tooltipSimple}
 		>
 			<StyledIconButton
 				ref={ref}

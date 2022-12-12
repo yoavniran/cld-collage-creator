@@ -34,7 +34,7 @@ const useCollageGenerator = createCallbackSetter({
 			params.id || Date.now().toString(),
 			manifest,
 			cloud,
-			collagePreset,
+			preset,
 		);
 
 		logger.log("GOT GENERATE RESULT !!! ", result);

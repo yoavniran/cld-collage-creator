@@ -52,6 +52,7 @@ const IconButtonMenu = (
 		iconSize = "large",
 		onOpenChange,
 		closeOnClick = true,
+		tooltipTitle,
 	}) => {
 	const [isOpen, setOpen] = useState(false);
 	const anchorRef = useRef(null);
@@ -84,6 +85,8 @@ const IconButtonMenu = (
 						fontSize={iconSize}
 					/>
 				}
+				tooltipTitle={tooltipTitle}
+				tooltipSimple
 			/>
 			<StyledMenu
 				$isPopupAbove={isPopupAbove}
