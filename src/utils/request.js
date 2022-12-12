@@ -1,20 +1,30 @@
-import logger  from "./logger";
+import logger from "./logger";
+
+const SUCCESS_STATUSES = [200, 201];
+
+const throwError = (status, statusText) => {
+	throw new Error(`Request Failed! status = ${status}, text = ${statusText}`);
+};
 
 const request = (url, data, cors = true) => {
 	return fetch(url, {
 		method: "POST",
 		body: data,
 		mode: cors ? "cors" : undefined,
-	}).then(({ json, status, statusText }) => {
-		logger.log("REQUEST RESPONSE", { status, statusText });
-		return json.then((jsonRes) => {
+	})
+		.then(({ json, status, statusText }) => {
+			logger.log("REQUEST RESPONSE", { status, statusText });
+			return SUCCESS_STATUSES.includes(status) ?
+				json() :
+				throwError(status, statusText);
+		})
+		.then((jsonRes) => {
 			logger.log("JSON RESPONSE !!!!! ", jsonRes);
 			return {
 				success: true,
 				response: jsonRes,
 			};
-		});
-	})
+		})
 		.catch((ex) => {
 			return {
 				success: false,
