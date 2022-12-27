@@ -1,5 +1,5 @@
+import { createSelectorHook } from "recoil-spring";
 import { logger } from "../../utils";
-import { createSelectorHook } from "../../recoilUtils";
 import atoms from "../store";
 
 const { damConfig } = atoms;
@@ -11,7 +11,6 @@ const useDamConfig = createSelectorHook(
 		logger.log("resolved DAM config - ", resolved);
 		return resolved;
 	},
-	false,
 );
 
 export default useDamConfig;

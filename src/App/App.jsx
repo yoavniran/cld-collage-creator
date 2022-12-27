@@ -1,8 +1,7 @@
-import { RecoilRoot } from "recoil";
+import { SpringRoot, getLocalStorageInitializer } from "recoil-spring";
 import CssBaseline from "@mui/material/CssBaseline";
 import GlobalStyles from "../styles/GlobalStyles";
 import { LS_KEY } from "../consts";
-import { useRecoilLocalStorageInitializer } from "../recoilUtils/recoil-spring";
 import { spring } from "../state/store";
 import collageStateInitializer from "../state/collageStateInitializer";
 import AppThemeProvider from "../styles/AppThemeProvider";
@@ -12,14 +11,16 @@ import StatePersister from "../components/StatePersister";
 import HtmlHead from "../components/HtmlHead";
 
 const App = () => {
-	const initializeRecoil = useRecoilLocalStorageInitializer({
-		lsKey: LS_KEY,
-		spring,
+	const initializeRecoil = getLocalStorageInitializer({
+		key: LS_KEY,
 		customInitializer: collageStateInitializer,
 	});
 
 	return (
-		<RecoilRoot initializeState={initializeRecoil}>
+		<SpringRoot
+			spring={spring}
+			initializer={initializeRecoil}
+		>
 			<StateLogger/>
 			<StatePersister/>
 			<HtmlHead>
@@ -29,7 +30,7 @@ const App = () => {
 					<CollageCreator/>
 				</AppThemeProvider>
 			</HtmlHead>
-		</RecoilRoot>
+		</SpringRoot>
 	);
 };
 

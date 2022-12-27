@@ -1,13 +1,10 @@
+import { createSelectorHook } from "recoil-spring";
 import atoms from "../store";
-import { createSelectorHook } from "../../recoilUtils";
 
 const {
 	crop
 } = atoms;
 
-const useCropType = createSelectorHook(
-	"CropSelector",
-	crop,
-);
+const useCropType = createSelectorHook(crop);
 
 export default useCropType;

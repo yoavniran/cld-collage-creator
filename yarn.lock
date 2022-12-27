@@ -4365,6 +4365,11 @@ rechoir@^0.7.0:
   dependencies:
     resolve "^1.9.0"
 
+recoil-spring@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/recoil-spring/-/recoil-spring-0.1.4.tgz#1aef90e365b6adffc24a25af0ec3c85d80cac688"
+  integrity sha512-wVDymu2fs3oXGi/CYfAJZ/8wCDclcoFPVLW4A9vOP/nOY1J79UPpdkkPU5CnxytF2dHF1jPrtPVPPAT6qD/ntw==
+
 recoil@^0.7.5:
   version "0.7.5"
   resolved "https://registry.npmjs.org/recoil/-/recoil-0.7.5.tgz#9a33a03350cfd99e08bdd5b73bfc8b8b9ee751b9"

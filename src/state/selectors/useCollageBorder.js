@@ -1,5 +1,5 @@
+import { createSelectorHook } from "recoil-spring";
 import atoms from "../store";
-import { createSelectorHook } from "../../recoilUtils";
 
 const {
 	borderWidth,

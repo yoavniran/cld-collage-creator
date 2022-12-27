@@ -1,15 +1,11 @@
+import { createSelectorHook } from "recoil-spring";
 import atoms from "../store";
-import { createSelectorHook } from "../../recoilUtils";
 
 const {
 	isMonochromeGrid,
 } = atoms;
 
-const useIsMonochromeGrid = createSelectorHook(
-	"IsMonochromeGridSelector",
-	isMonochromeGrid,
-	false,
-);
+const useIsMonochromeGrid = createSelectorHook(isMonochromeGrid, false);
 
 export default useIsMonochromeGrid;
 

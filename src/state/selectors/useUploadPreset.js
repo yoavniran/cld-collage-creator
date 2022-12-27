@@ -1,13 +1,10 @@
+import { createSelectorHook } from "recoil-spring";
 import atoms from "../store";
-import { createSelectorHook } from "../../recoilUtils";
 
 const {
 	uploadPreset,
 } = atoms;
 
-const useUploadPreset = createSelectorHook(
-	"UploadPresetSelector",
-	uploadPreset,
-);
+const useUploadPreset = createSelectorHook(uploadPreset);
 
 export default useUploadPreset;

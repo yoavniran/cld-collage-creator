@@ -1,13 +1,10 @@
+import { createSelectorHook } from "recoil-spring";
 import atoms from "../store";
-import { createSelectorHook } from "../../recoilUtils";
 
 const {
 	borderWidth
 } = atoms;
 
-const useCollageBorderWidth = createSelectorHook(
-	"CollageBorderWidthSelector",
-	borderWidth,
-);
+const useCollageBorderWidth = createSelectorHook(borderWidth);
 
 export default useCollageBorderWidth;

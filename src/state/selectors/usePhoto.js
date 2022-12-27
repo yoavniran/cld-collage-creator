@@ -1,13 +1,13 @@
-import atoms, { createSelectorFamilyHook } from "../store";
+import { createSelectorFamilyHook } from "recoil-spring";
+import atoms from "../store";
 
 const {
 	photos,
 } = atoms;
 
-const usePhoto = createSelectorFamilyHook({
-	key: "PhotoFamilySelector",
-	getter: photos,
-	setter: (param, uploadyItem, { set, reset }) => {
+const usePhoto = createSelectorFamilyHook(
+	photos,
+	(param, uploadyItem, { set, reset }) => {
 		if (uploadyItem === null) {
 			reset(photos(param));
 		} else {
@@ -20,7 +20,6 @@ const usePhoto = createSelectorFamilyHook({
 				cldId,
 			});
 		}
-	},
-});
+	});
 
 export default usePhoto;

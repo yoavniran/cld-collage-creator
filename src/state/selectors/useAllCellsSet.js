@@ -1,14 +1,15 @@
+import { createSelectorHook } from "recoil-spring";
 import atoms from "../store";
-import { getTrackerForAtom } from "../../recoilUtils/recoil-spring";
-import { createSelectorHook } from "../../recoilUtils";
 import useCollageCells from "./useCollageCells";
 
-const gridPhotosTracker = getTrackerForAtom(atoms.gridPhotos, atoms);
+const {
+	gridPhotos
+} = atoms;
 
 const useAllCellsSet = createSelectorHook(
 	"AllCellsSetSelector",
-	(get) => {
-		const trackedPhotos = get(gridPhotosTracker);
+	(get, getCallback, getTracker) => {
+		const trackedPhotos = getTracker(gridPhotos);
 		const cells = get(useCollageCells.selector);
 
 		return cells.flat()
@@ -20,3 +21,5 @@ const useAllCellsSet = createSelectorHook(
 );
 
 export default useAllCellsSet;
+
+export const useAllCellsSetSelector  = useAllCellsSet.selector;

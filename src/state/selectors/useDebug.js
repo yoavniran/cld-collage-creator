@@ -1,13 +1,10 @@
+import { createSelectorHook } from "recoil-spring";
 import atoms from "../store";
-import { createSelectorHook } from "../../recoilUtils";
 
 const {
 	isDebug
 } = atoms;
 
-const useDebug = createSelectorHook(
-	"IsDebugSelector",
-	isDebug
-);
+const useDebug = createSelectorHook(isDebug);
 
 export default useDebug;

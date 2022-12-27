@@ -1,15 +1,15 @@
-import atoms, { createSelectorFamilyHook } from "../store";
 import isNil from "lodash/isNil";
+import { createSelectorFamilyHook } from "recoil-spring";
+import atoms  from "../store";
 import getEmptyGridCells from "../getEmptyGridCells";
 
 const {
 	gridPhotos,
 } = atoms;
 
-const useGridPhoto = createSelectorFamilyHook({
-	key: "GridPhotoFamilySelector",
-	getter: gridPhotos,
-	setter: (param, { photo, options = {} }, { set, reset, get }) => {
+const useGridPhoto = createSelectorFamilyHook(
+	gridPhotos,
+	(param, { photo, options = {} }, { set, reset, get }) => {
 		if (photo === null) {
 			reset(gridPhotos(param));
 		} else if (!isNil(param)) {
@@ -28,7 +28,7 @@ const useGridPhoto = createSelectorFamilyHook({
 			//remove the photo from the original cell
 			reset(gridPhotos(options.orgCellId));
 		}
-	},
-});
+	}
+);
 
 export default useGridPhoto;

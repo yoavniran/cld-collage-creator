@@ -1,13 +1,10 @@
+import { createSelectorHook } from "recoil-spring";
 import atoms from "../store";
-import { createSelectorHook } from "../../recoilUtils";
 
 const {
 	isMockUpload
 } = atoms;
 
-const useMockUpload = createSelectorHook(
-	"MockUploadSelector",
-	isMockUpload
-);
+const useMockUpload = createSelectorHook(isMockUpload);
 
 export default useMockUpload;

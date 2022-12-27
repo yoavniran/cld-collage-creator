@@ -1,6 +1,6 @@
 import { LS_KEY } from "../../consts";
-import { useLocalStorageRecoilPersister } from "../../recoilUtils/recoil-spring";
-import atoms, { spring } from "../../state/store";
+import { useLocalStoragePersistence } from "recoil-spring";
+import atoms from "../../state/store";
 
 const {
 	gridCells,
@@ -25,10 +25,9 @@ const ignores = [
 ];
 
 const StatePersister = () => {
-	useLocalStorageRecoilPersister({
-		spring,
+	useLocalStoragePersistence({
+		key: LS_KEY,
 		ignore: ignores,
-		lsKey: LS_KEY,
 	});
 
 	return null;

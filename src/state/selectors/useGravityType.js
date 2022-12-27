@@ -1,13 +1,10 @@
+import { createSelectorHook } from "recoil-spring";
 import atoms from "../store";
-import { createSelectorHook } from "../../recoilUtils";
 
 const {
 	gravity
 } = atoms;
 
-const useGravityType = createSelectorHook(
-	"GravityTypeSelector",
-	gravity,
-);
+const useGravityType = createSelectorHook(gravity);
 
 export default useGravityType;

@@ -1,13 +1,12 @@
+import { createSelectorHook } from "recoil-spring";
 import atoms from "../store";
-import { createSelectorHook } from "../../recoilUtils";
 
 const {
 	themeMode
 } = atoms;
 
-const useThemeMode = createSelectorHook(
-	"ThemeModeSelector",
-	themeMode,
-);
+const useThemeMode = createSelectorHook(themeMode);
 
 export default useThemeMode;
+
+export const themeModeSelector = useThemeMode.selector;

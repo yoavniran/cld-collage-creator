@@ -1,6 +1,5 @@
+import { createSelectorHook } from "recoil-spring";
 import atoms from "../store";
-import { createSelectorHook } from "../../recoilUtils";
-import { getTrackerForAtom } from "../../recoilUtils/recoil-spring";
 
 const {
 	gridCells,
@@ -14,16 +13,14 @@ const {
 	gravity,
 } = atoms;
 
-const gridPhotosTracker = getTrackerForAtom(gridPhotos, atoms);
-
-const getCollageData = (get) => ({
+const getCollageData = (get, getTracker) => ({
 	size: get(gridSize),
 	width: get(width),
 	height: get(height),
 	spacing: get(borderWidth),
 	color: get(borderColor),
 	cells: get(gridCells),
-	photoIds: get(gridPhotosTracker),
+	photoIds: getTracker(gridPhotos),
 	crop: get(crop),
 	gravity: get(gravity),
 });
@@ -56,8 +53,11 @@ const createAssetsList = (flatCells, photoIds, get) => {
 
 const useCollageManifest = createSelectorHook(
 	"CollageManifestSelector",
-	(get) => {
-		const { size, cells, photoIds, spacing, color, width, height, crop, gravity } = getCollageData(get);
+	(get, getCallback, getTracker) => {
+		const {
+			size, cells, photoIds, spacing, color, width, height, crop, gravity,
+		} = getCollageData(get, getTracker);
+
 		const flatCells = cells.flat();
 		const template = createTemplate(size, flatCells);
 		const assets = createAssetsList(flatCells, photoIds, get);
@@ -74,7 +74,8 @@ const useCollageManifest = createSelectorHook(
 			assets: Object.values(assets).map((id) => ({ media: id })),
 		};
 	},
-	false,
 );
 
 export default useCollageManifest;
+
+export const collageManifestSelector = useCollageManifest.selector;

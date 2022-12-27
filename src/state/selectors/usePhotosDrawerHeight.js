@@ -1,13 +1,10 @@
+import { createSelectorHook } from "recoil-spring";
 import atoms from "../store";
-import { createSelectorHook } from "../../recoilUtils";
 
 const {
 	photosDrawerHeight
 } = atoms;
 
-const usePhotosDrawerHeight = createSelectorHook(
-	"PhotosDrawerHeightSelector",
-	photosDrawerHeight,
-);
+const usePhotosDrawerHeight = createSelectorHook(photosDrawerHeight);
 
 export default usePhotosDrawerHeight;

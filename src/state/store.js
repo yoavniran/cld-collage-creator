@@ -1,4 +1,4 @@
-import { createSpring, springFamily } from "../recoilUtils/recoil-spring";
+import { createSpring, springFamily } from "recoil-spring";
 import { THEME_MODES } from "../styles/theme";
 import { CROP_TYPES, GRAVITY_TYPES } from "../consts";
 
@@ -44,18 +44,12 @@ const DEFAULTS = {
 	isDam: document.location.search.includes("dam=true"),
 };
 
-
 const spring = createSpring({ ...DEFAULTS });
 
 window.__collageSpring = spring;
 
 const {
 	atoms,
-	createSelectorFamilyHook,
-	createTrackerSelectorHook,
-	createRecoilHistoryHook,
-	createTransactionHookSetter,
-	createCallbackSetter,
 } = spring;
 
 export default atoms;
@@ -63,10 +57,4 @@ export default atoms;
 export {
 	DEFAULTS,
 	spring,
-
-	createSelectorFamilyHook,
-	createTrackerSelectorHook,
-	createRecoilHistoryHook,
-	createTransactionHookSetter,
-	createCallbackSetter,
 };

@@ -1,14 +1,14 @@
-import { createGetSetHooks } from "../recoilUtils/recoilHelpers";
+import { createGetSetHooks } from "recoil-spring";
 import atoms from "./store";
 
 const {
-	photoOverCell
+	photoOverCell,
 } = atoms;
 
 const {
 	useSetHook: useSetPhotoOverCell,
 	useGetHook: useGetPhotoOverCell,
-} = createGetSetHooks("PhotoOverCellSelector", photoOverCell);
+} = createGetSetHooks(photoOverCell);
 
 export {
 	useSetPhotoOverCell,

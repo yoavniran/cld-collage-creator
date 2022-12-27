@@ -1,13 +1,10 @@
+import { createSelectorHook } from "recoil-spring";
 import atoms from "../store";
-import { createSelectorHook } from "../../recoilUtils";
 
 const {
 	notifications,
 } = atoms;
 
-const useNotifications = createSelectorHook(
-	"NotificationsSelector",
-	notifications,
-);
+const useNotifications = createSelectorHook(notifications);
 
 export default useNotifications;

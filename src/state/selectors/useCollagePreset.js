@@ -1,13 +1,10 @@
+import { createSelectorHook } from "recoil-spring";
 import atoms from "../store";
-import { createSelectorHook } from "../../recoilUtils";
 
 const {
 	collagePreset,
 } = atoms;
 
-const useCollagePreset = createSelectorHook(
-	"CollagePresetSelector",
-	collagePreset,
-);
+const useCollagePreset = createSelectorHook(collagePreset);
 
 export default useCollagePreset;

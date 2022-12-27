@@ -63,6 +63,7 @@
     "react-selectable": "^2.1.1",
     "react-syntax-highlighter": "^15.5.0",
     "recoil": "^0.7.5",
+    "recoil-spring": "^0.1.4",
     "styled-components": "^5.3.5"
   },
   "resolutions": {

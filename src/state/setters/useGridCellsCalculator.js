@@ -1,6 +1,7 @@
 import isBoolean from "lodash/isBoolean";
+import { createTransactionHook } from "recoil-spring";
 import { logger } from "../../utils";
-import atoms, { createTransactionHookSetter } from "../store";
+import atoms from "../store";
 import calculateCells, { getCellMapFromGrid } from "../cellsCalculator";
 
 const {
@@ -47,71 +48,69 @@ const calculateOverrideDetails = ({ selectedIds }, cells) => {
 	};
 };
 
-const useGridCellsCalculator = createTransactionHookSetter({
-	setter: (
-		{ get, set },
-		{ size, override, monochrome },
-	) => {
-		const isMonochromeSet = isBoolean(monochrome),
-			prevMonochrome = get(isMonochromeGrid),
-			isDifferentMonochrome = isMonochromeSet && monochrome !== prevMonochrome;
+const useGridCellsCalculator = createTransactionHook((
+	{ get, set },
+	{ size, override, monochrome },
+) => {
+	const isMonochromeSet = isBoolean(monochrome),
+		prevMonochrome = get(isMonochromeGrid),
+		isDifferentMonochrome = isMonochromeSet && monochrome !== prevMonochrome;
 
-		if (size || override || isDifferentMonochrome) {
-			let canCalculate = true;
-			const prevSize = get(gridSize),
-				prevCells = get(gridCells);
+	if (size || override || isDifferentMonochrome) {
+		let canCalculate = true;
+		const prevSize = get(gridSize),
+			prevCells = get(gridCells);
 
-			logger.log("RUNNING GRID CELL CALCULATOR TRANSACTION", {
-				prevSize,
-				prevCells,
-				size,
-				override,
-				prevMonochrome,
-				monochrome,
-				isDifferentMonochrome,
-			});
+		logger.log("RUNNING GRID CELL CALCULATOR TRANSACTION", {
+			prevSize,
+			prevCells,
+			size,
+			override,
+			prevMonochrome,
+			monochrome,
+			isDifferentMonochrome,
+		});
 
-			if (size && size !== prevSize) {
-				set(gridSize, size);
-			}
+		if (size && size !== prevSize) {
+			set(gridSize, size);
+		}
 
-			if (isDifferentMonochrome) {
-				set(isMonochromeGrid, monochrome);
-			}
+		if (isDifferentMonochrome) {
+			set(isMonochromeGrid, monochrome);
+		}
 
-			let overrideDetails;
+		let overrideDetails;
 
-			if (override && !override.unmerge && prevCells) {
-				overrideDetails = calculateOverrideDetails(override, prevCells);
-				canCalculate = getIsNewOverrideValid(override, overrideDetails);
+		if (override && !override.unmerge && prevCells) {
+			overrideDetails = calculateOverrideDetails(override, prevCells);
+			canCalculate = getIsNewOverrideValid(override, overrideDetails);
 
-				if (!canCalculate) {
-					set(notifications, (prev) => [{
-						type: "invalid-override",
-						severity: "error",
-						message: "Invalid selection!",
-					}, ...prev]);
-				}
-			}
-
-			if (canCalculate) {
-				if (override) {
-					set(lastOverride, override);
-				}
-
-				const detailedOverride = override && { ...override, ...overrideDetails };
-
-				const newCells = calculateCells({
-					size: size || prevSize,
-					isMonochrome: isMonochromeSet ? monochrome : prevMonochrome,
-					override: detailedOverride,
-					prevCells,
-				});
-
-				set(gridCells, newCells);
+			if (!canCalculate) {
+				set(notifications, (prev) => [{
+					type: "invalid-override",
+					severity: "error",
+					message: "Invalid selection!",
+				}, ...prev]);
 			}
 		}
-	},
+
+		if (canCalculate) {
+			if (override) {
+				set(lastOverride, override);
+			}
+
+			const detailedOverride = override && { ...override, ...overrideDetails };
+
+			const newCells = calculateCells({
+				size: size || prevSize,
+				isMonochrome: isMonochromeSet ? monochrome : prevMonochrome,
+				override: detailedOverride,
+				prevCells,
+			});
+
+			set(gridCells, newCells);
+		}
+	}
 });
 
 export default useGridCellsCalculator;

@@ -1,9 +1,10 @@
-import { spring, createTrackerSelectorHook } from "../store";
+import { createFamilyTrackerSelectorHook } from "recoil-spring";
+import atoms from "../store";
 
 const {
 	photos,
-} = spring.metadata;
+} = atoms;
 
-const usePhotos = createTrackerSelectorHook({ key: photos.name });
+const usePhotos = createFamilyTrackerSelectorHook(photos);
 
 export default usePhotos;

@@ -1,8 +1,9 @@
+import { createSetterHook } from "recoil-spring";
 import { logger } from "../../utils";
 import { NOTIFICATION_TYPES } from "../../consts";
 import createCollage from "../../createCollage";
-import atoms, { createCallbackSetter } from "../store";
-import useCollageManifest from "../selectors/useCollageManifest";
+import atoms from "../store";
+import { collageManifestSelector } from "../selectors/useCollageManifest";
 
 const {
 	notifications,
@@ -11,8 +12,8 @@ const {
 	collagePreset,
 } = atoms;
 
-const useCollageGenerator = createCallbackSetter({
-	setter: async (
+const useCollageGenerator = createSetterHook(
+	async (
 		{ get, set },
 		params = {},
 	) => {
@@ -26,7 +27,7 @@ const useCollageGenerator = createCallbackSetter({
 
 		const cloud = get(cloudAtom),
 			preset = get(collagePreset),
-			manifest = get(useCollageManifest.selector);
+			manifest = get(collageManifestSelector);
 
 		logger.log("generating ..... ", { manifest, params, cloud, preset });
 
@@ -57,7 +58,7 @@ const useCollageGenerator = createCallbackSetter({
 				message: "Unexpected error while generating collage!",
 			}, ...prev]);
 		}
-	},
-});
+	}
+);
 
 export default useCollageGenerator;

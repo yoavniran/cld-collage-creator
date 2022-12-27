@@ -1,14 +1,10 @@
+import { createSelectorHook } from "recoil-spring";
 import atoms from "../store";
-import { createSelectorHook } from "../../recoilUtils";
 
 const {
 	gridSize
 } = atoms;
 
-const useCollageSize = createSelectorHook(
-	"CollageSizeSelector",
-	gridSize,
-	false
-);
+const useCollageSize = createSelectorHook(gridSize,	false);
 
 export default useCollageSize;

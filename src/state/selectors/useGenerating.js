@@ -1,14 +1,10 @@
+import { createSelectorHook } from "recoil-spring";
 import atoms from "../store";
-import { createSelectorHook } from "../../recoilUtils";
 
 const {
 	isGenerating
 } = atoms;
 
-const useGenerating = createSelectorHook(
-	"GeneratingSelector",
-	isGenerating,
-	false,
-);
+const useGenerating = createSelectorHook(isGenerating, false);
 
 export default useGenerating;

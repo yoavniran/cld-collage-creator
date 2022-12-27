@@ -1,13 +1,10 @@
+import { createSelectorHook } from "recoil-spring";
 import atoms from "../store";
-import { createSelectorHook } from "../../recoilUtils";
 
 const {
 	isSamePreset,
 } = atoms;
 
-const useIsSamePreset = createSelectorHook(
-	"IsSamePresetSelector",
-	isSamePreset,
-);
+const useIsSamePreset = createSelectorHook(isSamePreset);
 
 export default useIsSamePreset;

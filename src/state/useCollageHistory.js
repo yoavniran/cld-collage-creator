@@ -1,4 +1,5 @@
-import atoms, { createRecoilHistoryHook } from "./store";
+import { useStateHistory } from "recoil-spring";
+import atoms from "./store";
 
 const {
 	gridSize,
@@ -11,20 +12,21 @@ const {
 	gridPhotos,
 } = atoms;
 
+const historyAtoms = [
+	gridSize,
+	borderColor,
+	borderWidth,
+	crop,
+	gridCells,
+	gridPhotos,
+	width,
+	gravity,
+];
+
 //TODO: need to ignore Notifications on forward/back
 
-const useCollageHistory = createRecoilHistoryHook({
-	atoms: [
-		gridSize,
-		borderColor,
-		borderWidth,
-		crop,
-		gridCells,
-		gridPhotos,
-		width,
-		gravity,
-	],
-});
+const useCollageHistory = () =>
+	useStateHistory({ include: historyAtoms });
 
 export default useCollageHistory;
 

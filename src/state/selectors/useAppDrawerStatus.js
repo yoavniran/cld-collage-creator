@@ -1,13 +1,10 @@
+import { createSelectorHook } from "recoil-spring";
 import atoms from "../store";
-import { createSelectorHook } from "../../recoilUtils";
 
 const {
 	isAppDrawerOpen
 } = atoms;
 
-const useAppDrawerStatus = createSelectorHook(
-	"DrawerStatusSelector",
-	isAppDrawerOpen,
-);
+const useAppDrawerStatus = createSelectorHook(isAppDrawerOpen);
 
 export default useAppDrawerStatus;

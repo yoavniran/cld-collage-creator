@@ -1,20 +1,19 @@
 import isString from "lodash/isString";
-import atoms, { createSelectorFamilyHook } from "../store";
+import { createSelectorFamilyHook } from "recoil-spring";
+import atoms from "../store";
 import { getIsUploadSuccess } from "../../utils";
 
 const {
 	uploads,
 } = atoms;
 
-const useUploadItem = createSelectorFamilyHook({
-	key: "UploadFamilyItemSelector",
-	getter: uploads,
-	setter: (param, uploadyItem, { set, reset }) => {
+const useUploadItem = createSelectorFamilyHook(
+	uploads,
+	(param, uploadyItem, { set, reset }) => {
 		if (uploadyItem === null || getIsUploadSuccess(uploadyItem)) {
 			reset(uploads(param));
 		} else {
 			const itemResponse = uploadyItem.uploadResponse || "";
-
 			const response = isString(itemResponse) ? itemResponse :
 				itemResponse.data?.error?.message;
 
@@ -25,7 +24,6 @@ const useUploadItem = createSelectorFamilyHook({
 				response,
 			});
 		}
-	},
-});
+	});
 
 export default useUploadItem;
