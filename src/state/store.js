@@ -31,6 +31,7 @@ const DEFAULTS = {
 	photoOverCell: null,
 	isGenerating: false,
 	isMonochromeGrid: false,
+	isCloudLocked: false,
 
 	//debug options
 	isDebug: false,
@@ -41,7 +42,7 @@ const DEFAULTS = {
 	[springFamily("photos")]: null,
 
 	damConfig: null,
-	isDam: document.location.search.includes("dam=true"),
+	isDam: false,
 };
 
 const spring = createSpring({ ...DEFAULTS });

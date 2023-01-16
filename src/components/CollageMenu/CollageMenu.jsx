@@ -4,7 +4,9 @@ import styled from "styled-components";
 import List from "@mui/material/List";
 import Tooltip from "@mui/material/Tooltip";
 import InputAdornment from "@mui/material/InputAdornment";
+import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
+import MenuItem from "@mui/material/MenuItem";
 import LockIcon from "@mui/icons-material/Lock";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import {
@@ -29,14 +31,14 @@ import {
 	useDimensions,
 	useCropType,
 	useGravityType,
+	useIsCloudLocked,
 } from "../../state/selectors";
+import FieldHelperText from "../FieldHelperText";
 import MenuField from "./MenuField";
 import MenuCategory from "./MenuCategory";
 import MenuSlider from "./MenuSlider";
 import MenuColorPicker from "./MenuColorPicker";
-import TextField from "@mui/material/TextField";
 import MenuSelect from "./MenuSelect";
-import MenuItem from "@mui/material/MenuItem";
 
 const StyledList = styled(List)`
   .react-colorful {
@@ -54,6 +56,14 @@ const StyledList = styled(List)`
   .MuiTextField-root {
     width: 100%;
   }
+	
+	.MuiFormControl-root {
+		margin-bottom: 10px;
+  }
+	
+	.MuiFormHelperText-root {
+		margin-top: 0;
+	}
 `;
 
 const GridSizeField = () => {
@@ -114,7 +124,18 @@ const BorderWidthField = () => {
 	);
 };
 
-const CloudNameField = () => {
+const CloudSettingsFields = () => {
+	const isCloudLocked = useIsCloudLocked();
+
+	return (
+		<>
+			<CloudNameField isCloudLocked={isCloudLocked}/>
+			<PresetFields isCloudLocked={isCloudLocked}/>
+		</>
+	);
+};
+
+const CloudNameField = ({ isCloudLocked }) => {
 	const [cloud, setCloud] = useCloud();
 
 	return (
@@ -125,12 +146,15 @@ const CloudNameField = () => {
 				variant="outlined"
 				color="secondary"
 				onChange={(e) => setCloud(e.target.value)}
+				InputProps={{
+					readOnly: isCloudLocked,
+				}}
 			/>
 		</MenuField>
 	);
 };
 
-const PresetFields = () => {
+const PresetFields = ({ isCloudLocked }) => {
 	const uploadRefInputRef = useRef(null);
 	const [collagePreset, setCollagePreset] = useCollagePreset();
 	const [uploadPreset, setUploadPreset] = useUploadPreset();
@@ -152,7 +176,11 @@ const PresetFields = () => {
 					value={collagePreset}
 					variant="outlined"
 					color="secondary"
-					onChange={(e) => setCollagePreset(e.target.value)}
+					onChange={(e) => !isCloudLocked && setCollagePreset(e.target.value)}
+					helperText={<FieldHelperText text="The preset to use when creating the collage" />}
+					InputProps={{
+						readOnly: isCloudLocked,
+					}}
 				/>
 			</MenuField>
 
@@ -164,11 +192,13 @@ const PresetFields = () => {
 					variant="outlined"
 					color="secondary"
 					onChange={(e) => setUploadPreset(e.target.value)}
-					helperText={isSamePreset ? "Collage Preset is used for uploads" : ""}
+					helperText={<FieldHelperText
+						text={isSamePreset ? "Collage Preset is used for image uploads" : "The preset to use for image uploads"} />
+				}
 					InputProps={{
-						readOnly: isSamePreset,
+						readOnly: isCloudLocked || isSamePreset,
 						endAdornment:
-							<InputAdornment position="end">
+							(isCloudLocked ? undefined : <InputAdornment position="end">
 								<Tooltip
 									title={isSamePreset ?
 										"unlock to use a different upload preset" : "lock to use the collage preset for uploads"}
@@ -182,7 +212,7 @@ const PresetFields = () => {
 										{isSamePreset ? <LockIcon/> : <LockOpenIcon/>}
 									</IconButton>
 								</Tooltip>
-							</InputAdornment>,
+							</InputAdornment>),
 					}}
 				/>
 			</MenuField>
@@ -240,8 +270,7 @@ const CollageMenu = () => {
 		</MenuCategory>
 
 		<MenuCategory title="Settings">
-			<CloudNameField/>
-			<PresetFields/>
+			<CloudSettingsFields/>
 		</MenuCategory>
 	</StyledList>;
 };

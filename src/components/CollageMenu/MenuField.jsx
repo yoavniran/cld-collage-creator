@@ -10,7 +10,7 @@ const StyledItem = styled(ListItem)`
   align-items: center;
 	
   .MuiInputBase-formControl, .react-colorful {
-    margin-bottom: 10px;
+    margin-bottom: 6px;
   }
 
   fieldset.MuiOutlinedInput-notchedOutline {

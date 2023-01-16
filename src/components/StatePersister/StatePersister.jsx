@@ -11,6 +11,7 @@ const {
 	gridPhotos,
 	photoOverCell,
 	isGenerating,
+	isCloudLocked,
 } = atoms;
 
 const ignores = [
@@ -22,6 +23,7 @@ const ignores = [
 	gridPhotos,
 	photoOverCell,
 	isGenerating,
+	isCloudLocked
 ];
 
 const StatePersister = () => {
