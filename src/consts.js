@@ -32,3 +32,5 @@ export const GENERATE_REPORT_TYPES = {
 	PRESET: "preset",
 	CELLS: "cells",
 };
+
+export const WEBHOOK_URL = ""

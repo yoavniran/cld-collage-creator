@@ -9,6 +9,7 @@ const createCollage = async (id, manifest, cloud, preset) => {
 		fd.append("upload_preset", preset);
 		fd.append("public_id", id);
 		fd.append("manifest_json", JSON.stringify(manifest));
+		fd.append("notification_url", "http://localhost:9999/.netlify/functions/collageCreate");
 
 		logger.log("SENDING COLLAGE REQUEST !!!!!!!!", { id, manifest, cloud, preset });
 

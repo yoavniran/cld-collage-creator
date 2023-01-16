@@ -4,7 +4,7 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import HelpCenterIcon from "@mui/icons-material/HelpCenter";
 import { useAppDrawerStatus, useIsDam } from "../../state/selectors";
 import useFloatingMenuMediaQuery from "../hooks/useFloatingMenuMediaQuery";
 import Logo from "../Logo";
@@ -75,7 +75,7 @@ const Topbar = () => {
 						href="https://cloudinary.com/documentation/image_collage_generation"
 						target="_blank"
 						rel="noopener"
-						icon={<HelpOutlineIcon fontSize="large"/>}
+						icon={<HelpCenterIcon fontSize="large"/>}
 						tooltipTitle="Documentation Page"
 						tooltipSimple
 					/>
