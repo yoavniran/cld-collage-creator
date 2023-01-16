@@ -1,4 +1,7 @@
+import { WEBHOOK_URL_BASE } from "./consts";
 import { logger, request } from "./utils";
+
+const NOTIFICATION_URL = `${WEBHOOK_URL_BASE}collageCreate`;
 
 const createCollage = async (id, manifest, cloud, preset) => {
 	let result;
@@ -9,9 +12,9 @@ const createCollage = async (id, manifest, cloud, preset) => {
 		fd.append("upload_preset", preset);
 		fd.append("public_id", id);
 		fd.append("manifest_json", JSON.stringify(manifest));
-		fd.append("notification_url", "http://localhost:9999/.netlify/functions/collageCreate");
+		fd.append("notification_url", NOTIFICATION_URL);
 
-		logger.log("SENDING COLLAGE REQUEST !!!!!!!!", { id, manifest, cloud, preset });
+		logger.log("SENDING COLLAGE REQUEST !!!!!!!!", { id, manifest, cloud, preset, NOTIFICATION_URL });
 
 		const response = await request(
 			`https://api.cloudinary.com/v1_1/${cloud}/image/create_collage`,
