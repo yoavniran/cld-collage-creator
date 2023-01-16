@@ -13,7 +13,6 @@ import CollagePhotos from "../CollagePhotos";
 import UploadyConnector from "../UploadyConnector";
 import CollageUploadDropZone from "../CollageUploadDropZone";
 import PageSpinner from "../PageSpinner";
-import InfoPopup from "../InfoPopup";
 
 const AppContainer = styled.div`
 	position: relative;
@@ -29,12 +28,6 @@ const AppContainer = styled.div`
   }
 `;
 
-const StyledInfoPopup = styled(InfoPopup)`
-	position: absolute;
-	bottom: 0;
-	right: 4px;
-`;
-
 const CollageCreator = () => {
 	return (
 		<UploadyConnector>
@@ -48,7 +41,6 @@ const CollageCreator = () => {
 							<Container maxWidth="xl" sx={{ display: "flex", pb: 50, position: "relative" }}>
 								<CollageGrid/>
 								<CollageFloatingMenu/>
-								<StyledInfoPopup/>
 							</Container>
 							<CollagePhotos/>
 						</AppContainer>

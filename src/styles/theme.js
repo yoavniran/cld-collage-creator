@@ -31,8 +31,8 @@ const darkTheme = {
 
 		primary: {
 			light: "#0288d1",
-			main: "#022e46",
-			dark: "#1d292f",
+			main: "#052638",
+			dark: "#0c1215",
 			contrastText: "#fff",
 		},
 		secondary: {
@@ -104,6 +104,7 @@ const lightTheme = merge({}, darkTheme, {
 		primary: {
 			contrastText: "#000",
 			dark: "#8b979d",
+			main: "#9cdbff",
 		},
 		background: {
 			paper: "rgba(177,185,190,0.75)",

@@ -5,7 +5,7 @@ import IconButton from "@mui/material/IconButton";
 import UndoIcon from "@mui/icons-material/Undo";
 import RedoIcon from "@mui/icons-material/Redo";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
-import  useCollageHistory from "../../state/useCollageHistory";
+import useCollageHistory from "../../state/useCollageHistory";
 import { useCollageReset } from "../../state/setters";
 import GenerateButton from "./GenerateButton";
 

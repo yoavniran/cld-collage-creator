@@ -1,15 +1,16 @@
+import { useState } from "react";
 import styled, { css } from "styled-components";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
-import HelpCenterIcon from "@mui/icons-material/HelpCenter";
 import { useAppDrawerStatus, useIsDam } from "../../state/selectors";
 import useFloatingMenuMediaQuery from "../hooks/useFloatingMenuMediaQuery";
+import HelpMenu from "../HelpMenu";
 import Logo from "../Logo";
 import AppSettings from "../AppSettings";
-import TooltipIconButton from "../TooltipIconButton";
+import AboutModal from "./AboutModal";
 
 const StyledAppBar = styled(AppBar)`
   padding: 0 12px;
@@ -54,6 +55,7 @@ const Title = () => <Typography
 
 const Topbar = () => {
 	const [isAppDrawerOpen, setAppDrawerOpen] = useAppDrawerStatus(false);
+	const [isShowingAboutModal, setShowingAboutModal] = useState(false);
 	const isDam = useIsDam();
 	const showFloating = useFloatingMenuMediaQuery();
 
@@ -71,19 +73,8 @@ const Topbar = () => {
 				</BarLeftSide>
 
 				<BarRightSize>
-					<TooltipIconButton
-						href="https://cloudinary.com/documentation/image_collage_generation"
-						target="_blank"
-						rel="noopener"
-						icon={<HelpCenterIcon fontSize="large"/>}
-						tooltipTitle="Documentation Page"
-						tooltipSimple
-					/>
 
-					<TooltipIconButton
-						tooltipTitle=""
-						tooltipSimple
-						/>
+					<HelpMenu showAboutModal={() => setShowingAboutModal(true)}/>
 
 					{!isAppDrawerOpen && <AppSettings />}
 
@@ -97,6 +88,7 @@ const Topbar = () => {
 					</IconButton>}
 				</BarRightSize>
 			</StyledToolbar>
+			{isShowingAboutModal && <AboutModal onClose={() => setShowingAboutModal(false)}/>}
 		</StyledAppBar>
 	);
 };

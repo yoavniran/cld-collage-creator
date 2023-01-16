@@ -6,6 +6,7 @@ import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
 import TooltipIconButton from "../TooltipIconButton";
+import useAppTheme from "../../styles/useAppTheme";
 
 const StyledDialog = styled(Dialog)`
   .MuiDialog-paper {
@@ -37,6 +38,8 @@ const ConfirmationModal = ({
 	                           cancelLabel = "Cancel",
 	                           showCancel = true,
                            }) => {
+	const theme = useAppTheme();
+
 	const handleClose = (confirm) => {
 		onClose(confirm);
 	};
@@ -69,7 +72,9 @@ const ConfirmationModal = ({
 					</Button>
 				}
 				<Button
-					sx={{ backgroundColor: "action.active" }}
+					sx={{
+						backgroundColor: "action.active",
+				}}
 					onClick={() => handleClose(true)}
 				>
 					{confirmLabel}

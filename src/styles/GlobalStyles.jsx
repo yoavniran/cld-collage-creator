@@ -36,6 +36,10 @@ const GlobalStyles = createGlobalStyle`
 	  
 	  ${isMobile ? opaquePaperCss : ""}
   }
+  
+  a {
+	  color: ${({ theme }) => theme.palette.primary.light };
+  }
 `;
 
 export default GlobalStyles;
