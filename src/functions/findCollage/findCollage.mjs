@@ -12,15 +12,17 @@ const handler = async (event) => {
 			client = new faunadb.Client({ secret: process.env.FAUNADB_SECRET });
 
 			const dbResult = await client.query(
-				// q.Paginate(
-				// 	q.Match(q.Index("collage-index"), rid)
-				// )
 				q.Get(
 					q.Match(q.Index("collage-index"), rid),
 				),
 			);
 
 			console.log(`GOT RESULT FOR RID = ${rid}= `, dbResult);
+
+			response = {
+				found: !!dbResult,
+				data: dbResult?.data,
+			};
 		} else {
 			response = INVALID_REQ_RESPONSE;
 		}
