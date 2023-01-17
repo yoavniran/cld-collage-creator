@@ -11,13 +11,19 @@ const handler = async (event) => {
 			const q = faunadb.query;
 			client = new faunadb.Client({ secret: process.env.FAUNADB_SECRET });
 
-			const dbResult = await client.query(
-				q.Get(
-					q.Match(q.Index("collage-index"), rid),
-				),
-			);
+			let dbResult;
 
-			console.log(`GOT RESULT FOR RID = ${rid}= `, dbResult);
+			try {
+				dbResult = await client.query(
+					q.Get(
+						q.Match(q.Index("collage-index"), rid),
+					),
+				);
+
+				console.log(`GOT RESULT FOR RID = ${rid}= `, dbResult);
+			} catch (ex) {
+				console.log(`Failed to find collage data for rid "${rid}" - db response code: ${ex.requestResult?.statusCode}`, ex.requestResult?.responseContent?.errors);
+			}
 
 			response = {
 				statusCode: 200,
