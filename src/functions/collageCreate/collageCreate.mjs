@@ -3,7 +3,7 @@ import faunadb from "faunadb";
 const INVALID_REQ_RESPONSE = { statusCode: 400, body: "invalid request" };
 
 const handler = async (event) => {
-	let response;
+	let response, client;
 
 	try {
 		if (event.httpMethod === "POST") {
@@ -12,7 +12,7 @@ const handler = async (event) => {
 			if (data.request_id && data.secure_url) {
 				const id = data.request_id;
 				const q = faunadb.query;
-				const client = new faunadb.Client({
+				client = new faunadb.Client({
 					secret: process.env.FAUNADB_SECRET,
 					// keepAlive: false,
 				});
@@ -50,6 +50,8 @@ const handler = async (event) => {
 	} catch (ex) {
 		console.error("ERROR OCCURRED", ex);
 		response = { statusCode: 500, body: "system error" };
+	} finally {
+		client?.close();
 	}
 
 	return response;
