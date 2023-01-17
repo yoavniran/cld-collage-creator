@@ -18,6 +18,7 @@ import {
 	MAX_DIM,
 	GRAVITY_TYPES,
 	CROP_TYPES,
+	CLOUD_ENTRY_MODE,
 } from "../../consts";
 import { useGridCellsCalculator } from "../../state/setters";
 import {
@@ -31,7 +32,7 @@ import {
 	useDimensions,
 	useCropType,
 	useGravityType,
-	useIsCloudLocked,
+	useCloudEntryMode,
 } from "../../state/selectors";
 import FieldHelperText from "../FieldHelperText";
 import MenuField from "./MenuField";
@@ -56,14 +57,14 @@ const StyledList = styled(List)`
   .MuiTextField-root {
     width: 100%;
   }
-	
-	.MuiFormControl-root {
-		margin-bottom: 10px;
+
+  .MuiFormControl-root {
+    margin-bottom: 10px;
   }
-	
-	.MuiFormHelperText-root {
-		margin-top: 0;
-	}
+
+  .MuiFormHelperText-root {
+    margin-top: 0;
+  }
 `;
 
 const GridSizeField = () => {
@@ -124,14 +125,16 @@ const BorderWidthField = () => {
 	);
 };
 
-const CloudSettingsFields = () => {
-	const isCloudLocked = useIsCloudLocked();
+const CloudSettingsCategory = () => {
+	const entryMode = useCloudEntryMode(),
+		isLocked = entryMode === CLOUD_ENTRY_MODE.LOCKED;
 
 	return (
-		<>
-			<CloudNameField isCloudLocked={isCloudLocked}/>
-			<PresetFields isCloudLocked={isCloudLocked}/>
-		</>
+		entryMode !== CLOUD_ENTRY_MODE.HIDDEN &&
+		<MenuCategory title="Settings">
+			<CloudNameField isCloudLocked={isLocked}/>
+			<PresetFields isCloudLocked={isLocked}/>
+		</MenuCategory>
 	);
 };
 
@@ -177,7 +180,7 @@ const PresetFields = ({ isCloudLocked }) => {
 					variant="outlined"
 					color="secondary"
 					onChange={(e) => !isCloudLocked && setCollagePreset(e.target.value)}
-					helperText={<FieldHelperText text="The preset to use when creating the collage" />}
+					helperText={<FieldHelperText text="The preset to use when creating the collage"/>}
 					InputProps={{
 						readOnly: isCloudLocked,
 					}}
@@ -193,8 +196,8 @@ const PresetFields = ({ isCloudLocked }) => {
 					color="secondary"
 					onChange={(e) => setUploadPreset(e.target.value)}
 					helperText={<FieldHelperText
-						text={isSamePreset ? "Collage Preset is used for image uploads" : "The preset to use for image uploads"} />
-				}
+						text={isSamePreset ? "Collage Preset is used for image uploads" : "The preset to use for image uploads"}/>
+					}
 					InputProps={{
 						readOnly: isCloudLocked || isSamePreset,
 						endAdornment:
@@ -269,9 +272,7 @@ const CollageMenu = () => {
 			<GravityField/>
 		</MenuCategory>
 
-		<MenuCategory title="Settings">
-			<CloudSettingsFields/>
-		</MenuCategory>
+		<CloudSettingsCategory/>
 	</StyledList>;
 };
 

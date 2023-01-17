@@ -1,6 +1,6 @@
 import { createSpring, springFamily } from "recoil-spring";
 import { THEME_MODES } from "../styles/theme";
-import { CROP_TYPES, GRAVITY_TYPES } from "../consts";
+import { CLOUD_ENTRY_MODE, CROP_TYPES, GRAVITY_TYPES } from "../consts";
 
 const DEFAULTS = {
 	//grid properties
@@ -31,7 +31,7 @@ const DEFAULTS = {
 	photoOverCell: null,
 	isGenerating: false,
 	isMonochromeGrid: false,
-	isCloudLocked: false,
+	cloudEntryMode: CLOUD_ENTRY_MODE.OPEN,
 
 	//debug options
 	isDebug: false,

@@ -34,3 +34,9 @@ export const GENERATE_REPORT_TYPES = {
 };
 
 export const WEBHOOK_URL_BASE = "https://cld-collage-creator.netlify.app/.netlify/functions/";
+
+export const CLOUD_ENTRY_MODE = {
+	OPEN: "open",
+	LOCKED: "locked",
+	HIDDEN: "hidden",
+};

@@ -30,4 +30,4 @@ export useIsDam from "./useIsDam";
 export useDamConfig from "./useDamConfig";
 export useIsMonochromeGrid from "./useIsMonochromeGrid";
 export useCollageManifest from "./useCollageManifest";
-export useIsCloudLocked from "./useIsCloudLocked";
+export useCloudEntryMode from "./useCloudEntryMode";

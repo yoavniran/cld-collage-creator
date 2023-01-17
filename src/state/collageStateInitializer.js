@@ -1,4 +1,5 @@
 import queryString from "query-string";
+import { CLOUD_ENTRY_MODE } from "../consts";
 import atoms, { DEFAULTS } from "./store";
 import calculateCells from "./cellsCalculator";
 
@@ -10,8 +11,14 @@ const {
 	collagePreset,
 	uploadPreset,
 	isSamePreset,
-	isCloudLocked,
+	cloudEntryMode,
 } = atoms;
+
+const getCloudEntryMode = (qs) =>
+	Object.values(CLOUD_ENTRY_MODE)
+		.includes(qs.cloudEntryMode) ?
+		qs.cloudEntryMode :
+		CLOUD_ENTRY_MODE.OPEN
 
 const collageStateInitializer = (data, set) => {
 	const size = data?.gridSize || DEFAULTS.gridSize;
@@ -33,7 +40,7 @@ const collageStateInitializer = (data, set) => {
 	const qs = queryString.parse(location.search);
 	set(isDam, qs.dam === "true");
 	set(cloud, qs.cloud ? qs.cloud : data.cloud);
-	set(isCloudLocked, qs.locked === "true");
+	set(cloudEntryMode, getCloudEntryMode(qs));
 	set(collagePreset, qs.collagePreset ? qs.collagePreset : data.collagePreset);
 	set(uploadPreset, qs.uploadPreset ? qs.uploadPreset : data.uploadPreset);
 	set(isSamePreset, qs.uploadPreset ? false : data.isSamePreset);

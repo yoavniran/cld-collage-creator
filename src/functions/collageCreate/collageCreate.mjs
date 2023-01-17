@@ -1,53 +1,61 @@
 import faunadb from "faunadb";
 
+const INVALID_REQ_RESPONSE = { statusCode: 400, body: "invalid request" };
 
-// Docs on event and context https://docs.netlify.com/functions/build/#code-your-function-2
 const handler = async (event) => {
+	let response;
+
 	try {
-		// const subject = event.queryStringParameters.name || "World";
+		if (event.httpMethod === "POST") {
+			const data = JSON.parse(event.body);
 
-		console.log("RECEIVED REQUEST - METHOD = ", event.httpMethod);
-		console.log("RECEIVED REQUEST - BODY = ", event.body);
-		console.log("RECEIVED REQUEST - PARAMS = ", event.queryStringParameters);
+			if (data.request_id && data.secure_url) {
+				const id = data.request_id;
+				const q = faunadb.query;
+				const client = new faunadb.Client({
+					secret: process.env.FAUNADB_SECRET,
+					// keepAlive: false,
+				});
 
-		const q = faunadb.query;
-		const client = new faunadb.Client({
-			secret: process.env.FAUNADB_SECRET,
-			// keepAlive: false,
-		});
+				console.log(" -- creating DB entry for request ", { id, publicId: data.public_id });
 
-		const createP = client.query(
-			q.Create(
-				q.Collection("collages"),
-				{
-					data: {
-						id: Date.now(),
-						publicId: "bob123",
-					},
-				},
-			),
-		);
+				const createP = client.query(
+					q.Create(
+						q.Collection("collages"),
+						{
+							data: {
+								id,
+								...data,
+							},
+						},
+					),
+				);
 
-		const response = await createP;
+				const dbResult = await createP;
 
-		console.log("CREATE RESPONSE !!! ", response);
+				if (dbResult?.ref) {
+					console.log(" -- DB entry created for request ", { id, publicId: data.public_id });
+				}
 
-
-		return {
-			statusCode: 200,
-			body: JSON.stringify({
-				hasSecret: !!process.env.FAUNADB_SECRET,
-				dbRef: response.ref,
-			}),
-			// // more keys you can return:
-			// headers: { "headerName": "headerValue", ... },
-			// isBase64Encoded: true,
-		};
-	} catch (error) {
-		return { statusCode: 500, body: error.toString() };
+				response = {
+					statusCode: 200,
+					body: { success: true },
+				};
+			} else {
+				response = INVALID_REQ_RESPONSE;
+			}
+		} else {
+			response = INVALID_REQ_RESPONSE;
+		}
+	} catch (ex) {
+		console.error("ERROR OCCURRED", ex);
+		response = { statusCode: 500, body: "system error" };
 	}
+
+	return response;
 };
 
 export {
 	handler,
 };
+// Docs on event and context https://docs.netlify.com/functions/build/#code-your-function-2
