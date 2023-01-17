@@ -20,7 +20,7 @@ const handler = async (event) => {
 			console.log(`GOT RESULT FOR RID = ${rid}= `, dbResult);
 
 			response = {
-				found: !!dbResult,
+				success: !!dbResult,
 				data: dbResult?.data,
 			};
 		} else {
