@@ -20,8 +20,11 @@ const handler = async (event) => {
 			console.log(`GOT RESULT FOR RID = ${rid}= `, dbResult);
 
 			response = {
-				success: !!dbResult,
-				data: dbResult?.data,
+				statusCode: 200,
+				body: {
+					success: !!dbResult,
+					data: dbResult?.data,
+				}
 			};
 		} else {
 			response = INVALID_REQ_RESPONSE;
