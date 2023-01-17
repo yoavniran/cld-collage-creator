@@ -12,10 +12,11 @@ const request = (url, data, cors = true) => {
 		body: data,
 		mode: cors ? "cors" : undefined,
 	})
-		.then(({ json, status, statusText }) => {
+		.then((response) => {
+			const { status, statusText } = response;
 			logger.log("REQUEST RESPONSE", { status, statusText });
 			return SUCCESS_STATUSES.includes(status) ?
-				json() :
+				response.json() :
 				throwError(status, statusText);
 		})
 		.then((jsonRes) => {
