@@ -10,6 +10,7 @@ const {
 	isGenerating,
 	cloud: cloudAtom,
 	collagePreset,
+	pollingReqs,
 } = atoms;
 
 const useCollageGenerator = createSetterHook(
@@ -46,11 +47,15 @@ const useCollageGenerator = createSetterHook(
 			set(notifications, (prev) => [{
 				type: NOTIFICATION_TYPES.COLLAGE_GENERATE_SUCCESS,
 				severity: "success",
-				message: "Collage generated successfully!",
+				message: "Collage request was sent successfully",
 			}, ...prev]);
 
-			//TODO: query function for result && store collage URL in saved-history
+			const { requestId, publicId } = result;
 
+			set(pollingReqs(requestId), {
+				requestId,
+				publicId,
+			});
 		} else {
 			set(notifications, (prev) => [{
 				type: NOTIFICATION_TYPES.COLLAGE_GENERATE_FAIL,

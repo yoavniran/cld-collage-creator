@@ -10,6 +10,8 @@ const DEFAULTS = {
 	width: 900,
 	height: 900,
 	[springFamily("gridPhotos")]: null,
+	[springFamily("pollingReqs")]: null,
+	[springFamily("collages")]: null,
 
 	//grid computed
 	gridCells: [],

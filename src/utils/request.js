@@ -16,14 +16,16 @@ const request = (url, data, cors = true) => {
 			const { status, statusText } = response;
 			logger.log("REQUEST RESPONSE", { status, statusText });
 			return SUCCESS_STATUSES.includes(status) ?
-				response.json() :
+				response.json()
+					.then((jsonRes) => ({ jsonRes, response })) :
 				throwError(status, statusText);
 		})
-		.then((jsonRes) => {
-			logger.log("JSON RESPONSE !!!!! ", jsonRes);
+		.then(({ jsonRes, response }) => {
+			logger.log("SERVER RESPONSE !!!!! ", jsonRes);
 			return {
 				success: true,
-				response: jsonRes,
+				serverResponse: jsonRes,
+				headers: response.headers,
 			};
 		})
 		.catch((ex) => {

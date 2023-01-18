@@ -23,7 +23,7 @@ const ignores = [
 	gridPhotos,
 	photoOverCell,
 	isGenerating,
-	cloudEntryMode
+	cloudEntryMode,
 ];
 
 const StatePersister = () => {
