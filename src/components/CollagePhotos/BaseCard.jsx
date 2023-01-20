@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import styled from "styled-components";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -20,11 +21,12 @@ const StyledBaseCard = styled(Card)`
 	}
 `;
 
-const BaseCard = ({ children, tooltipText, actions, className, firstActionAlwaysShow }) => {
+const BaseCard = forwardRef(({ children, tooltipText, actions, firstActionAlwaysShow, ...props }, ref) => {
 	return (
 		<StyledBaseCard
-			className={className}
 			variant="outlined"
+			ref={ref}
+			{...props}
 		>
 			<Tooltip
 				show={!!tooltipText}
@@ -50,6 +52,6 @@ const BaseCard = ({ children, tooltipText, actions, className, firstActionAlways
 			/>}
 		</StyledBaseCard>
 	);
-};
+});
 
 export default BaseCard;

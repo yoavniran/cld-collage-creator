@@ -5,6 +5,8 @@ import ConfirmationModal from "../ConfirmationDialog";
 import SyntaxHighlight from "../SyntaxHighlight";
 import TooltipIconButton from "../TooltipIconButton";
 
+//TODO !!!!!!! LOAD SyntaxHighlight lazy !!!!!!!!!!
+
 const StyledSyntaxHighlight = styled(SyntaxHighlight)`
 	min-height: 400px;
 	max-height: 600px;

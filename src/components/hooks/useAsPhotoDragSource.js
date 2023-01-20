@@ -3,6 +3,8 @@ import { DRAG_TYPES } from "../../consts";
 import useDndKeyboardSupport from "./useDndKeyboardSupport";
 import { useSetPhotoOverCell } from "../../state/setters";
 
+//TODO: implement clean preview of dragged photo (https://stackoverflow.com/questions/69440259/how-to-implement-react-dnd-usedraglayer)
+
 const useAsPhotoDragSource = ({ photo, onlyWithKeys = [], orgCellId }) => {
 	const dndKeyboardSupport = useDndKeyboardSupport();
 	const setPhotoOverCell = useSetPhotoOverCell();

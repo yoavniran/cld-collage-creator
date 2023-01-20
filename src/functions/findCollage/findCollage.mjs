@@ -1,13 +1,15 @@
 import faunadb from "faunadb";
-import { createResponse, ERROR_RESPONSE, INVALID_REQ_RESPONSE } from "../common.mjs";
+import { createCorsResponse, ERROR_RESPONSE, INVALID_REQ_RESPONSE } from "../common.mjs";
 
-const handler = async (event) => {
+const handler = async ({ httpMethod, queryStringParameters }) => {
 	let response, client;
 
 	try {
-		const { rid } = event.queryStringParameters;
+		const { rid } = queryStringParameters;
 
-		if (event.httpMethod === "GET" && rid) {
+		console.log("FIND REQUEST ", { httpMethod, rid });
+
+		if (httpMethod === "GET" && rid) {
 			const q = faunadb.query;
 			client = new faunadb.Client({ secret: process.env.FAUNADB_SECRET });
 
@@ -65,7 +67,7 @@ const handler = async (event) => {
 		client?.close();
 	}
 
-	return createResponse(response);
+	return createCorsResponse(response);
 };
 
 export {

@@ -2,6 +2,7 @@ import { useState } from "react";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import MenuItem from "@mui/material/MenuItem";
 import SettingsIcon from "@mui/icons-material/Settings";
+import { IS_DEV } from "../../consts";
 import { useDebug, useMockUpload, useIsMonochromeGrid } from "../../state/selectors";
 import { useGridCellsCalculator } from "../../state/setters";
 import IconButtonMenu from "../IconButtonMenu";
@@ -36,12 +37,12 @@ const SettingsMenu = () => {
 					label="Debug"
 				/>
 			</MenuItem>
-			<MenuItem>
+			{IS_DEV && <MenuItem>
 				<FormControlLabel
 					control={<SimpleSwitch checked={isMockUpload} onChange={toggleMockUpload} />}
 					label="Mock Upload"
 				/>
-			</MenuItem>
+			</MenuItem>}
 			<MenuItem>
 				<FormControlLabel
 					control={<SimpleSwitch checked={isMonochromeGrid} onChange={toggleMonochrome} />}

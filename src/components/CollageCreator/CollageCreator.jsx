@@ -13,6 +13,7 @@ import CollagePhotos from "../CollagePhotos";
 import UploadyConnector from "../UploadyConnector";
 import CollageUploadDropZone from "../CollageUploadDropZone";
 import PageSpinner from "../PageSpinner";
+import { useCollagesPoller } from "../../state/setters";
 
 const AppContainer = styled.div`
 	position: relative;
@@ -29,6 +30,8 @@ const AppContainer = styled.div`
 `;
 
 const CollageCreator = () => {
+	useCollagesPoller();
+
 	return (
 		<UploadyConnector>
 			<DndProvider backend={getDndBackend()}>

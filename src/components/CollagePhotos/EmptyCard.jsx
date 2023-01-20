@@ -21,7 +21,7 @@ const EmptyBaseCard = styled(BaseCard)`
 
 const EmptyCard = ({}) => {
 	const uploadDetails = useUploadDetails();
-	const canUpload = !!uploadDetails;
+	const isDisabled = !uploadDetails;
 
 	return (
 		<EmptyBaseCard
@@ -29,10 +29,11 @@ const EmptyCard = ({}) => {
 		>
 			<StyledUploadButton
 				extraProps={{
-					isDisabled: !canUpload,
+					isDisabled,
 					tooltipOnDisabled: true,
-					tooltipText: CANT_UPLOAD_TEXT,
-					tooltipTitle: "Notice!",
+					badgeShowOnDisabled: true,
+					tooltipText: isDisabled && CANT_UPLOAD_TEXT,
+					tooltipTitle: isDisabled && "Notice!",
 					tooltipDelay:  1000,
 					"aria-label": "upload image",
 					icon: <AddIcon fontSize="large"/>,

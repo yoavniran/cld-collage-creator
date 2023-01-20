@@ -20,7 +20,7 @@ const getCloudEntryMode = (qs) =>
 		qs.cloudEntryMode :
 		CLOUD_ENTRY_MODE.OPEN
 
-const collageStateInitializer = (data, set) => {
+const collageStateInitializer = (data, { set }) => {
 	const size = data?.gridSize || DEFAULTS.gridSize;
 
 	set(gridCells, calculateCells({

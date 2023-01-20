@@ -1,62 +1,80 @@
-import faunadb from "faunadb";
-import { createResponse, ERROR_RESPONSE, INVALID_REQ_RESPONSE } from "../common.mjs";
+import fetch, { FormData } from "node-fetch";
+import { createCorsResponse, ERROR_RESPONSE, INVALID_REQ_RESPONSE } from "../common.mjs";
 
-const handler = async (event) => {
-	let response, client;
+const submitCreate = async (data) => {
+	let result;
+
+	console.log("CREATING COLLAGE WITH CLOUDINARY", data);
+	const fd = new FormData();
+	fd.append("upload_preset", data.preset);
+	fd.append("public_id", data.id);
+	fd.append("manifest_json", JSON.stringify(data.manifest));
 
 	try {
-		if (event.httpMethod === "POST") {
-			const data = JSON.parse(event.body);
+		const response = await fetch(
+			`https://api.cloudinary.com/v1_1/${data.cloud}/image/create_collage`,
+			{ method: "POST", body: fd },
+		);
 
-			if (data.request_id && data.secure_url) {
-				const id = data.request_id;
-				const q = faunadb.query;
-				client = new faunadb.Client({
-					secret: process.env.FAUNADB_SECRET,
-					// keepAlive: false,
-				});
+		console.log(`GOT CLD RESPONSE ${response.status} - ${response.statusText}`);
 
-				console.log(" -- creating DB entry for request ", { id, publicId: data.public_id });
+		if (response.status === 200) {
+			const requestId = response.headers.get("x-request-id");
+			console.log("GOT CLD requestId HEADER ", requestId);
 
-				const createP = client.query(
-					q.Create(
-						q.Collection("collages"),
-						{
-							data: {
-								id,
-								...data,
-							},
-						},
-					),
-				);
+			if (requestId) {
+				const json = await response.json();
 
-				const dbResult = await createP;
+				console.log("GOT CLD RESPONSE JSON ", json);
 
-				if (dbResult?.ref) {
-					console.log(" -- DB entry created for request ", { id, publicId: data.public_id });
-				}
-
-				response = {
-					statusCode: 200,
-					body: { success: true },
+				return {
+					error: false,
+					data: {
+						requestId,
+						...json,
+					},
 				};
-			} else {
-				response = INVALID_REQ_RESPONSE;
 			}
+		}
+	} catch (ex) {
+		console.log("ERROR CREATING COLLAGE WITH CLOUDINARY !", ex);
+	}
+
+	return result || { error: true };
+};
+
+const handler = async ({ httpMethod, body }) => {
+	let response;
+
+	try {
+		if (httpMethod === "OPTIONS") {
+			response = {
+				statusCode: 200,
+				body: "",
+			};
+		} else if (httpMethod === "POST") {
+			const data = JSON.parse(body);
+			const result = await submitCreate(data);
+			const success = !result.error;
+
+			response = {
+				statusCode: 200,
+				body: {
+					success,
+					...result.data,
+				},
+			};
 		} else {
 			response = INVALID_REQ_RESPONSE;
 		}
 	} catch (ex) {
 		console.error("ERROR OCCURRED", ex);
 		response = ERROR_RESPONSE;
-	} finally {
-		client?.close();
 	}
 
-	return createResponse(response);
+	return createCorsResponse(response);
 };
 
 export {
 	handler,
 };
-// Docs on event and context https://docs.netlify.com/functions/build/#code-your-function-2

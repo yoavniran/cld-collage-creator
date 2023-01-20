@@ -1,36 +1,43 @@
 import { WEBHOOK_URL_BASE } from "./consts";
 import { logger, request } from "./utils";
 
-const NOTIFICATION_URL = `${WEBHOOK_URL_BASE}collageCreate`;
+const CREATE_URL = `${WEBHOOK_URL_BASE}collageCreate`;
 
 const createCollage = async (id, manifest, cloud, preset) => {
 	let result;
 
 	try {
-		const fd = new FormData();
+		// const fd = new FormData();
+		//
+		// fd.append("upload_preset", preset);
+		// fd.append("public_id", id);
+		// fd.append("manifest_json", JSON.stringify(manifest));
 
-		fd.append("upload_preset", preset);
-		fd.append("public_id", id);
-		fd.append("manifest_json", JSON.stringify(manifest));
-		// fd.append("notification_url", NOTIFICATION_URL);
-
-		logger.log("SENDING COLLAGE REQUEST !!!!!!!!", { id, manifest, cloud, preset, NOTIFICATION_URL });
+		logger.log("SENDING COLLAGE REQUEST !!!!!!!!", {
+			id,
+			manifest,
+			cloud,
+			preset,
+		});
 
 		const response = await request(
-			`https://api.cloudinary.com/v1_1/${cloud}/image/create_collage`,
-			fd,
+			//`https://api.cloudinary.com/v1_1/${cloud}/image/create_collage`,
+			// fd,
+			CREATE_URL,
+			JSON.stringify({
+				id,
+				cloud,
+				preset,
+				manifest,
+			}),
 		);
 
 		logger.log("!!!!!!!!!!!!!! CREATE RESPONSE !!!!!!!!!! ", response);
 
-		result = {
-			success: response.success,
-			requestId: response.success ? response.headers.get("request_id") : null,
-			publicId: response.success ? response.serverResponse.public_id : null,
-		};
+		result = response.serverResponse ;
 	} catch (ex) {
 		console.error(ex);
-		result = { result: "error", message: ex.message };
+		result = { success: false, result: "error", message: ex.message };
 	}
 
 	return result;

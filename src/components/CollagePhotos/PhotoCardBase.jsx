@@ -1,15 +1,15 @@
 import { useState } from "react";
 import styled from "styled-components";
-import BaseCard from "./BaseCard";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SwipeUpAltIcon from "@mui/icons-material/SwipeUpAlt";
 import BrokenImageIcon from "@mui/icons-material/BrokenImage";
 import { addUrlTransformation } from "../../utils";
+import { useGridPhoto } from "../../state/selectors";
 import useAsPhotoDragSource from "../hooks/useAsPhotoDragSource";
 import TooltipIconButton from "../TooltipIconButton";
 import Tooltip from "../Tooltip";
+import BaseCard from "./BaseCard";
 import PhotoMedia from "./PhotoMedia";
-import { useGridPhoto } from "../../state/selectors";
 
 const StyledBaseCard = styled(BaseCard)`
   .MuiCardContent-root {
@@ -90,6 +90,7 @@ const PhotoCardBase = ({
 					/>,
 				},
 			]}
+			ref={dragRef}
 		>
 			<Tooltip
 				title="Drag to Collage"
@@ -106,7 +107,6 @@ const PhotoCardBase = ({
 						<BrokenImageIcon fontSize="large" color="error"/>
 					</ErrorContainer> :
 					<PhotoMedia
-						ref={dragRef}
 						url={photoUrl}
 						alt={name}
 						isDragging={isDragging}

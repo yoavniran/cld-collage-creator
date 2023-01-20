@@ -57,6 +57,7 @@ const GenerateButton = () => {
 	const generate = useCollageGenerator();
 	const isGenerating = useGenerating();
 	const canGenerateReport = useCanGenerate();
+	const isDisabled = !canGenerateReport.result;
 	const isDarkMode = useIsDarkMode();
 	const theme = useAppTheme();
 
@@ -97,10 +98,11 @@ const GenerateButton = () => {
 			<>
 				<SplitIconButton
 					onClick={generate}
-					isDisabled={!canGenerateReport.result}
+					isDisabled={isDisabled}
 					tooltipOnDisabled
-					tooltipTitle="To Generate: "
-					tooltipText={<CantGenerateTooltipText report={canGenerateReport}/>}
+					badgeShowOnDisabled
+					tooltipTitle={isDisabled && "To Generate: "}
+					tooltipText={isDisabled && <CantGenerateTooltipText report={canGenerateReport}/>}
 					tooltipSeverity="warning"
 					aria-label="generate collage"
 					icon={<SaveIcon fontSize="large"/>}
@@ -138,7 +140,7 @@ const GenerateButton = () => {
 				</SplitIconButton>
 
 				{isShowingSaveAs && <SaveAsModal onClose={onSaveAsClose}/>}
-				{isShowingManifest && <ManifestModal onClose={onManifestClose}/> }
+				{isShowingManifest && <ManifestModal onClose={onManifestClose}/>}
 			</>
 	);
 };

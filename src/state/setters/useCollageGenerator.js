@@ -52,10 +52,14 @@ const useCollageGenerator = createSetterHook(
 
 			const { requestId, publicId } = result;
 
-			set(pollingReqs(requestId), {
-				requestId,
-				publicId,
-			});
+			if (requestId) {
+				set(pollingReqs(requestId), {
+					requestId,
+					publicId,
+					createTime: Date.now(),
+					attempts: 0,
+				});
+			}
 		} else {
 			set(notifications, (prev) => [{
 				type: NOTIFICATION_TYPES.COLLAGE_GENERATE_FAIL,

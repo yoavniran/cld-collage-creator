@@ -1,3 +1,4 @@
+import isString from "lodash/isString";
 import logger from "./logger";
 
 const SUCCESS_STATUSES = [200, 201];
@@ -6,11 +7,21 @@ const throwError = (status, statusText) => {
 	throw new Error(`Request Failed! status = ${status}, text = ${statusText}`);
 };
 
-const request = (url, data, cors = true) => {
+const requestGet = (url) =>
+	request(url, null, true, "GET");
+
+const request = (url, data, cors = true, method = "POST") => {
+	const headers = new Headers();
+
+	if (isString(data)) {
+		headers.set("Content-Type", "application/json");
+	}
+
 	return fetch(url, {
-		method: "POST",
+		method,
 		body: data,
 		mode: cors ? "cors" : undefined,
+		headers,
 	})
 		.then((response) => {
 			const { status, statusText } = response;
@@ -53,4 +64,7 @@ const request = (url, data, cors = true) => {
 	// return pXhr;
 };
 
-export default request;
+export {
+	request,
+	requestGet,
+};

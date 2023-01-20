@@ -1,3 +1,5 @@
+export const IS_DEV = process.env.NODE_ENV === "development";
+
 export const LS_KEY = "ccc_ls_data";
 
 export const DRAG_TYPES = {
@@ -33,7 +35,9 @@ export const GENERATE_REPORT_TYPES = {
 	CELLS: "cells",
 };
 
-export const WEBHOOK_URL_BASE = "https://cld-collage-creator.netlify.app/.netlify/functions/";
+export const WEBHOOK_URL_BASE = IS_DEV ?
+	"http://localhost:9999/.netlify/functions/" :
+	"https://cld-collage-creator.netlify.app/.netlify/functions/";
 
 export const CLOUD_ENTRY_MODE = {
 	OPEN: "open",
