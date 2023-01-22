@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { addUrlTransformation, timeAgo } from "../../utils";
 import { useReadyCollage } from "../../state/selectors";
 import ContainerActions from "../ContainerActions";
@@ -27,8 +28,18 @@ const ImageContainer = styled.div`
 	width: 100%;
 `;
 
+const StyledContainerActions = styled(ContainerActions)`
+  width: 100%;
+	
+  .action-circle-container {
+    &:first-child {
+      width: 100%;
+    }
+  }
+`;
+
 const ReadyCollageCell = ({ id }) => {
-	const collage = useReadyCollage(id),
+	const [collage, removeCollage] = useReadyCollage(id),
 		collageImg = addUrlTransformation(collage.secure_url, "$&/w_200,dpr_2/");
 
 	const onOpenCollage = () => {
@@ -39,6 +50,10 @@ const ReadyCollageCell = ({ id }) => {
 		navigator.clipboard.writeText(collage.secure_url);
 	};
 
+	const onDelete = () => {
+		removeCollage();
+	};
+
 	return (
 		collage &&
 		<Tooltip
@@ -46,7 +61,7 @@ const ReadyCollageCell = ({ id }) => {
 			title={collage.public_id}
 		>
 			<CollageCell data-url={collage.secure_url}>
-				<ContainerActions actions={[
+				<StyledContainerActions actions={[
 					{
 						key: "open",
 						component: <TooltipIconButton
@@ -66,6 +81,17 @@ const ReadyCollageCell = ({ id }) => {
 							aria-label="copy url"
 							color="secondary"
 							tooltipText="Copy collage URL to clipboard"
+							tooltipDelay={400}
+						/>,
+					},
+					{
+						key: "delete",
+						component: <TooltipIconButton
+							onClick={onDelete}
+							icon={<DeleteIcon fontSize="medium"/>}
+							aria-label="remove collage"
+							color="secondary"
+							tooltipText="Remove collage from this list"
 							tooltipDelay={400}
 						/>,
 					},

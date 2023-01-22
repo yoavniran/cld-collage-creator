@@ -7,7 +7,9 @@ const {
 
 const useReadyCollage = createSelectorFamilyHook(
 	collages,
-	false
+	(param, newValue, { reset }) => {
+		reset(collages(param));
+	}
 );
 
 export default useReadyCollage;
