@@ -2,19 +2,21 @@ import styled from "styled-components";
 import { UploadPreview } from "@rpldy/upload-preview";
 import MenuItem from "@mui/material/MenuItem";
 import BurstModeIcon from "@mui/icons-material/BurstMode";
+import MinimizeIcon from "@mui/icons-material/Minimize";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { useDamConfig, usePhotos, usePhotosDrawerHeight } from "../../state/selectors";
+import { useFillGridPhotos } from "../../state/setters";
+import IconButtonMenu from "../IconButtonMenu";
 import ResizableBottomContainer from "../ResizableBottomContainer";
 import EmptyCard from "./EmptyCard";
 import UploadingCard from "./UploadingCard";
 import UploadPhotoCard from "./UploadPhotoCard";
-import { useDamConfig, usePhotos, usePhotosDrawerHeight } from "../../state/selectors";
-import { useFillGridPhotos } from "../../state/setters";
-import IconButtonMenu from "../IconButtonMenu";
 import AssetPhotoCard from "./AssetPhotoCard";
 
 const MIN_CONTAINER_HEIGHT = 14;
 
 const StyledResizableBottomContainer = styled(ResizableBottomContainer)`
-	
+
 `;
 
 const PhotosContainer = styled.div`
@@ -31,11 +33,9 @@ const PhotosContainer = styled.div`
 //TODO: support drag/paste of cloudinary res URL????
 
 const StyledIconButtonMenu = styled(IconButtonMenu)`
-	position: absolute;
-	right: 2px;
-	top: 10px;
-	
-	
+  position: absolute;
+  right: 2px;
+  top: 10px;
 `;
 
 const CollagePhotos = () => {
@@ -46,6 +46,10 @@ const CollagePhotos = () => {
 
 	const onFillCells = () => {
 		fillCells(damConfig);
+	};
+
+	const onMinimize = () => {
+		setDrawerHeight(MIN_CONTAINER_HEIGHT)
 	};
 
 	return (
@@ -65,9 +69,12 @@ const CollagePhotos = () => {
 				{photos.map((photoId) =>
 					<UploadPhotoCard key={photoId} id={photoId}/>)}
 			</PhotosContainer>
-			<StyledIconButtonMenu>
+			<StyledIconButtonMenu icon={<MoreVertIcon/>}>
 				<MenuItem onClick={onFillCells} disabled={!photos.length}>
-					<BurstModeIcon /> Fill Cells
+					<BurstModeIcon/> Fill Cells
+				</MenuItem>
+				<MenuItem onClick={onMinimize}>
+					<MinimizeIcon/> Minimize
 				</MenuItem>
 			</StyledIconButtonMenu>
 		</StyledResizableBottomContainer>

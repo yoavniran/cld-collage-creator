@@ -12,6 +12,7 @@ export const NOTIFICATION_TYPES = {
 	COLLAGE_GENERATE_FAIL: "collage-generate-fail",
 	COLLAGE_GENERATE_SUCCESS: "collage-generate-success",
 	FILL_GRID: "fill-grid",
+	POLL_REQUEST_EXPIRED: "polling-request-expired",
 };
 
 export const GRAVITY_TYPES = [

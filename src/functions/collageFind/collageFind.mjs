@@ -7,7 +7,7 @@ const handler = async ({ httpMethod, queryStringParameters }) => {
 	try {
 		const { rid } = queryStringParameters;
 
-		console.log("FIND REQUEST ", { httpMethod, rid });
+		console.log("LOOKUP REQUEST ", { rid });
 
 		if (httpMethod === "GET" && rid) {
 			const q = faunadb.query;
@@ -40,7 +40,7 @@ const handler = async ({ httpMethod, queryStringParameters }) => {
 					),
 				);
 
-				console.log(`GOT RESULT FOR RID = "${rid}"(${rids.length}) = `, !!dbResult);
+				console.log(`GOT RESULT FOR RID = "${rid}"(${rids.length}) DATA COUNT: `, dbResult?.length || 0);
 			} catch (ex) {
 				console.log(`Failed to find collage data for rid "${rid}"(${rids.length}) - db response code: ${ex.requestResult?.statusCode}`, ex.requestResult?.responseContent?.errors);
 			}

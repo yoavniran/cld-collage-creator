@@ -50,7 +50,7 @@ const useCollageGenerator = createSetterHook(
 				message: "Collage request was sent successfully",
 			}, ...prev]);
 
-			const { requestId, publicId } = result;
+			const { requestId, public_Id: publicId } = result;
 
 			if (requestId) {
 				set(pollingReqs(requestId), {
@@ -58,7 +58,7 @@ const useCollageGenerator = createSetterHook(
 					publicId,
 					createTime: Date.now(),
 					attempts: 0,
-				});
+				}, true);
 			}
 		} else {
 			set(notifications, (prev) => [{

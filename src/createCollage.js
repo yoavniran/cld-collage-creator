@@ -34,7 +34,7 @@ const createCollage = async (id, manifest, cloud, preset) => {
 
 		logger.log("!!!!!!!!!!!!!! CREATE RESPONSE !!!!!!!!!! ", response);
 
-		result = response.serverResponse ;
+		result = response.serverResponse;
 	} catch (ex) {
 		console.error(ex);
 		result = { success: false, result: "error", message: ex.message };
