@@ -1,10 +1,16 @@
+// import { useState } from "react";
 import styled from "styled-components";
 import { UploadPreview } from "@rpldy/upload-preview";
 import MenuItem from "@mui/material/MenuItem";
 import BurstModeIcon from "@mui/icons-material/BurstMode";
 import MinimizeIcon from "@mui/icons-material/Minimize";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { useDamConfig, usePhotos, usePhotosDrawerHeight } from "../../state/selectors";
+import {
+	useDamConfig,
+	useGetPhotoOverCell,
+	usePhotos,
+	usePhotosDrawerHeight,
+} from "../../state/selectors";
 import { useFillGridPhotos } from "../../state/setters";
 import IconButtonMenu from "../IconButtonMenu";
 import ResizableBottomContainer from "../ResizableBottomContainer";
@@ -16,7 +22,7 @@ import AssetPhotoCard from "./AssetPhotoCard";
 const MIN_CONTAINER_HEIGHT = 14;
 
 const StyledResizableBottomContainer = styled(ResizableBottomContainer)`
-
+	${({ $visible }) => !$visible && "visibility: hidden;"}
 `;
 
 const PhotosContainer = styled.div`
@@ -39,6 +45,7 @@ const StyledIconButtonMenu = styled(IconButtonMenu)`
 `;
 
 const CollagePhotos = () => {
+	const photoOverCell = useGetPhotoOverCell();
 	const photos = usePhotos();
 	const [drawerHeight, setDrawerHeight] = usePhotosDrawerHeight();
 	const fillCells = useFillGridPhotos();
@@ -49,7 +56,7 @@ const CollagePhotos = () => {
 	};
 
 	const onMinimize = () => {
-		setDrawerHeight(MIN_CONTAINER_HEIGHT)
+		setDrawerHeight(MIN_CONTAINER_HEIGHT);
 	};
 
 	return (
@@ -57,6 +64,7 @@ const CollagePhotos = () => {
 			minHeight={MIN_CONTAINER_HEIGHT}
 			height={drawerHeight}
 			setHeight={setDrawerHeight}
+			$visible={!photoOverCell}
 		>
 			<PhotosContainer sx={{ height: "100%" }}>
 				<EmptyCard/>

@@ -7,6 +7,7 @@ import { useDebug, useMockUpload, useIsMonochromeGrid } from "../../state/select
 import { useGridCellsCalculator } from "../../state/setters";
 import IconButtonMenu from "../IconButtonMenu";
 import SimpleSwitch from "../SimpleSwitch";
+import Tooltip from "../Tooltip";
 
 //TODO: Add button to reset all settings (clear LS) with confirmation dialog
 
@@ -32,25 +33,27 @@ const SettingsMenu = () => {
 			tooltipTitle="Settings"
 		>
 			<MenuItem>
-				<FormControlLabel
-					control={<SimpleSwitch checked={isDebug} onChange={toggleDebug} />}
-					label="Debug"
-				/>
+				<Tooltip simple title="Turn on to see debug messages in developer console">
+					<FormControlLabel
+						control={<SimpleSwitch checked={isDebug} onChange={toggleDebug}/>}
+						label="Debug"
+					/>
+				</Tooltip>
 			</MenuItem>
 			{IS_DEV && <MenuItem>
 				<FormControlLabel
-					control={<SimpleSwitch checked={isMockUpload} onChange={toggleMockUpload} />}
+					control={<SimpleSwitch checked={isMockUpload} onChange={toggleMockUpload}/>}
 					label="Mock Upload"
 				/>
 			</MenuItem>}
 			<MenuItem>
 				<FormControlLabel
-					control={<SimpleSwitch checked={isMonochromeGrid} onChange={toggleMonochrome} />}
+					control={<SimpleSwitch checked={isMonochromeGrid} onChange={toggleMonochrome}/>}
 					label="Monochrome Grid"
 				/>
 			</MenuItem>
 		</IconButtonMenu>
-	)
+	);
 };
 
 export default SettingsMenu;

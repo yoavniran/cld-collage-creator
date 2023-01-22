@@ -144,7 +144,7 @@ const CloudNameField = ({ isCloudLocked }) => {
 	return (
 		<MenuField>
 			<TextField
-				label="Cloud Name"
+				label="Product Environment (Cloud)"
 				value={cloud}
 				variant="outlined"
 				color="secondary"
