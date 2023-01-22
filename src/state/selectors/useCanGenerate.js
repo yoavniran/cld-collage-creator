@@ -15,7 +15,7 @@ const useCanGenerate = createSelectorHook(
 		const checks = [
 			{
 				type: GENERATE_REPORT_TYPES.CLOUD,
-				text: "Set cloud name (menu)",
+				text: "Set product environment (menu)",
 				status: !isEmpty(get(cloud)),
 			},
 			{

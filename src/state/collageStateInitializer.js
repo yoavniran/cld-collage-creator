@@ -39,11 +39,11 @@ const collageStateInitializer = (data, { set }) => {
 	//initialize UI based on optional query params
 	const qs = queryString.parse(location.search);
 	set(isDam, qs.dam === "true");
-	set(cloud, qs.cloud ? qs.cloud : data.cloud);
+	set(cloud, qs.cloud ? qs.cloud : data?.cloud);
 	set(cloudEntryMode, getCloudEntryMode(qs));
-	set(collagePreset, qs.collagePreset ? qs.collagePreset : data.collagePreset);
-	set(uploadPreset, qs.uploadPreset ? qs.uploadPreset : data.uploadPreset);
-	set(isSamePreset, qs.uploadPreset ? false : data.isSamePreset);
+	set(collagePreset, qs.collagePreset ? qs.collagePreset : data?.collagePreset);
+	set(uploadPreset, qs.uploadPreset ? qs.uploadPreset : data?.uploadPreset);
+	set(isSamePreset, qs.uploadPreset ? false : data?.isSamePreset);
 };
 
 export default collageStateInitializer;

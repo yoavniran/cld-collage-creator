@@ -24,11 +24,13 @@ const Tooltip = (
 		delay = 100,
 		nextDelay,
 		simple = false,
+		open,
 		...contentProps
 	}) => {
 	return (
 		<MuiTooltip
 			arrow
+			open={open}
 			TransitionComponent={Zoom}
 			title={show ? (simple ? contentProps.title : <TooltipContent {...contentProps} />) : ""}
 			placement={placement}

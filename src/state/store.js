@@ -29,7 +29,7 @@ const DEFAULTS = {
 	themeMode: THEME_MODES.DARK,
 	notifications: [],
 	isAppDrawerOpen: false,
-	photosDrawerHeight: 0,
+	photosDrawerHeight: 200,
 	photoOverCell: null,
 	isGenerating: false,
 	isMonochromeGrid: false,

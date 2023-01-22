@@ -1,5 +1,6 @@
-// import { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
+import { useBatchAddListener } from "@rpldy/uploady";
 import { UploadPreview } from "@rpldy/upload-preview";
 import MenuItem from "@mui/material/MenuItem";
 import BurstModeIcon from "@mui/icons-material/BurstMode";
@@ -18,11 +19,12 @@ import EmptyCard from "./EmptyCard";
 import UploadingCard from "./UploadingCard";
 import UploadPhotoCard from "./UploadPhotoCard";
 import AssetPhotoCard from "./AssetPhotoCard";
+import Tooltip from "../Tooltip/Tooltip";
 
 const MIN_CONTAINER_HEIGHT = 14;
 
 const StyledResizableBottomContainer = styled(ResizableBottomContainer)`
-	${({ $visible }) => !$visible && "visibility: hidden;"}
+  ${({ $visible }) => !$visible && "visibility: hidden;"}
 `;
 
 const PhotosContainer = styled.div`
@@ -50,6 +52,9 @@ const CollagePhotos = () => {
 	const [drawerHeight, setDrawerHeight] = usePhotosDrawerHeight();
 	const fillCells = useFillGridPhotos();
 	const damConfig = useDamConfig();
+	const [noPhotos, setNoPhotos] = useState(() => !damConfig?.assets.length && !photos.length);
+
+	useBatchAddListener(() => setNoPhotos(false));
 
 	const onFillCells = () => {
 		fillCells(damConfig);
@@ -67,7 +72,16 @@ const CollagePhotos = () => {
 			$visible={!photoOverCell}
 		>
 			<PhotosContainer sx={{ height: "100%" }}>
-				<EmptyCard/>
+				<Tooltip
+					open={noPhotos}
+					severity="info"
+					placement="right"
+					title="Get Started!"
+					text="Upload your photos here to begin creating your collage"
+				>
+					<EmptyCard showTooltip={!noPhotos}/>
+				</Tooltip>
+
 				<UploadPreview
 					rememberPreviousBatches
 					PreviewComponent={UploadingCard}
@@ -77,6 +91,7 @@ const CollagePhotos = () => {
 				{photos.map((photoId) =>
 					<UploadPhotoCard key={photoId} id={photoId}/>)}
 			</PhotosContainer>
+
 			<StyledIconButtonMenu icon={<MoreVertIcon/>}>
 				<MenuItem onClick={onFillCells} disabled={!photos.length}>
 					<BurstModeIcon/> Fill Cells
