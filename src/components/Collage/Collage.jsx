@@ -31,7 +31,7 @@ const SELECTION_PROPS = {
 	}
 };
 
-const CollageGrid = () => {
+const Collage = () => {
 	const collageSize = useCollageSize();
 	const cells = useCollageCells();
 	const photoOverCell = useGetPhotoOverCell();
@@ -80,4 +80,4 @@ const CollageGrid = () => {
 	</StyledSelectionArea>);
 };
 
-export default CollageGrid;
+export default Collage;

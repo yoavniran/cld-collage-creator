@@ -6,6 +6,7 @@ import { useGridCellsCalculator } from "../../state/setters";
 import useGridPhoto from "../../state/selectors/useGridPhoto";
 import TooltipIconButton from "../TooltipIconButton";
 import ContainerActions from "../ContainerActions";
+import Tooltip from "../Tooltip";
 
 const StyledContainerActions = styled(ContainerActions)`
 	width: 100%;
@@ -55,7 +56,13 @@ const CellActions = ({ id, presentationId, isOverriding, hasPhoto, cellRef }) =>
 				{
 					key: "id",
 					component:
-						<Typography variant="h4" color="secondary.main">{presentationId}</Typography>,
+					<Tooltip
+						simple
+						title={hasPhoto ? "" : "Drag a photo over"}
+						nextDelay={0}
+					>
+						<Typography variant="h4" color="secondary.main">{presentationId}</Typography>
+					</Tooltip>,
 				},
 				//show unmerge button if overriding
 				isOverriding && {

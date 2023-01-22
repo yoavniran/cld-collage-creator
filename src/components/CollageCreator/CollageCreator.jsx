@@ -5,7 +5,7 @@ import { DndProvider } from "react-dnd";
 import Topbar from "../Topbar";
 import AppDrawer from "../AppDrawer";
 import getDndBackend from "../DragDropBackend";
-import CollageGrid from "../CollageGrid";
+import Collage from "../Collage";
 import Notifications from "../Notifications";
 import CollageActions from "../CollageActions";
 import CollageFloatingMenu from "../CollageFloatingMenu";
@@ -42,7 +42,7 @@ const CollageCreator = () => {
 						<AppContainer>
 							<CollageActions/>
 							<Container maxWidth="xl" sx={{ display: "flex", pb: 50, position: "relative" }}>
-								<CollageGrid/>
+								<Collage/>
 								<CollageFloatingMenu/>
 							</Container>
 							<CollagePhotos/>

@@ -1,14 +1,40 @@
+import { useEffect } from "react";
 import {
 	isRecoilValue,
 	useRecoilTransactionObserver_UNSTABLE as useRecoilTransactionObserver,
 } from "recoil";
 import { logger } from "../../utils";
 import atoms from "../../state/store";
-import { useDebug } from "../../state/selectors";
+import { useDebug, useStateDebugger } from "../../state/selectors";
+
+const {
+	cloud,
+	collagePreset,
+	uploadPreset,
+} = atoms;
 
 const StateLogger = () => {
+	const getFromState = useStateDebugger();
 	const [isDebug] = useDebug();
-	logger.setDebug(isDebug);
+
+	useEffect(() => {
+		//helper method for debug purposes
+		window._getFromState = getFromState;
+
+		//helper method for documentation
+		window._getHiddenCloudUrl = () => {
+			const cloudVal = getFromState(cloud),
+				collagePresetVal = getFromState(collagePreset),
+				uploadPresetVal = getFromState(uploadPreset) || collagePresetVal;
+
+			const loc = document.location;
+			return `${loc.origin}?cloudEntryMode=hidden&cloud=${encodeURIComponent(cloudVal)}&collagePreset=${encodeURIComponent(collagePresetVal)}&uploadPreset=${encodeURIComponent(uploadPresetVal)}`;
+		};
+	}, [getFromState]);
+
+	useEffect(() => {
+		logger.setDebug(isDebug);
+	}, [isDebug]);
 
 	useRecoilTransactionObserver(({ snapshot }) => {
 		if (isDebug) {
