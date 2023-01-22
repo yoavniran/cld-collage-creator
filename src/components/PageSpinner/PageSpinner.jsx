@@ -12,10 +12,10 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 
-const PageSpinner = () => {
+const PageSpinner = ({ className, size = 100 }) => {
 	return (
-		<Wrapper>
-			<CircularProgress size={100}/>
+		<Wrapper className={className}>
+			<CircularProgress size={size}/>
 		</Wrapper>
 	);
 };
