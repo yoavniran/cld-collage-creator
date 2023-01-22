@@ -6,6 +6,7 @@ const StyledCollagesDialog = styled(ConfirmationModal)`
   .MuiDialog-paper {
     max-width: 1200px;
     width: 80%;
+	  max-height: 85vh;
   }
 `;
 

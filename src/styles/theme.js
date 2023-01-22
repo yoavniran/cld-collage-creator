@@ -53,7 +53,7 @@ const darkTheme = {
 			disabled: "rgba(119,140,150,0.8)",
 		},
 		background: {
-			paper: "rgba(38,50,56,0.65)",
+			paper: "rgba(38,50,56,0.9)",
 			default: "#849198",
 		},
 		text: {
@@ -107,7 +107,7 @@ const lightTheme = merge({}, darkTheme, {
 			main: "#9cdbff",
 		},
 		background: {
-			paper: "rgba(177,185,190,0.75)",
+			paper: "rgba(177,185,190,0.9)",
 			default: "#dce1e3",
 		},
 		text: {

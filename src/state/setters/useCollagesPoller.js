@@ -7,7 +7,7 @@ import { logger, requestGet } from "../../utils";
 import atoms from "../store";
 
 const EXPIRY_TIME = 1000 * 60 * 10, //10 minutes
-	EXPIRY_ATTEMPTS = 20,
+	EXPIRY_ATTEMPTS = 30,
 	COLLAGES_URL = `${WEBHOOK_URL_BASE}collageFind`;
 
 const {

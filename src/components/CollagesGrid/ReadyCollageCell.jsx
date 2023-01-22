@@ -14,8 +14,7 @@ const CollageCell = styled(BaseCell)`
   position: relative;
 	
 	.MuiTypography-caption {
-		font-size: 1.2rem;
-		font-weight: bold;
+		font-size: 1.1rem;
 		margin: 2px 0;
   }
 `;

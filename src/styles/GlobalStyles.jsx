@@ -8,7 +8,7 @@ import "@fontsource/roboto-serif/700.css";
 import "@fontsource/chicle/400.css";
 
 const opaquePaperCss = css`
-  background-color: ${({ theme }) => alpha(theme.palette.background.paper, 0.9)};
+  background-color: ${({ theme }) => alpha(theme.palette.background.paper, 0.98)};
 `;
 
 const GlobalStyles = createGlobalStyle`
