@@ -1,9 +1,10 @@
 # Cloudinary Collage Creator
 
+
+![CCC Application Demo](https://res.cloudinary.com/yoav-cloud/video/upload/e_accelerate:80,h_600,e_loop/fl_animated,fl_awebp/v1674467123/collages/collage-full-flow-very-short.webp)
+    
 <p align="center">
-
-    [![CCC Demo Video](https://res.cloudinary.com/yoav-cloud/video/upload/e_accelerate:80,h_600,e_loop/fl_animated,fl_awebp/v1674467123/collages/collage-full-flow-very-short.webp)](https://res.cloudinary.com/yoav-cloud/video/upload/h_1200,e_accelerate:50/v1674459548/collages/collage-full-flow-short.mp4)
-
+    <a target="_blank" href="https://res.cloudinary.com/yoav-cloud/video/upload/h_1200,e_accelerate:50/v1674459548/collages/collage-full-flow-short.mp4">longer demo video</a>
 </p>
 
 ## Intro
