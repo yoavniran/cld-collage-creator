@@ -1,5 +1,8 @@
 # Cloudinary Collage Creator
 
+[![CCC Demo Video](https://res.cloudinary.com/yoav-cloud/video/upload/h_600,so_10/v1674459548/collages/collage-full-flow-short.png)](https://res.cloudinary.com/yoav-cloud/video/upload/h_1200,e_accelerate:50/v1674459548/collages/collage-full-flow-short.mp4)
+
+
 ## Intro
 
 This application uses the [Collage Generation API](https://cloudinary.com/documentation/image_collage_generation)
