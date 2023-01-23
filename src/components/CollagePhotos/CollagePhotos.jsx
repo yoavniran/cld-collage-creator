@@ -52,7 +52,7 @@ const CollagePhotos = () => {
 	const [drawerHeight, setDrawerHeight] = usePhotosDrawerHeight();
 	const fillCells = useFillGridPhotos();
 	const damConfig = useDamConfig();
-	const [noPhotos, setNoPhotos] = useState(() => !damConfig?.assets.length && !photos.length);
+	const [noPhotos, setNoPhotos] = useState(() => !damConfig?.assets?.length && !photos.length);
 
 	useBatchAddListener(() => setNoPhotos(false));
 

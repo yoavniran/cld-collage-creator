@@ -1,5 +1,6 @@
 const path = require("path"),
 	webpack = require("webpack"),
+	CopyWebpackPlugin = require("copy-webpack-plugin"),
 	MiniCssExtractPlugin = require("mini-css-extract-plugin"),
 	ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin"),
 	HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -42,10 +43,10 @@ module.exports = {
 						loader: "file-loader",
 						options: {
 							name: "[name].[ext]",
-							outputPath: "/"
-						}
-					}
-				]
+							outputPath: "/",
+						},
+					},
+				],
 			},
 			{
 				test: /\.css$/i,
@@ -69,10 +70,13 @@ module.exports = {
 		...[
 			isDev && new webpack.HotModuleReplacementPlugin(),
 			isDev && new ReactRefreshWebpackPlugin(),
-			!isDev && new MiniCssExtractPlugin()
+			!isDev && new MiniCssExtractPlugin(),
+			!isDev && new CopyWebpackPlugin({
+				patterns: [{ from: "./assets/ccc-og.png", to: "./" }],
+			}),
 		].filter(Boolean),
 		new HtmlWebpackPlugin({
-			template: "public/index.html"
+			template: "public/index.html",
 		}),
 	],
 	optimization: {
@@ -80,8 +84,8 @@ module.exports = {
 			cacheGroups: {
 				commons: {
 					test: /[\\/]node_modules[\\/]/,
-					name: 'vendors',
-					chunks: 'all',
+					name: "vendors",
+					chunks: "all",
 				},
 			},
 		},
