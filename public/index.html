@@ -2,14 +2,28 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-<!--    <link rel="icon" href="favicon.ico" />-->
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-<!--    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />-->
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
+      <title>Cloudinary Collage Creator</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1"/>
+      <meta name="theme-color" content="#000000"/>
+      <meta name="description" content="Create a collage from your photos using Cloudinary"/>
+      <meta name="keywords" content="images,photos,collage,tool,cloudinary,create"/>
+
+      <meta property="og:title" content="Cloudinary Collage Creator by Yoav Niran"/>
+      <meta property="og:type" content="website"/>
+      <meta property="og:image" content="/ccc-og.png"/>
+      <meta property="og:description" content="Create a collage from your photos using Cloudinary">
+
+      <meta property="twitter:domain" content="cld-collage-creator.netlify.app">
+      <meta property="twitter:url" content="https://cld-collage-creator.netlify.app/">
+      <meta name="twitter:card" content="summary_large_image"/>
+      <meta property="twitter:title" content="Cloudinary Collage Creator by Yoav Niran"/>
+      <meta name="twitter:description" content="Create a collage from your photos using Cloudinary">
+      <meta name="twitter:image" content="/ccc-og.png">
+      <!--    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />-->
+      <!--
+        manifest.json provides metadata used when your web app is installed on a
+        user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+      -->
 <!--    <link rel="manifest" href="manifest.json" />-->
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
@@ -20,7 +34,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-      <title>Cloudinary Collage Creator</title>
+
       <script>
           if (document.location.search?.includes("dam=true")) {
 			const s = document.createElement("script");
