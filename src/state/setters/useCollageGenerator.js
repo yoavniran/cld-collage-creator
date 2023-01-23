@@ -50,7 +50,7 @@ const useCollageGenerator = createSetterHook(
 				message: "Collage request was sent successfully",
 			}, ...prev]);
 
-			const { requestId, public_Id: publicId } = result;
+			const { requestId, public_id: publicId } = result;
 
 			if (requestId) {
 				set(pollingReqs(requestId), {

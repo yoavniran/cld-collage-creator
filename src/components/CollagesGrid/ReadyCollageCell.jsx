@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Typography from "@mui/material/Typography";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -6,26 +7,12 @@ import { addUrlTransformation, timeAgo } from "../../utils";
 import { useReadyCollage } from "../../state/selectors";
 import ContainerActions from "../ContainerActions";
 import TooltipIconButton from "../TooltipIconButton";
-import BaseCell from "./BaseCell";
+import BaseCell, { ImageContainer } from "./BaseCell";
 import Tooltip from "../Tooltip/Tooltip";
-import Typography from "@mui/material/Typography";
 
-const CollageCell = styled(BaseCell)`
-  position: relative;
-	
-	.MuiTypography-caption {
-		font-size: 1.1rem;
-		margin: 2px 0;
-  }
-`;
-
-const ImageContainer = styled.div`
+const CollageImage = styled(ImageContainer)`
   background-image: url("${({ $img }) => $img}");
-  background-repeat: no-repeat;
-  background-size: cover;
-  flex-grow: 2;
-	width: 100%;
-`;
+`
 
 const StyledContainerActions = styled(ContainerActions)`
   width: 100%;
@@ -59,7 +46,7 @@ const ReadyCollageCell = ({ id }) => {
 			simple
 			title={collage.public_id}
 		>
-			<CollageCell data-url={collage.secure_url}>
+			<BaseCell data-url={collage.secure_url}>
 				<StyledContainerActions actions={[
 					{
 						key: "open",
@@ -95,9 +82,9 @@ const ReadyCollageCell = ({ id }) => {
 						/>,
 					},
 				]}/>
-				<ImageContainer $img={collageImg} />
+				<CollageImage $img={collageImg} />
 				<Typography variant="caption">{timeAgo(collage.createTime)}</Typography>
-			</CollageCell>
+			</BaseCell>
 		</Tooltip>
 	);
 };
