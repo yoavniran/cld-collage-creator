@@ -18,6 +18,7 @@ It's main stack was developed with:
 - [React-Uploady](https://react-uploady.org)
 - [React-dnd](react-dnd.github.io/)
 - [Netlify (functions)](https://www.netlify.com/)
+- [Fauna DB](https://fauna.com/)
 
 ## Public
 
