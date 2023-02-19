@@ -1473,14 +1473,14 @@
     "@rpldy/shared" "^1.1.0"
     "@rpldy/simple-state" "^1.1.0"
 
-"@rpldy/abort@^1.3.0-rc.3":
-  version "1.3.0-rc.3"
-  resolved "https://registry.npmjs.org/@rpldy/abort/-/abort-1.3.0-rc.3.tgz#c0cf5ca082d9365a61336d3e37436bd5d9741f2f"
-  integrity sha512-hkybh6TSSknr9aA6QLTzAvziLQJiCpab8DHW//FQuSL5B9XQWuDmDImQiy1p8zXcxoiry6Clq+7BezPJ9qO0Nw==
+"@rpldy/abort@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@rpldy/abort/-/abort-1.4.0.tgz#af5d3690cd5a3584b6f0c9d7f3c6ee20fd84d313"
+  integrity sha512-ea8nIhK4y7176wiPzcX1nbUMtsXOT1Mu0t6Qu4zgj4AsoB0pLq899JRA4q3GeR/jr+UEjVX11QYHnyDa4csKxg==
   dependencies:
-    "@rpldy/raw-uploader" "^1.3.0-rc.3"
-    "@rpldy/shared" "^1.3.0-rc.3"
-    "@rpldy/simple-state" "^1.3.0-rc.3"
+    "@rpldy/raw-uploader" "^1.4.0"
+    "@rpldy/shared" "^1.4.0"
+    "@rpldy/simple-state" "^1.4.0"
 
 "@rpldy/life-events@^1.1.0":
   version "1.1.0"
@@ -1489,12 +1489,12 @@
   dependencies:
     "@rpldy/shared" "^1.1.0"
 
-"@rpldy/life-events@^1.3.0-rc.3":
-  version "1.3.0-rc.3"
-  resolved "https://registry.npmjs.org/@rpldy/life-events/-/life-events-1.3.0-rc.3.tgz#317e2b62225a5bde34ebd2e83f0cb59258ed55e6"
-  integrity sha512-eEBXXpr6/gEslf853wHnOs2Fo/7MZHWS1/bRctZpC98EgS8jof4hN/IAyb7zJhanYl8jULUTak3cTFRl1PztFw==
+"@rpldy/life-events@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@rpldy/life-events/-/life-events-1.4.0.tgz#9e75fc3faf3535f6f0b1c08744b1bc994d92e3da"
+  integrity sha512-KoYOVdQtMkI0zAchz74cRXe3dUOmp0Z2xI10xB+wC2A5BkBNnUb76Qj20xd2NYFjAovtg9+3aMeutVrRgJMgeQ==
   dependencies:
-    "@rpldy/shared" "^1.3.0-rc.3"
+    "@rpldy/shared" "^1.4.0"
 
 "@rpldy/mock-sender@^1.1.0":
   version "1.1.0"
@@ -1513,32 +1513,32 @@
     "@rpldy/life-events" "^1.1.0"
     "@rpldy/shared" "^1.1.0"
 
-"@rpldy/raw-uploader@^1.3.0-rc.3":
-  version "1.3.0-rc.3"
-  resolved "https://registry.npmjs.org/@rpldy/raw-uploader/-/raw-uploader-1.3.0-rc.3.tgz#18c84a3921d6cbec72504d56e9bbe56fc230b27c"
-  integrity sha512-R/O/5G5wNdfpMN/M9AzPh/Rr/eZSRL/ZgGhDgf5km6c6xxIq6FWXQBXmSpEqpzMFF8wxo4vWhfi3ylucLzHy5Q==
+"@rpldy/raw-uploader@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@rpldy/raw-uploader/-/raw-uploader-1.4.0.tgz#cb461ba81f4582678523e10e6c9a09b8312a32e8"
+  integrity sha512-08027OMOgWuEybbVDDTHnVIzW7O4tDOOZ1l5iqoQ60TJT1T3L6ARnu1Q35zX9f+DLf5D6KH3OoF9mwB3/yToBA==
   dependencies:
-    "@rpldy/life-events" "^1.3.0-rc.3"
-    "@rpldy/shared" "^1.3.0-rc.3"
+    "@rpldy/life-events" "^1.4.0"
+    "@rpldy/shared" "^1.4.0"
 
-"@rpldy/retry-hooks@1.3.0-rc.3":
-  version "1.3.0-rc.3"
-  resolved "https://registry.npmjs.org/@rpldy/retry-hooks/-/retry-hooks-1.3.0-rc.3.tgz#1921f424a9fc25d276027c0e82e3f33d39f85c2e"
-  integrity sha512-wS5WwdNjdejE6ZgvsWg3dXkuKRloK4tImM73fzGY16oCYEinKOAE5SvFPCUCmVIIyFyDer1UtJcwM6RjrXRAbg==
+"@rpldy/retry-hooks@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@rpldy/retry-hooks/-/retry-hooks-1.4.0.tgz#caf9bb50c2c693af20610dff993023593918bcd0"
+  integrity sha512-U5ti9a8fY8XOaNFrzz1fgPChHs1di2/IhFwy5y2MqYpu5iuAOPpENsjJQgaap/uTgYus6WjElYtfqYcwR6c0ug==
   dependencies:
-    "@rpldy/retry" "^1.3.0-rc.3"
-    "@rpldy/shared" "^1.3.0-rc.3"
-    "@rpldy/shared-ui" "^1.3.0-rc.3"
-    "@rpldy/uploader" "^1.3.0-rc.3"
+    "@rpldy/retry" "^1.4.0"
+    "@rpldy/shared" "^1.4.0"
+    "@rpldy/shared-ui" "^1.4.0"
+    "@rpldy/uploader" "^1.4.0"
 
-"@rpldy/retry@^1.3.0-rc.3":
-  version "1.3.0-rc.3"
-  resolved "https://registry.npmjs.org/@rpldy/retry/-/retry-1.3.0-rc.3.tgz#174bef8960011938919bd22e8776a50391105c8a"
-  integrity sha512-RkM8gJM+KIffIywZbEWzAi1eAjd5ouXXMIMonffZ6GUCu6RFXn0VFRGBBppORFtXzCx/atXdnWUpxqe4lMMQ6A==
+"@rpldy/retry@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@rpldy/retry/-/retry-1.4.0.tgz#cfaa048bd7989a304c8c80131afcbff0bdab2515"
+  integrity sha512-eZS7JMNJDkLta5EIbjUFuzO35SsmbSalxxjDN1fHLM6+qv8gCClt5x/8J0sddDaNeYGKeApbDg/OtByleycV6g==
   dependencies:
-    "@rpldy/shared" "^1.3.0-rc.3"
-    "@rpldy/simple-state" "^1.3.0-rc.3"
-    "@rpldy/uploader" "^1.3.0-rc.3"
+    "@rpldy/shared" "^1.4.0"
+    "@rpldy/simple-state" "^1.4.0"
+    "@rpldy/uploader" "^1.4.0"
 
 "@rpldy/sender@^1.1.0":
   version "1.1.0"
@@ -1547,20 +1547,20 @@
   dependencies:
     "@rpldy/shared" "^1.1.0"
 
-"@rpldy/sender@^1.3.0-rc.3":
-  version "1.3.0-rc.3"
-  resolved "https://registry.npmjs.org/@rpldy/sender/-/sender-1.3.0-rc.3.tgz#3746ce3a8b65bce9ced0e3681c18b0c8183d37ac"
-  integrity sha512-MZiR0TT80gIL+E5aQHSKR1djK7VBiHqtYgvdy8ZR11LMFfJaxStyMUoXUKeEUMf7x+3WNzlWbSngELoaacRGWw==
+"@rpldy/sender@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@rpldy/sender/-/sender-1.4.0.tgz#0757cdf4dd746dbdbed31eb95b4da83cd307e844"
+  integrity sha512-92z347ICzp8TEQsPzBlRrw3zmIPXD3C1GbiEELkXN0vT7LRs4FE4VpkxTVFJmrpxl0vgcQw/ddqsK6byE5zCaQ==
   dependencies:
-    "@rpldy/shared" "^1.3.0-rc.3"
+    "@rpldy/shared" "^1.4.0"
 
-"@rpldy/shared-ui@^1.3.0-rc.3":
-  version "1.3.0-rc.3"
-  resolved "https://registry.npmjs.org/@rpldy/shared-ui/-/shared-ui-1.3.0-rc.3.tgz#f969562751ed37dd2e115d36d180f78aff33c5a0"
-  integrity sha512-lrwJ4m7+uw6WHrSwSSlTQwyOXbCl+24Pg92g0qMqfLmvZEYCcZQqwJPVDeTDeSM7Nrrmz/rFtBBEPsGiO4XSjA==
+"@rpldy/shared-ui@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@rpldy/shared-ui/-/shared-ui-1.4.0.tgz#5bf1bc30aade229f2a5070632215bf345083ade4"
+  integrity sha512-qFEiXxSoAxivQoPG4oU0SdQzgLB81U3iVw3409hSV7kAUC+7cz+6m/ZXa3h3BmZw1OnDYcOxtD8WVe2QaI52oA==
   dependencies:
-    "@rpldy/shared" "^1.3.0-rc.3"
-    "@rpldy/uploader" "^1.3.0-rc.3"
+    "@rpldy/shared" "^1.4.0"
+    "@rpldy/uploader" "^1.4.0"
 
 "@rpldy/shared@^1.1.0":
   version "1.1.0"
@@ -1570,10 +1570,10 @@
     invariant "^2.2.4"
     just-throttle "^1.1.0"
 
-"@rpldy/shared@^1.3.0-rc.3":
-  version "1.3.0-rc.3"
-  resolved "https://registry.npmjs.org/@rpldy/shared/-/shared-1.3.0-rc.3.tgz#0362b6985685227490a0fa3ba429e2d06f7ff6c7"
-  integrity sha512-sQRhVjlu3QDNh6Ge1ZKl9IK4fAIwyjN01YQlASlB8X70/53XVWwF4jPFMpTnubPV/ar+2vRJLh3/ktE4zsSIcw==
+"@rpldy/shared@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@rpldy/shared/-/shared-1.4.0.tgz#5c8652c3c32963a4aff8893af7321028e88eca73"
+  integrity sha512-OxOV/IQs5SqNdDAcSsqaRAVlbwDLQV0OPQc7/NSyrcE5BLq9egD6Z83xxvOb/G7UIAR0h3ZKGtA9lCk7LXKz1Q==
   dependencies:
     invariant "^2.2.4"
     just-throttle "^1.1.0"
@@ -1585,42 +1585,42 @@
   dependencies:
     "@rpldy/shared" "^1.1.0"
 
-"@rpldy/simple-state@^1.3.0-rc.3":
-  version "1.3.0-rc.3"
-  resolved "https://registry.npmjs.org/@rpldy/simple-state/-/simple-state-1.3.0-rc.3.tgz#dfbe9fca4169dbcd2c62e6d497e8474a47aa1bee"
-  integrity sha512-4QXibIOdO9Hd+2IiZ4By4NwIwRywSbXwNrJqDb5OBcq7Gn4ze3vocrjCQh0PwsuoW2oBfat0nrWyB4ikhv2qqQ==
+"@rpldy/simple-state@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@rpldy/simple-state/-/simple-state-1.4.0.tgz#d5620963691b4e862da20f0957dc0735447000e6"
+  integrity sha512-61jWvYU1bCgbzRGtk20vf0hGjLX48Zp6dakieAqW9+sucoujrcpxibd6q1cGPsFn/sx5E4xCOVRhJXfY1erTSQ==
   dependencies:
-    "@rpldy/shared" "^1.3.0-rc.3"
+    "@rpldy/shared" "^1.4.0"
 
-"@rpldy/upload-button@^1.3.0-rc.3":
-  version "1.3.0-rc.3"
-  resolved "https://registry.npmjs.org/@rpldy/upload-button/-/upload-button-1.3.0-rc.3.tgz#50a56aedb88a7679e81baaed46701d8598df2a72"
-  integrity sha512-uQyTGNxGsVv/SeUxvCoQ8P+e4thPTPhPTFhQuTMtnGR0KvrqTTKW8sQ0z7otgRDw6hAY3udcy8DrxQ5vQY/x7A==
+"@rpldy/upload-button@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@rpldy/upload-button/-/upload-button-1.4.0.tgz#5e1106f7ffe871bf8b4b8fa70d6488e4beec0111"
+  integrity sha512-FQsQppwmn2ryK1F5Hov8UqNcIsikvNSr8mBiy1vj1GrvPIqLJ8SrJ/qtnLuVyASlCdxMf+LOpgPsjg5hVo4ENQ==
   dependencies:
-    "@rpldy/shared-ui" "^1.3.0-rc.3"
+    "@rpldy/shared-ui" "^1.4.0"
 
-"@rpldy/upload-drop-zone@^1.3.0-rc.3":
-  version "1.3.0-rc.3"
-  resolved "https://registry.npmjs.org/@rpldy/upload-drop-zone/-/upload-drop-zone-1.3.0-rc.3.tgz#ef339a3221f14254f4659963d156ee0d36c901aa"
-  integrity sha512-8yTgSWWUBAU+4JJ8Nz3vPN6bYjyvHePMheC9p9/9H40PLw6W0VCFG32h6lj93DnBHnmLFwTL9+qi5jIx59QgJg==
+"@rpldy/upload-drop-zone@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@rpldy/upload-drop-zone/-/upload-drop-zone-1.4.0.tgz#ef1249d362f30f12285b766d58b7dc27fa51dd82"
+  integrity sha512-dRAxvr6CAVpX925PDs7ovdqZnnCtNGTT4TOdrZxT76NSXsNXoXV2w3hkC2T4XeEN/BLzgbAcjLORkqJAGrUUDQ==
   dependencies:
-    "@rpldy/shared-ui" "^1.3.0-rc.3"
+    "@rpldy/shared-ui" "^1.4.0"
     html-dir-content "^0.3.2"
 
-"@rpldy/upload-paste@^1.3.0-rc.3":
-  version "1.3.0-rc.3"
-  resolved "https://registry.npmjs.org/@rpldy/upload-paste/-/upload-paste-1.3.0-rc.3.tgz#b8c2d2fd2fac2f4b5eac3c7b7032f6cc4185eb6a"
-  integrity sha512-AmbfzZaGDfhf9m4IK7uUvfPoui+ZEmrwwFLm13BEuPUwVujw5Ay0Au+8/8XtPB2KuHpTbna/Fj9rI2BVUK8K3Q==
+"@rpldy/upload-paste@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@rpldy/upload-paste/-/upload-paste-1.4.0.tgz#918422b4536cb0580c0f0089581e3fdc3868ff8f"
+  integrity sha512-1Nv14a/gQKPJw7TU2U/fYNG+JmUS8a2hKI6gOGS94oKe8jTQio8XCQ9eF2mtQs+x56nQkQvM3u5cu2SlWpdsUg==
   dependencies:
-    "@rpldy/shared-ui" "^1.3.0-rc.3"
+    "@rpldy/shared-ui" "^1.4.0"
 
-"@rpldy/upload-preview@^1.3.0-rc.3":
-  version "1.3.0-rc.3"
-  resolved "https://registry.npmjs.org/@rpldy/upload-preview/-/upload-preview-1.3.0-rc.3.tgz#5be954df777a4f06f7f063eee4855f3ce5a4c965"
-  integrity sha512-wJieWdughNg+YI/skqSw5s3NDGHfrWXOxckGjUquRtaOQROql2l2qvKtRhiJemh7Ysoans2PcZF9dIFNNrMs7A==
+"@rpldy/upload-preview@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@rpldy/upload-preview/-/upload-preview-1.4.0.tgz#0e284b46ee189e8a6fa3631e7c8d6ec8c8632b25"
+  integrity sha512-Fy6arG53+DFkiJbt8lsJQXR0YiFQl2ZJEJga28rMahqcrqgHweF5tsaZ/RUBpBBSG4pzbs4yYB8Ub+2bSj49hg==
   dependencies:
-    "@rpldy/shared" "^1.3.0-rc.3"
-    "@rpldy/shared-ui" "^1.3.0-rc.3"
+    "@rpldy/shared" "^1.4.0"
+    "@rpldy/shared-ui" "^1.4.0"
 
 "@rpldy/uploader@^1.1.0":
   version "1.1.0"
@@ -1634,27 +1634,27 @@
     "@rpldy/shared" "^1.1.0"
     "@rpldy/simple-state" "^1.1.0"
 
-"@rpldy/uploader@^1.3.0-rc.3":
-  version "1.3.0-rc.3"
-  resolved "https://registry.npmjs.org/@rpldy/uploader/-/uploader-1.3.0-rc.3.tgz#5f9df1be527beee3ffea92e5f3d68e55ab79dd9a"
-  integrity sha512-ztTizhpLY6/MqbEhUDiluPso7wiXqPiOJpsqk1fmJOZD6JQTvgl7jyA+7YKPYeLHk2cZh88lp+S0mgVkTmKoOQ==
+"@rpldy/uploader@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@rpldy/uploader/-/uploader-1.4.0.tgz#a09611da29b201b53637f67fb45431e263bdd5f9"
+  integrity sha512-yQMDLUABmDXPQwgP5G56FYi6fPEv4IYdYiseglNDfU9cVe//84ISOxh+/PqM2cp+LXdv8tMEbj9SO31uAZLniA==
   dependencies:
-    "@rpldy/abort" "^1.3.0-rc.3"
-    "@rpldy/life-events" "^1.3.0-rc.3"
-    "@rpldy/raw-uploader" "^1.3.0-rc.3"
-    "@rpldy/sender" "^1.3.0-rc.3"
-    "@rpldy/shared" "^1.3.0-rc.3"
-    "@rpldy/simple-state" "^1.3.0-rc.3"
+    "@rpldy/abort" "^1.4.0"
+    "@rpldy/life-events" "^1.4.0"
+    "@rpldy/raw-uploader" "^1.4.0"
+    "@rpldy/sender" "^1.4.0"
+    "@rpldy/shared" "^1.4.0"
+    "@rpldy/simple-state" "^1.4.0"
 
-"@rpldy/uploady@^1.3.0-rc.3":
-  version "1.3.0-rc.3"
-  resolved "https://registry.npmjs.org/@rpldy/uploady/-/uploady-1.3.0-rc.3.tgz#4a41949d848ff8fe9cef0e91f125c43abf47dfa3"
-  integrity sha512-x9Ep5decwfjmmmC32kakGQtNOx4X4b+1bM7K4veNg3ZVfyMOtw09IATOGxOKFNyFa/f291gO43LEavKa7oYZXw==
+"@rpldy/uploady@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@rpldy/uploady/-/uploady-1.4.0.tgz#47bdcf95292e00db5ffbfe165aa9f4439ad80901"
+  integrity sha512-CHSr0BHFDwzPudDhmh9wfIxv08eOxKn4465dZyS0NbkTRYDcQSprFWYD3+4PBYlH5IOeD0a++61nInLIBLbv2w==
   dependencies:
-    "@rpldy/life-events" "^1.3.0-rc.3"
-    "@rpldy/shared" "^1.3.0-rc.3"
-    "@rpldy/shared-ui" "^1.3.0-rc.3"
-    "@rpldy/uploader" "^1.3.0-rc.3"
+    "@rpldy/life-events" "^1.4.0"
+    "@rpldy/shared" "^1.4.0"
+    "@rpldy/shared-ui" "^1.4.0"
+    "@rpldy/uploader" "^1.4.0"
 
 "@testing-library/dom@^8.5.0":
   version "8.13.0"

@@ -10,6 +10,7 @@ const {
 	gravity,
 	gridCells,
 	gridPhotos,
+	photoOverCell,
 } = atoms;
 
 const historyAtoms = [
@@ -25,8 +26,14 @@ const historyAtoms = [
 
 //TODO: need to ignore Notifications on forward/back
 
+const collageHistoryMutator = (mutable) => {
+	if (mutable.getLoadable(photoOverCell).contents) {
+		mutable.set(photoOverCell, null);
+	}
+};
+
 const useCollageHistory = () =>
-	useStateHistory({ include: historyAtoms });
+	useStateHistory({ include: historyAtoms, navMutator: collageHistoryMutator });
 
 export default useCollageHistory;
 
